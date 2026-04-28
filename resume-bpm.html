@@ -155,7 +155,7 @@
 
     /* ── CAREER JOURNEY ───────────────────────────────── */
     .career-section { margin-bottom: .16in; }
-    .job { margin-bottom: .14in; }
+    .job { margin-bottom: .2in; }
     .job:last-child { margin-bottom: 0; }
     .job-header {
       display: flex;
@@ -163,26 +163,26 @@
       align-items: baseline;
     }
     .job-company {
-      font-size: 10pt;
+      font-size: 11pt;
       font-weight: 700;
       color: var(--navy);
     }
     .job-dates {
-      font-size: 7pt;
+      font-size: 8pt;
       color: var(--text-muted);
       white-space: nowrap;
     }
     .job-meta {
-      font-size: 7.5pt;
+      font-size: 8.5pt;
       color: var(--text-muted);
-      margin-top: .03rem;
-      margin-bottom: .07rem;
+      margin-top: .05rem;
+      margin-bottom: .1rem;
     }
     .job-meta strong { font-weight: 600; color: var(--text); }
     .job-desc {
-      font-size: 8pt;
+      font-size: 9pt;
       color: var(--text);
-      line-height: 1.52;
+      line-height: 1.6;
     }
     .job-two-col {
       display: grid;
@@ -250,15 +250,35 @@
     .lang-bar-wrap { height: 3px; background: rgba(30,111,217,.15); border-radius: 2px; margin-top: 2px; }
     .lang-bar { height: 100%; background: var(--blue); border-radius: 2px; }
 
-    /* ── SIDEBAR: BOOKS ───────────────────────────────── */
-    .book-item {
+    /* ── SIDEBAR: SKILLS (tag groups) ────────────────── */
+    .tag-group { margin-bottom: .1rem; }
+    .tag-group-label { font-size: 6.5pt; color: var(--blue); font-weight: 700; margin-bottom: .1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .16rem; }
+    .tag {
+      font-size: 7pt;
+      padding: .1rem .38rem;
+      background: rgba(30,111,217,.08);
+      border: 1px solid rgba(30,111,217,.22);
+      border-radius: 10px;
+      color: var(--navy);
+    }
+
+    /* ── SIDEBAR: TESTIMONIALS ────────────────────────── */
+    .testimonial {
+      background: rgba(255,255,255,.72);
+      border-left: 2.5px solid var(--blue);
+      padding: .15rem .28rem;
+      margin-bottom: .1rem;
+      border-radius: 0 4px 4px 0;
+    }
+    .testimonial-text {
       font-size: 7.5pt;
+      font-style: italic;
       color: var(--text);
       line-height: 1.5;
-      padding-left: .4rem;
-      border-left: 1.5px solid var(--blue);
-      margin-bottom: .07rem;
     }
+    .testimonial-author { font-size: 7.5pt; font-weight: 700; color: var(--navy); margin-top: .08rem; }
+    .testimonial-role   { font-size: 6.5pt; color: var(--text-muted); }
 
     /* ── SIDEBAR: HOBBIES ─────────────────────────────── */
     .hobby-item {
@@ -292,7 +312,6 @@
   <header class="header">
     <div class="header-text">
       <div class="header-name">Fernando Abreu</div>
-      <div class="header-title">Business Program Manager &nbsp;|&nbsp; Cloud &amp; Agentic AI &nbsp;·&nbsp; Microsoft Professional Services &nbsp;·&nbsp; Fortune 500</div>
       <div class="header-contact">
         <span>📞 804.773.5483</span>
         <a href="mailto:fefoabreu@gmail.com">fefoabreu@gmail.com</a>
@@ -318,7 +337,7 @@
 
       <div class="summary">
         <div class="section-label">Summary</div>
-        <p>25-year IT career specialist in Complex Program Delivery, Strategic Pursuit Leadership, and Agentic AI-based program management. 10 years at Microsoft as Principal Project Manager across SQA/RMQA and Pursuit Lead roles within ISD — driving delivery excellence, risk compliance, and Go-to-Market execution for the Fortune 500. Deep expertise in MCEM governance, OneServices Portfolio orchestration, OKRs/KPIs telemetry, and building Agentic AI solutions that operationalize data-driven decision-making at scale.</p>
+        <p>25-year IT career specialist in Complex Program Delivery, Strategic Pursuit Leadership, and Agentic AI-based program management. 10 years at Microsoft as Principal Project Manager across SQA/RMQA and Pursuit Lead roles within ISD — driving delivery excellence, risk compliance, and Go-to-Market execution for the Fortune 500. Deep expertise in MCEM governance, OneServices Portfolio orchestration, OKRs/KPIs telemetry, leveraging and optimizing Agentic AI Solutions that operationalize data-driven decision-making at scale.</p>
       </div>
 
       <div class="skills-section">
@@ -331,7 +350,7 @@
       </div>
 
       <div class="dotl-section">
-        <div class="section-label">Day in the Life — Key Activities &amp; Programs</div>
+        <div class="section-label">Key Activities &amp; Programs</div>
         <div class="dotl-item">
           <p><strong>Sales Acceleration &amp; Complex Contracting:</strong> Intake, design, cadence and approval of ISD solutions driving deal velocity through technical proposals, solution reviews, WBS, Staffing Plans, pricing models, Statements of Work, Work Orders, Amendments, and project delivery plans.</p>
         </div>
@@ -363,11 +382,54 @@
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Built and deployed Agentic AI risk assessment tools and 3 companion AI Agents (Delivery, Pursuit, Sales) for portfolio-wide monitoring</p>
+          <p>Incorporated into workflow Agentic AI risk assessment tools and 3 companion AI Agents (Delivery, Pursuit, Sales) for portfolio-wide monitoring</p>
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
           <p>Founded Scrum-Agile App Dev Practice at Dexian-Disys from zero — delivering for USPS, ExxonMobil &amp; Schlumberger with full P&amp;L ownership</p>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Skills</div>
+        <div class="tag-group">
+          <div class="tag-group-label">Practices</div>
+          <div class="tags">
+            <span class="tag">Agile / Scrum</span>
+            <span class="tag">Design Thinking</span>
+            <span class="tag">PMO Methodology</span>
+            <span class="tag">SDLC</span>
+            <span class="tag">CMMI</span>
+            <span class="tag">Kanban</span>
+            <span class="tag">DevOps</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <div class="tag-group-label">Cloud &amp; AI</div>
+          <div class="tags">
+            <span class="tag">Azure Cloud Adoption</span>
+            <span class="tag">Agentic AI Solutions</span>
+            <span class="tag">AI Agent Development</span>
+            <span class="tag">AI/Automation Optimization</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <div class="tag-group-label">Leadership</div>
+          <div class="tags">
+            <span class="tag">Cross-Functional Orchestration</span>
+            <span class="tag">Stakeholder Management</span>
+            <span class="tag">Change Management</span>
+            <span class="tag">Risk Management</span>
+          </div>
+        </div>
+        <div class="tag-group">
+          <div class="tag-group-label">Business</div>
+          <div class="tags">
+            <span class="tag">Technical Presales</span>
+            <span class="tag">Portfolio Management</span>
+            <span class="tag">Complex Deal Governance</span>
+            <span class="tag">SOW Design</span>
+          </div>
         </div>
       </div>
 
@@ -461,17 +523,13 @@
           <div class="job-desc">Designed and enhanced IT consulting service offerings, project management and sales prospecting for software development projects, implementation of management methodologies, outsourcing operations, and counseling clients for optimized IT &amp; Business integration via PMO.</div>
         </div>
 
-        <div class="job-two-col">
-          <div>
-            <div class="job-mini-company">Clínica Oncologia Centenário</div>
-            <div class="job-mini-dates">Sep 2002 – Apr 2004</div>
-            <div class="job-mini-role">Software Development Tech Lead (Delphi)</div>
+        <div class="job">
+          <div class="job-header">
+            <div class="job-company">Dinamize Web Systems</div>
+            <div class="job-dates">2000 – 2004</div>
           </div>
-          <div>
-            <div class="job-mini-company">Dinamize Web Systems</div>
-            <div class="job-mini-dates">Aug 2000 – Sep 2002</div>
-            <div class="job-mini-role">Full Stack SW Engineer (Delphi, VB, ASP.net)</div>
-          </div>
+          <div class="job-meta"><strong>Full Stack Software Engineer</strong> · Porto Alegre, Brazil</div>
+          <div class="job-desc">Where it all began. Built client-server and web-based applications using Delphi, Visual Basic, ASP.NET, and SQL Server. Developed foundational skills in database administration, UX/UI wireframing, and product engineering.</div>
         </div>
 
       </div>
@@ -532,15 +590,26 @@
       </div>
 
       <div class="sidebar-section">
-        <div class="section-label">Books That Shaped My Mindset</div>
-        <div class="book-item">Good to Great — J. Collins</div>
-        <div class="book-item">The Fifth Discipline — P. Senge</div>
-        <div class="book-item">Outliers &amp; The Tipping Point — M. Gladwell</div>
-        <div class="book-item">Freakonomics — S. Dubner &amp; S. Levitt</div>
-        <div class="book-item">The Innovator's Dilemma — C. Christensen</div>
-        <div class="book-item">Meditations — M. Aurelius</div>
-        <div class="book-item">Work Rules — L. Bock</div>
-        <div class="book-item">Sophie's World — J. Gaarder</div>
+        <div class="section-label">Voices</div>
+
+        <div class="testimonial">
+          <div class="testimonial-text">"Fernando is one of the most knowledgeable and effective resources I have come across in my +20yrs at MSFT. Your approach and structured working style keeping Team on point for the multitude of tasks and approvals it takes is SUPER. VERY few can accomplish this."</div>
+          <div class="testimonial-author">Adam Ryncarz</div>
+          <div class="testimonial-role">Ford/GM/Cruise Account Delivery Executive · Microsoft</div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial-text">"I have unwavering confidence in everything you do. I have witnessed your exponential growth over the years. You are intentional, focused, and do not shy away from challenges. I genuinely see you as a leader in your field."</div>
+          <div class="testimonial-author">Dawna Covey</div>
+          <div class="testimonial-role">Enterprise ADL · Microsoft</div>
+        </div>
+
+        <div class="testimonial">
+          <div class="testimonial-text">"Fernando has a can do attitude. Even on areas outside of his remit, he has leaned in to support the team. Fernando is a joy to work with."</div>
+          <div class="testimonial-author">Melissa Hooper</div>
+          <div class="testimonial-role">Sales Director · Microsoft</div>
+        </div>
+
       </div>
 
       <div class="sidebar-section">
