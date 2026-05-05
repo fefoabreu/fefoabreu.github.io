@@ -54,6 +54,7 @@
       -webkit-backdrop-filter: blur(14px);
       box-shadow: 0 1px 0 rgba(200,169,110,.15);
     }
+    .nav-left { display: flex; align-items: center; gap: 1.2rem; }
     .nav-logo {
       font-family: 'Cormorant Garamond', serif;
       font-size: 1.25rem; font-weight: 600;
@@ -61,6 +62,16 @@
       opacity: 0; transition: opacity .4s;
     }
     nav.scrolled .nav-logo { opacity: 1; }
+    .claude-badge {
+      display: flex; align-items: center; gap: .38rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem; letter-spacing: .07em;
+      color: #D97757;
+      opacity: .8; transition: opacity .25s;
+      text-decoration: none;
+    }
+    .claude-badge:hover { opacity: 1; }
+    .claude-badge svg { width: 15px; height: 15px; flex-shrink: 0; }
     .nav-links {
       display: flex; gap: 2rem; list-style: none;
     }
@@ -74,6 +85,7 @@
     @media(max-width:680px){
       .nav-links { gap: 1rem; }
       .nav-links a { font-size: .68rem; }
+      .claude-badge span { display: none; }
     }
 
     /* ─── HERO ───────────────────────────────────────────── */
@@ -601,7 +613,18 @@
 
   <!-- NAV -->
   <nav id="main-nav">
-    <span class="nav-logo">Fernando Abreu</span>
+    <div class="nav-left">
+      <a href="https://claude.ai/code" target="_blank" rel="noopener" class="claude-badge">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2.5C12 2.5 16.5 7.5 16.5 12C16.5 16.5 12 21.5 12 21.5C12 21.5 7.5 16.5 7.5 12C7.5 7.5 12 2.5 12 2.5Z" fill="#D97757"/>
+          <path d="M2.5 12C2.5 12 7.5 7.5 12 7.5C16.5 7.5 21.5 12 21.5 12C21.5 12 16.5 16.5 12 16.5C7.5 16.5 2.5 12 2.5 12Z" fill="#D97757" opacity="0.65"/>
+          <path d="M5.1 5.1C5.1 5.1 9.4 8.7 11.5 12C13.6 15.3 14.9 18.9 14.9 18.9C14.9 18.9 10.6 15.3 8.5 12C6.4 8.7 5.1 5.1 5.1 5.1Z" fill="#D97757" opacity="0.8"/>
+          <path d="M18.9 5.1C18.9 5.1 15.3 9.4 12 11.5C8.7 13.6 5.1 14.9 5.1 14.9C5.1 14.9 8.7 10.6 12 8.5C15.3 6.4 18.9 5.1 18.9 5.1Z" fill="#D97757" opacity="0.8"/>
+        </svg>
+        <span>powered by Claude Code</span>
+      </a>
+      <span class="nav-logo">Fernando Abreu</span>
+    </div>
     <ul class="nav-links">
       <li><a href="#microsoft">Microsoft</a></li>
       <li><a href="#story">Before</a></li>
