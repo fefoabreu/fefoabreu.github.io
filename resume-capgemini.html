@@ -7,16 +7,18 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    /* ── TOKENS ───────────────────────────────────────── */
+    /* ── TOKENS — fefoabreu.me navy/blue palette ──────── */
     :root {
-      --teal-dark:  #0e6e7a;
-      --teal-mid:   #1a9aaa;
-      --teal-light: #f0f7f8;
-      --text:       #2d3748;
-      --text-muted: #718096;
+      --navy:       #0f1e3c;
+      --navy2:      #162848;
+      --blue:       #1e6fd9;
+      --blue-lt:    #4a9eff;
+      --sidebar-bg: #eef4fd;
+      --gold:       #c8a96e;
+      --text:       #1c2030;
+      --text-muted: #6b7280;
       --white:      #ffffff;
-      --border:     #d1e8ec;
-      --gold:       #e8a614;
+      --border:     rgba(30,111,217,.18);
     }
 
     /* ── PAGE SETUP ───────────────────────────────────── */
@@ -47,7 +49,7 @@
 
     /* ── HEADER ───────────────────────────────────────── */
     .header {
-      background: var(--teal-dark);
+      background: var(--navy);
       color: var(--white);
       padding: 0.3in 0.4in;
       display: flex;
@@ -67,7 +69,7 @@
     .header-title {
       font-size: 9pt;
       font-weight: 300;
-      color: rgba(255,255,255,.82);
+      color: rgba(255,255,255,.80);
       margin-top: .15rem;
       letter-spacing: .02em;
     }
@@ -75,23 +77,23 @@
       display: flex;
       flex-wrap: wrap;
       gap: .2rem .9rem;
-      margin-top: .4rem;
+      margin-top: .38rem;
       font-size: 7.5pt;
-      color: rgba(255,255,255,.72);
+      color: rgba(255,255,255,.68);
     }
-    .header-contact a { color: rgba(255,255,255,.72); text-decoration: none; }
+    .header-contact a { color: rgba(255,255,255,.68); text-decoration: none; }
     .cert-tags {
       display: flex;
       flex-wrap: wrap;
       gap: .25rem;
-      margin-top: .4rem;
+      margin-top: .38rem;
     }
     .cert-tag {
       font-size: 6.5pt;
       padding: .12rem .45rem;
-      border: 1px solid rgba(255,255,255,.38);
+      border: 1px solid rgba(255,255,255,.32);
       border-radius: 10px;
-      color: rgba(255,255,255,.82);
+      color: rgba(255,255,255,.80);
       letter-spacing: .08em;
     }
     .header-photo {
@@ -99,7 +101,7 @@
       height: 72px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid rgba(255,255,255,.38);
+      border: 2px solid rgba(255,255,255,.32);
       flex-shrink: 0;
     }
 
@@ -114,7 +116,7 @@
       border-right: 1px solid var(--border);
     }
     .col-right {
-      background: var(--teal-light);
+      background: var(--sidebar-bg);
       padding: .26in .22in;
     }
 
@@ -124,8 +126,8 @@
       font-weight: 700;
       letter-spacing: .18em;
       text-transform: uppercase;
-      color: var(--teal-mid);
-      border-bottom: 1.5px solid var(--teal-mid);
+      color: var(--blue);
+      border-bottom: 1.5px solid var(--blue);
       padding-bottom: .16rem;
       margin-bottom: .32rem;
     }
@@ -134,9 +136,26 @@
     .summary { margin-bottom: .18in; }
     .summary p { font-size: 8.5pt; line-height: 1.65; color: var(--text); }
 
-    /* ── EXPERIENCE ───────────────────────────────────── */
-    .experience { margin-bottom: .14in; }
-    .job { margin-bottom: .15in; }
+    /* ── KEY SKILLS (bullet paragraphs) ──────────────── */
+    .skills-section { margin-bottom: .16in; }
+    .skill-bullets { list-style: disc; padding-left: .9rem; }
+    .skill-bullets li {
+      font-size: 8pt;
+      line-height: 1.58;
+      color: var(--text);
+      margin-bottom: .1rem;
+    }
+    .skill-bullets li strong { font-weight: 600; color: var(--navy); }
+
+    /* ── DAY IN LIFE ──────────────────────────────────── */
+    .dotl-section { margin-bottom: .14in; }
+    .dotl-item { margin-bottom: .1rem; }
+    .dotl-item p { font-size: 8pt; line-height: 1.55; color: var(--text); }
+    .dotl-item p strong { font-weight: 700; color: var(--navy); }
+
+    /* ── CAREER JOURNEY ───────────────────────────────── */
+    .career-section { margin-bottom: .16in; }
+    .job { margin-bottom: .2in; }
     .job:last-child { margin-bottom: 0; }
     .job-header {
       display: flex;
@@ -144,77 +163,58 @@
       align-items: baseline;
     }
     .job-company {
-      font-size: 10.5pt;
+      font-size: 11pt;
       font-weight: 700;
-      color: var(--teal-dark);
+      color: var(--navy);
     }
     .job-tenure {
-      font-size: 8pt;
+      font-size: 8.5pt;
       font-weight: 700;
-      color: var(--teal-mid);
+      color: var(--blue);
       letter-spacing: 0;
     }
     .job-dates {
-      font-size: 7pt;
+      font-size: 8pt;
       color: var(--text-muted);
       white-space: nowrap;
     }
     .job-meta {
-      font-size: 7.5pt;
+      font-size: 8.5pt;
       color: var(--text-muted);
-      margin-top: .04rem;
-      margin-bottom: .08rem;
+      margin-top: .05rem;
+      margin-bottom: .1rem;
     }
-    .job-meta strong {
-      font-weight: 600;
+    .job-meta strong { font-weight: 600; color: var(--text); }
+    .job-desc {
+      font-size: 9pt;
       color: var(--text);
+      line-height: 1.6;
     }
-    .job-bullets {
-      margin: .12rem 0 .12rem .82rem;
-      padding: 0;
+    .job-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0 1rem;
+      margin-bottom: .14in;
     }
-    .job-bullets li {
-      font-size: 8pt;
-      color: var(--text);
-      line-height: 1.52;
-      margin-bottom: .08rem;
-    }
-    .client-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .16rem;
-      margin-top: .14rem;
-    }
-    .client-tag {
-      font-size: 6.5pt;
-      padding: .07rem .36rem;
-      border: 1px solid #b2d8e0;
-      border-radius: 10px;
-      color: var(--teal-mid);
-      background: rgba(26,154,170,.06);
-    }
+    .job-mini-company { font-size: 9pt; font-weight: 700; color: var(--navy); }
+    .job-mini-dates   { font-size: 7pt; color: var(--text-muted); margin-top: .02rem; }
+    .job-mini-role    { font-size: 7.5pt; color: var(--text); margin-top: .02rem; }
 
     /* ── EDUCATION ────────────────────────────────────── */
     .education { margin-bottom: .14in; }
-    .edu-item { margin-bottom: .08in; }
-    .edu-degree { font-size: 8.5pt; font-weight: 600; color: var(--text); }
-    .edu-school  { font-size: 7.5pt; color: var(--text-muted); }
-
-    /* ── COMMUNITY ────────────────────────────────────── */
-    .community-item {
-      font-size: 8pt;
-      color: var(--text);
-      line-height: 1.52;
-      padding-left: .45rem;
-      border-left: 2px solid var(--teal-mid);
-      margin-bottom: .09in;
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .06in .4in;
     }
+    .edu-item {}
+    .edu-degree { font-size: 8pt; font-weight: 600; color: var(--text); }
+    .edu-school { font-size: 7pt; color: var(--text-muted); }
 
-    /* ── SIDEBAR SECTIONS ─────────────────────────────── */
+    /* ── SIDEBAR: ACHIEVEMENTS ────────────────────────── */
     .sidebar-section { margin-bottom: .16in; }
     .sidebar-section:last-child { margin-bottom: 0; }
 
-    /* ── SIDEBAR: ACHIEVEMENTS ────────────────────────── */
     .achievement {
       display: flex;
       align-items: flex-start;
@@ -224,17 +224,19 @@
     .achievement-star { color: var(--gold); font-size: 9pt; flex-shrink: 0; margin-top: 1px; }
     .achievement p { font-size: 7.5pt; color: var(--text); line-height: 1.48; }
 
-    /* ── SIDEBAR: SKILLS ──────────────────────────────── */
-    .tag-group { margin-bottom: .1rem; }
-    .tag-group-label { font-size: 6.5pt; color: var(--teal-mid); font-weight: 700; margin-bottom: .1rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: .16rem; }
-    .tag {
-      font-size: 7pt;
-      padding: .1rem .38rem;
-      background: rgba(26,154,170,.1);
-      border: 1px solid rgba(26,154,170,.25);
+    /* ── SIDEBAR: CLIENT TAGS ─────────────────────────── */
+    .client-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .16rem;
+    }
+    .client-tag {
+      font-size: 6.5pt;
+      padding: .07rem .36rem;
+      border: 1px solid rgba(30,111,217,.25);
       border-radius: 10px;
-      color: var(--teal-dark);
+      color: var(--blue);
+      background: rgba(30,111,217,.06);
     }
 
     /* ── SIDEBAR: CERTS ───────────────────────────────── */
@@ -250,14 +252,27 @@
       align-items: baseline;
     }
     .lang-name  { font-size: 8pt; font-weight: 500; color: var(--text); }
-    .lang-level { font-size: 7pt; color: var(--teal-mid); }
-    .lang-bar-wrap { height: 3px; background: rgba(26,154,170,.2); border-radius: 2px; margin-top: 2px; }
-    .lang-bar { height: 100%; background: var(--teal-mid); border-radius: 2px; }
+    .lang-level { font-size: 7pt; color: var(--blue); }
+    .lang-bar-wrap { height: 3px; background: rgba(30,111,217,.15); border-radius: 2px; margin-top: 2px; }
+    .lang-bar { height: 100%; background: var(--blue); border-radius: 2px; }
+
+    /* ── SIDEBAR: SKILLS (tag groups) ────────────────── */
+    .tag-group { margin-bottom: .1rem; }
+    .tag-group-label { font-size: 6.5pt; color: var(--blue); font-weight: 700; margin-bottom: .1rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .16rem; }
+    .tag {
+      font-size: 7pt;
+      padding: .1rem .38rem;
+      background: rgba(30,111,217,.08);
+      border: 1px solid rgba(30,111,217,.22);
+      border-radius: 10px;
+      color: var(--navy);
+    }
 
     /* ── SIDEBAR: TESTIMONIALS ────────────────────────── */
     .testimonial {
       background: rgba(255,255,255,.72);
-      border-left: 2.5px solid var(--teal-mid);
+      border-left: 2.5px solid var(--blue);
       padding: .15rem .28rem;
       margin-bottom: .1rem;
       border-radius: 0 4px 4px 0;
@@ -268,8 +283,25 @@
       color: var(--text);
       line-height: 1.5;
     }
-    .testimonial-author { font-size: 7.5pt; font-weight: 700; color: var(--teal-dark); margin-top: .08rem; }
+    .testimonial-author { font-size: 7.5pt; font-weight: 700; color: var(--navy); margin-top: .08rem; }
     .testimonial-role   { font-size: 6.5pt; color: var(--text-muted); }
+
+    /* ── SIDEBAR: HOBBIES ─────────────────────────────── */
+    .hobby-item {
+      font-size: 7.5pt;
+      color: var(--text);
+      line-height: 1.5;
+      margin-bottom: .05rem;
+      display: flex;
+      align-items: flex-start;
+      gap: .25rem;
+    }
+    .hobby-dot {
+      color: var(--blue);
+      font-size: 8pt;
+      flex-shrink: 0;
+      margin-top: .02rem;
+    }
 
     /* ── PRINT ────────────────────────────────────────── */
     @media print {
@@ -312,58 +344,34 @@
 
       <div class="summary">
         <div class="section-label">Summary</div>
-        <p>Technical Project Manager with 25+ years in IT, including a decade at Microsoft leading Azure Cloud and AI platform delivery for Fortune 500 clients. Deep expertise managing end-to-end delivery of enterprise data and analytics programs — spanning Azure Data Lake, Databricks, Azure AI, Copilot Studio, Power BI, and Tableau — coordinating cross-functional teams of data engineers, cloud architects, analysts, and external vendors. Proven track record translating complex technical initiatives into executive-level outcomes, with PMP, CSPO, CSM, and ITIL certifications and fluency in Agile, SAFe, and hybrid delivery models. Multilingual (English, Portuguese, French, Spanish).</p>
+        <p>25-year IT career with a decade at Microsoft leading Azure Cloud and AI platform delivery for Fortune 500 enterprises. Technical Project Manager with deep expertise managing end-to-end delivery of data platform, analytics, and AI initiatives — spanning Azure Data Lake, Databricks, Azure AI, Copilot Studio, Power BI, and Tableau. Proven ability to coordinate cross-functional teams of data engineers, cloud architects, analysts, and external vendors while translating complex technical programs into clear executive outcomes. Fluent in Agile, SAFe, and hybrid delivery models, with a track record of driving measurable results on schedule, within scope, and aligned to enterprise data and AI strategies.</p>
       </div>
 
-      <div class="experience">
-        <div class="section-label">Experience</div>
-
-        <div class="job">
-          <div class="job-header">
-            <div class="job-company">Microsoft <span class="job-tenure">· 10 years</span></div>
-            <div class="job-dates">July 2016 – Present</div>
-          </div>
-          <div class="job-meta"><strong>Technical Project Manager</strong> · Azure Cloud &amp; AI Professional Services · Richmond, VA</div>
-          <ul class="job-bullets">
-            <li>Led end-to-end technical project management of Azure data platform, analytics, and AI initiatives for Fortune 500 clients — including ExxonMobil, GM, and PressGaney — coordinating cross-functional teams of data engineers, cloud architects, analysts, and external vendors across Azure Data Lake, Databricks, and Azure AI environments.</li>
-            <li>Managed enterprise data modernization programs migrating from Tableau to Power BI and transitioning legacy data pipelines to Azure Data Lake + Databricks; governed project plans, milestones, dependencies, budgets, and risk registers across Agile and hybrid (SAFe/Scrum) delivery models using Azure DevOps.</li>
-            <li>Delivered Azure AI and Copilot Studio implementation programs — including planning, stakeholder communication, change control, and governance — translating complex technical concepts into clear executive updates and ensuring alignment to enterprise data architecture and security standards.</li>
-            <li>Accelerated sales velocity through SOW design, pricing models, and complex deal governance for multi-million-dollar Azure engagements; managed OKRs, KPIs, financial health, and customer satisfaction metrics across portfolio.</li>
-            <li>Built and deployed Agentic AI companion agents (Delivery, Pursuit, Sales) enabling data-driven portfolio monitoring, root-cause analysis, and automated issue resolution across program delivery operations.</li>
-          </ul>
-          <div class="client-tags">
-            <span class="client-tag">ExxonMobil</span>
-            <span class="client-tag">GM-Cruise</span>
-            <span class="client-tag">PressGaney</span>
-            <span class="client-tag">AT&amp;T</span>
-            <span class="client-tag">Chevron</span>
-            <span class="client-tag">Coca-Cola</span>
-            <span class="client-tag">Disney</span>
-            <span class="client-tag">FedEx</span>
-            <span class="client-tag">Ford</span>
-            <span class="client-tag">NBA</span>
-            <span class="client-tag">NFL</span>
-            <span class="client-tag">Nike</span>
-            <span class="client-tag">T-Mobile</span>
-            <span class="client-tag">WarnerBros. Discovery</span>
-            <span class="client-tag">+ more</span>
-          </div>
-        </div>
-
-        <div class="job">
-          <div class="job-header">
-            <div class="job-company">Dexian-DISYS <span class="job-tenure">· 6 years</span></div>
-            <div class="job-dates">Nov 2010 – Jun 2016</div>
-          </div>
-          <div class="job-meta"><strong>Practice Leader, Application Development</strong> · Houston, TX → Washington D.C. Metro</div>
-          <ul class="job-bullets">
-            <li>Founded and scaled a Scrum-Agile Application Development Practice from zero, defining delivery models, sales strategy, and full operational oversight with P&amp;L responsibility.</li>
-            <li>Delivered consulting for U.S. Postal Service, ExxonMobil, Schlumberger, and Frontier; managed full lead-to-order and order-to-cash lifecycle.</li>
-            <li>Led people management, technical presales, financial forecasting, and complex deal governance; expanded scope from Houston to D.C. Metro region.</li>
-          </ul>
-        </div>
-
+      <div class="skills-section">
+        <div class="section-label">Key Professional Skills</div>
+        <ul class="skill-bullets">
+          <li><strong>Azure Data &amp; AI Platform Delivery:</strong> 10 years managing Azure Cloud modernization and AI implementation programs for Fortune 500 clients — including ExxonMobil, GM, and Press Ganey. Hands-on experience governing Azure Data Lake architecture, Databricks partnership engagements, Azure AI and Copilot Studio deployments, and enterprise migrations from Tableau to Power BI. End-to-end project lifecycle ownership: scope, schedule, budget, risk register, stakeholder communication, and delivery governance aligned to enterprise data architecture and security standards.</li>
+          <li><strong>Cross-Functional Delivery Leadership:</strong> Coordinates and orchestrates delivery teams across data engineers, cloud architects, analytics leads, business analysts, and external vendors. Champions buy-in from collaborating organizations on solution approach, architecture decisions, and delivery plans. Full-cycle hands-on oversight from presales through production deployment, using Azure DevOps and ServiceNow (SNOW) as primary project and Agile tooling across Scrum, SAFe, and hybrid delivery models.</li>
+          <li><strong>Stakeholder Management &amp; Program Governance:</strong> Translates complex technical concepts into clear, actionable updates for executive and business stakeholders. Develops and manages project plans, milestones, dependencies, and budgets; proactively manages risks, issues, and change requests. Tracks OKRs, KPIs, and delivery health metrics in Monthly Business Reviews. Built and deployed Agentic AI companion agents (Delivery, Pursuit, Sales) to drive portfolio-wide data-driven monitoring and accelerated issue resolution.</li>
+        </ul>
       </div>
+
+      <div class="dotl-section">
+        <div class="section-label">Key Activities &amp; Programs</div>
+        <div class="dotl-item">
+          <p><strong>Data Platform &amp; Analytics Program Delivery:</strong> Plan and manage end-to-end delivery of Azure data platform, analytics, and AI initiatives — from roadmap and WBS through stakeholder sign-off and go-live. Governed Azure Data Lake and Databricks implementations, Power BI adoption programs, and enterprise Tableau decommissioning projects at ExxonMobil, GM, and Press Ganey.</p>
+        </div>
+        <div class="dotl-item">
+          <p><strong>Agile &amp; Hybrid Delivery Execution:</strong> Drives delivery cadence across Scrum, SAFe, and hybrid models using Azure DevOps and SNOW. Manages sprint planning, backlog grooming, milestone tracking, dependency mapping, and velocity reporting for multi-track data engineering and analytics workstreams.</p>
+        </div>
+        <div class="dotl-item">
+          <p><strong>Risk, Governance &amp; Automation:</strong> Proactively identifies and manages delivery risks, issues, and change requests against enterprise data architecture, governance, and security standards. Incorporates Agentic AI-based risk assessment and automation tooling to reduce manual overhead, surface patterns early, and accelerate resolution across program portfolios.</p>
+        </div>
+        <div class="dotl-item">
+          <p><strong>SOW Design &amp; Commercial Governance:</strong> Intake, design, and approval of consulting solutions driving deal velocity through technical proposals, WBS, staffing plans, pricing models, Statements of Work, Work Orders, and Amendments. Manages P&amp;L health, financial forecasting, and customer satisfaction metrics alongside sales and delivery executives.</p>
+        </div>
+      </div>
+
     </div>
 
     <!-- RIGHT SIDEBAR -->
@@ -373,19 +381,19 @@
         <div class="section-label">Key Achievements</div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Managed Azure Data Lake + Databricks platform delivery at ExxonMobil and GM, including Tableau-to-Power BI analytics migration</p>
+          <p>Led Azure Data Lake + Databricks platform delivery at ExxonMobil and GM, including enterprise Tableau-to-Power BI analytics migration</p>
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Delivered Azure AI and Copilot Studio programs for 17+ Fortune 500 clients over 10 years at Microsoft</p>
+          <p>Delivered Azure AI and Copilot Studio implementation programs for 17+ Fortune 500 clients over 10 years at Microsoft Professional Services</p>
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Built 3 production Agentic AI agents (Delivery, Pursuit, Sales) deployed across Microsoft's Professional Services portfolio</p>
+          <p>Built and deployed 3 Agentic AI companion agents (Delivery, Pursuit, Sales) for portfolio-wide monitoring and data-driven decision-making</p>
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Founded and scaled Agile App Dev Practice from zero at Dexian-DISYS with full P&amp;L ownership</p>
+          <p>Founded Scrum-Agile App Dev Practice at Dexian-Disys from zero — delivering for USPS, ExxonMobil &amp; Schlumberger with full P&amp;L ownership</p>
         </div>
       </div>
 
@@ -443,6 +451,35 @@
         </div>
       </div>
 
+      <div class="sidebar-section">
+        <div class="section-label">Anchor Accounts</div>
+        <div class="client-tags">
+          <span class="client-tag">ExxonMobil</span>
+          <span class="client-tag">GM-Cruise</span>
+          <span class="client-tag">Press Ganey</span>
+          <span class="client-tag">AT&amp;T</span>
+          <span class="client-tag">AWS</span>
+          <span class="client-tag">Chevron</span>
+          <span class="client-tag">Coca-Cola</span>
+          <span class="client-tag">Constellation</span>
+          <span class="client-tag">Disney</span>
+          <span class="client-tag">Domino's</span>
+          <span class="client-tag">Electronic Arts</span>
+          <span class="client-tag">FedEx</span>
+          <span class="client-tag">Ford</span>
+          <span class="client-tag">Lumen</span>
+          <span class="client-tag">Manpower</span>
+          <span class="client-tag">NBA</span>
+          <span class="client-tag">NFL</span>
+          <span class="client-tag">Nike</span>
+          <span class="client-tag">Pepsico</span>
+          <span class="client-tag">T-Mobile</span>
+          <span class="client-tag">The GAP</span>
+          <span class="client-tag">Verizon</span>
+          <span class="client-tag">WarnerBros.</span>
+        </div>
+      </div>
+
     </div>
   </div>
 </div>
@@ -454,20 +491,34 @@
     <!-- LEFT COLUMN -->
     <div class="col-left">
 
-      <div class="experience">
-        <div class="section-label">Experience (continued)</div>
+      <div class="career-section">
+        <div class="section-label">Career Journey</div>
+
+        <div class="job">
+          <div class="job-header">
+            <div class="job-company">Microsoft <span class="job-tenure">· 10 years</span></div>
+            <div class="job-dates">July 2016 – Present</div>
+          </div>
+          <div class="job-meta"><strong>Technical Project Manager</strong> · Azure Cloud &amp; AI Professional Services · Richmond, VA</div>
+          <div class="job-desc">Led end-to-end technical project management of Azure data platform, analytics, and AI initiatives for Fortune 500 clients — including ExxonMobil, GM, and Press Ganey. Governed Azure Data Lake and Databricks implementations, managed enterprise Tableau-to-Power BI analytics migrations, and delivered Azure AI and Copilot Studio programs from planning through go-live. Coordinated cross-functional teams of data engineers, cloud architects, analysts, and external vendors using Azure DevOps across Agile and SAFe delivery models. Managed project plans, milestones, risk registers, budgets, and stakeholder communications; tracked OKRs, KPIs, P&amp;L health, and CSAT across a multi-million-dollar portfolio. Developed and deployed Agentic AI companion agents (Delivery, Pursuit, Sales) for portfolio-wide monitoring and data-driven decision-making.</div>
+        </div>
+
+        <div class="job">
+          <div class="job-header">
+            <div class="job-company">Dexian-Disys <span class="job-tenure">· 6 years</span></div>
+            <div class="job-dates">Nov 2010 – Jun 2016</div>
+          </div>
+          <div class="job-meta"><strong>Practice Manager, Application Development</strong> · Houston, TX → Washington D.C. Metro</div>
+          <div class="job-desc">Head of delivery, technical sales prospecting, and oversight of all operations and projects under the Practice. Defined and built from the ground up an Application Development Practice. Full lead-to-order and order-to-cash process ownership. Forecasting, strategic planning, contracts closure, sale profitability analysis, and market trend monitoring.</div>
+        </div>
 
         <div class="job">
           <div class="job-header">
             <div class="job-company">Meta Brasil <span class="job-tenure">· 8 years</span></div>
             <div class="job-dates">Sep 2002 – Oct 2010</div>
           </div>
-          <div class="job-meta"><strong>SW Engineer → Dev Lead → IT Consultant → Technical Program Manager</strong> · Porto Alegre, Brazil</div>
-          <ul class="job-bullets">
-            <li>Progressed through every discipline over 8 years — from writing production code to leading product teams, implementing SDLC and PMO methodologies, and managing outsourcing operations.</li>
-            <li>Implemented CMMI SEPG processes and led SCAMPI appraisals; managed outsourcing operations and delivered optimized business-technology integration for enterprise clients.</li>
-            <li>Designed and engineered IT consulting products end-to-end, building deep expertise in solution design, product engineering, and client-facing consulting.</li>
-          </ul>
+          <div class="job-meta"><strong>SW Engineer → Dev Lead → Sr. Consultant → Technical Program Manager</strong> · Porto Alegre, Brazil</div>
+          <div class="job-desc">Designed and enhanced IT consulting service offerings, project management and sales prospecting for software development projects, implementation of management methodologies, outsourcing operations, and counseling clients for optimized IT &amp; Business integration via PMO.</div>
         </div>
 
         <div class="job">
@@ -476,34 +527,27 @@
             <div class="job-dates">Aug 2000 – Jul 2004</div>
           </div>
           <div class="job-meta"><strong>Full Stack Software Engineer</strong> · Porto Alegre, Brazil</div>
-          <ul class="job-bullets">
-            <li>Built client-server and web-based applications using Delphi, Visual Basic, ASP.NET, and SQL Server.</li>
-            <li>Developed foundational skills in database administration, UX/UI wireframing, and product engineering.</li>
-          </ul>
+          <div class="job-desc">Where it all began. Built client-server and web-based applications using Delphi, Visual Basic, ASP.NET, and SQL Server. Developed foundational skills in database administration, UX/UI wireframing, and product engineering.</div>
         </div>
 
       </div>
 
       <div class="education">
-        <div class="section-label">Education</div>
-        <div class="edu-item">
-          <div class="edu-degree">MBA in Business Strategy — Magna Cum Laude</div>
-          <div class="edu-school">Unisinos &nbsp;·&nbsp; 2009–2011</div>
+        <div class="section-label">Academic Background</div>
+        <div class="edu-grid">
+          <div class="edu-item">
+            <div class="edu-degree">Master's in Business Strategy</div>
+            <div class="edu-school">Unisinos &nbsp;·&nbsp; Magna cum laude &nbsp;·&nbsp; 2009–2011</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">B.S. Computer Science</div>
+            <div class="edu-school">PUC Rio Grande do Sul &nbsp;·&nbsp; Summa cum laude &nbsp;·&nbsp; 2003–2007</div>
+          </div>
+          <div class="edu-item">
+            <div class="edu-degree">Associate's in Software Engineering</div>
+            <div class="edu-school">Escola Técnica Santo Inácio &nbsp;·&nbsp; 1997–2000</div>
+          </div>
         </div>
-        <div class="edu-item">
-          <div class="edu-degree">B.S. Computer Science — Summa Cum Laude</div>
-          <div class="edu-school">PUC Rio Grande do Sul &nbsp;·&nbsp; 2003–2007</div>
-        </div>
-        <div class="edu-item">
-          <div class="edu-degree">Associate's in Software Engineering</div>
-          <div class="edu-school">Escola Técnica Santo Inácio &nbsp;·&nbsp; 1997–2000</div>
-        </div>
-      </div>
-
-      <div>
-        <div class="section-label">Community &amp; Teaching</div>
-        <div class="community-item">PMP Exam Instructor — PMIRS Chapter (since 2006) &nbsp;·&nbsp; Risk Management track</div>
-        <div class="community-item">PMO Workshop Facilitator — SEBRAE-RS (since 2011)</div>
       </div>
 
     </div>
@@ -590,6 +634,18 @@
           <div class="testimonial-role">Architect Manager · Microsoft</div>
         </div>
 
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Hobbies &amp; Interests</div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>"That One Picture" — amateur photography</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>"Project Footprint" — 30+ countries visited</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Water Sports, Skiing, 10k Running, HIIT</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>F1, Broadway, Major Leagues, World Travel</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>"The Book of Alessia Faye" — Girl Dad</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Pet parent (Doce &amp; Salgada)</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Reading — J. Grisham, M. Gladwell, W. Isaacson</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Passe Completo Rádio! &amp; How I Built This</span></div>
       </div>
 
     </div>
