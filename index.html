@@ -220,17 +220,30 @@
     /* Photo column */
     .hero-photo-col {
       opacity: 0; animation: fadeIn .9s var(--ease) .5s forwards;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 1.6rem; width: 300px;
     }
     .hero-photo {
-      width: 220px; height: 220px; border-radius: 50%;
-      object-fit: cover;
+      width: 200px; height: 200px; border-radius: 50%;
+      object-fit: cover; flex-shrink: 0;
       border: 3px solid rgba(200,169,110,.3);
       box-shadow:
         0 0 0 8px rgba(200,169,110,.07),
         0 0 0 16px rgba(200,169,110,.04),
         0 24px 60px rgba(0,0,0,.4);
     }
-    @media(max-width:700px){ .hero-photo { width: 160px; height: 160px; } }
+    @media(max-width:700px){ .hero-photo { width: 150px; height: 150px; } }
+    .hero-intro {
+      font-size: .85rem; font-weight: 300; line-height: 1.8;
+      color: rgba(250,248,243,.58);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .hero-intro p { margin-bottom: .85rem; }
+    .hero-intro p:last-child { margin-bottom: 0; }
+    @media(max-width:700px){
+      .hero-photo-col { width: 100%; max-width: 340px; }
+      .hero-intro { text-align: left; }
+    }
 
     /* ─── SECTION SCAFFOLDING ────────────────────────────── */
     section { scroll-margin-top: 60px; }
@@ -532,7 +545,8 @@
       font-size: .9rem; color: #374151;
     }
     .path-arrow { color: var(--accent); font-family: 'DM Mono', monospace; font-size: .8rem; }
-    .path-flag { font-size: 1rem; }
+    .path-flag { font-size: 1rem; display: flex; align-items: center; }
+    .flag-img { height: 14px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.18); display: block; }
 
     /* ─── CONNECT ────────────────────────────────────────── */
     #connect {
@@ -648,8 +662,8 @@
           <span class="cert-tag">CSPO</span>
           <span class="cert-tag">CSM</span>
           <span class="cert-tag">ITIL</span>
-          <span class="cert-tag">MBA</span>
           <span class="cert-tag">CMMI</span>
+          <span class="cert-tag">MBA</span>
         </div>
 
         <div class="metrics-row">
@@ -684,7 +698,7 @@
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             Get in Touch
           </a>
-          <a href="Fernando_Abreu_BPM_Resume.pdf" download class="btn btn-ghost">
+          <a href="Fernando Abreu - Sr Tech PM Microsoft.pdf" download class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
             Download Resume
           </a>
@@ -695,6 +709,11 @@
 
       <div class="hero-photo-col">
         <img src="assets/profile.jpg" alt="Fernando Abreu" class="hero-photo" />
+        <div class="hero-intro">
+          <p>Hi, my name is Fernando Abreu, and I've spent the last 10 years at Microsoft as a Principal Tech PM. I began my career as a software engineer, then moved into consulting to help customers adopt Agile practices and PMO methodologies to run their projects more effectively. From there, I was invited to build a Modern Applications professional services practice from the ground up leading a group of 22 people at peak.</p>
+          <p>My time at Microsoft has been centered on delivery excellence and business growth in the Azure Cloud&amp;AI space. I specialize in lead‑to‑order strategy and deal shaping, helping executives shepherd the approval and delivery of Microsoft's largest and most intricate consulting engagements, all while running global programs to strengthen and streamline tools and methods.</p>
+          <p>And that's just my side hustle — my full‑time job is being a proud girl dad, loving husband, and distinguished pet parent. I'm originally from Brazil, spent a chapter as a French Canadian, and later became a naturalized American now living in beautiful, historic Richmond, Virginia.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -706,12 +725,12 @@
       <h2 class="section-title reveal reveal-d1">Ten years at<br /><em>the top.</em></h2>
       <div class="section-rule reveal reveal-d2"></div>
       <p class="section-lead reveal reveal-d3">
-        July 2016 — Present. Principal Project Manager leading the most complex Cloud and AI consulting engagements in Microsoft's Professional Services portfolio.
+        July 2016 — Present. Technical Project Manager leading Azure Cloud and AI, M365 and Dynamics implementation programs for Fortune 500 clients across Microsoft's Professional Services portfolio.
       </p>
 
       <div class="ms-highlight reveal reveal-d3">
         <p>
-          Leading end-to-end delivery of complex Cloud and AI consulting engagements across the Fortune 500 — orchestrating cross-functional teams of Architects, Business Analysts, Feature Teams, Vendors, and Delivery Executives to drive measurable business growth and consumption ROI.
+          Led end-to-end delivery of Azure Cloud and AI consulting engagements across the Fortune 500 — orchestrating cross-functional teams of engineers, cloud architects, business analysts, vendors, and delivery executives. Fluent in AI-driven solutions and agentification (Claude Code and Copilot Studio) for portfolio-wide monitoring and data-driven decision-making.
         </p>
       </div>
 
@@ -719,7 +738,7 @@
         <div class="ms-card reveal reveal-d1">
           <div class="ms-card-icon">🤖</div>
           <h4>Agentic AI Adoption</h4>
-          <p>Developed and deployed companion AI Agents — Delivery Agent, Pursuit Agent, Sales Agent — enabling data-driven portfolio monitoring, root-cause analysis, and accelerated resolution across program portfolios.</p>
+          <p>Agentic AI companion agents (Delivery, Pursuit, Sales) for portfolio-wide data-driven monitoring, root-cause analysis, and accelerated resolution. Fluent in Claude Code and Copilot Studio agentification.</p>
         </div>
         <div class="ms-card reveal reveal-d2">
           <div class="ms-card-icon">☁️</div>
@@ -742,21 +761,27 @@
         <p style="font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;">Client Portfolio</p>
         <div class="client-cloud">
           <span class="client-tag">AT&amp;T</span>
+          <span class="client-tag">AWS</span>
           <span class="client-tag">Chevron</span>
           <span class="client-tag">Coca-Cola</span>
           <span class="client-tag">Constellation</span>
           <span class="client-tag">Disney</span>
+          <span class="client-tag">Domino's</span>
           <span class="client-tag">Electronic Arts</span>
           <span class="client-tag">ExxonMobil</span>
           <span class="client-tag">FedEx</span>
           <span class="client-tag">Ford</span>
           <span class="client-tag">GAP</span>
           <span class="client-tag">GM-Cruise</span>
+          <span class="client-tag">Lumen</span>
           <span class="client-tag">Manpower</span>
           <span class="client-tag">NBA</span>
           <span class="client-tag">NFL</span>
           <span class="client-tag">Nike</span>
+          <span class="client-tag">Pepsico</span>
+          <span class="client-tag">Press Ganey</span>
           <span class="client-tag">T-Mobile</span>
+          <span class="client-tag">Verizon</span>
           <span class="client-tag">WarnerBros. Discovery</span>
         </div>
       </div>
@@ -783,10 +808,10 @@
             <div class="tl-company">Dexian-DISYS</div>
             <div class="tl-role">Practice Leader, Application Development · Houston, TX → Washington D.C. Metro</div>
             <div class="tl-body">
-              <p>Built a Scrum-Agile Application Development Practice from zero — defining delivery models, sales strategy, and full operational oversight. Moved from Brazil to Montréal, then Houston, then the D.C. Metro, expanding scope at every step.</p>
+              <p>Head of delivery, technical sales prospecting, and oversight of all operations and projects under the Practice. Built a Modern Applications professional services practice from the ground up leading a group of 22 people at peak. Moved from Brazil to Montréal, then Houston, then the D.C. Metro, expanding scope at every step.</p>
               <ul>
-                <li>Founded and scaled the Agile App Dev Practice, ground-up</li>
-                <li>Delivered consulting for U.S. Postal Service, ExxonMobil, Schlumberger, Frontier</li>
+                <li>Built the Modern Applications practice ground-up — 22 people at peak</li>
+                <li>Delivered services to U.S. Postal Service, Schlumberger and HangIT</li>
                 <li>Full lead-to-order and order-to-cash lifecycle ownership</li>
                 <li>People management, technical presales, forecasting, P&amp;L, complex deal governance</li>
               </ul>
@@ -1045,10 +1070,10 @@
 
           <div class="journey-path reveal reveal-d1">
             <div class="path-step"><span class="path-flag">🇧🇷</span><span>Porto Alegre, Brazil</span></div>
-            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag">🇨🇦</span><span>Montréal, Canada</span></div>
+            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag"><img src="https://flagcdn.com/w40/ca-qc.png" class="flag-img" alt="Quebec flag"></span><span>Montréal, Québec</span></div>
             <div class="path-step"><span class="path-arrow">→</span><span class="path-flag">🇺🇸</span><span>Houston, TX</span></div>
-            <div class="path-step"><span class="path-arrow">→</span><span>Washington, D.C. Metro</span></div>
-            <div class="path-step"><span class="path-arrow">→</span><span>Richmond, VA (home)</span></div>
+            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag"><img src="https://flagcdn.com/w40/us-dc.png" class="flag-img" alt="Washington D.C. flag"></span><span>Washington, D.C. Metro</span></div>
+            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 13" width="20" height="14" class="flag-img" aria-label="Richmond, VA flag"><rect width="20" height="13" fill="#002868"/><circle cx="10" cy="6.5" r="5.2" fill="none" stroke="#C8A96E" stroke-width="1"/><circle cx="10" cy="6.5" r="4" fill="none" stroke="#C8A96E" stroke-width="0.3"/><line x1="10" y1="2.2" x2="10" y2="10.8" stroke="#C8A96E" stroke-width="0.5"/><line x1="8.5" y1="4" x2="11.5" y2="4" stroke="#C8A96E" stroke-width="0.5"/><circle cx="10" cy="1.6" r="0.9" fill="none" stroke="#C8A96E" stroke-width="0.4"/></svg></span><span>Richmond, VA (home)</span></div>
           </div>
 
           <div class="beyond-quote reveal reveal-d2">
