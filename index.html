@@ -613,6 +613,242 @@
       to   { opacity: 1; }
     }
 
+    /* ─── THE LAB ─────────────────────────────────────── */
+    #lab {
+      background: #060d1f;
+      position: relative; overflow: hidden;
+    }
+    #lab::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(200,169,110,.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,169,110,.025) 1px, transparent 1px);
+      background-size: 70px 70px;
+      pointer-events: none;
+    }
+    #lab .section-title { color: var(--cream); }
+    #lab .section-rule  { background: var(--accent); }
+    #lab .chapter-label { color: var(--accent); }
+    #lab .section-lead  { color: rgba(250,248,243,.5); }
+    #lab .section-inner { padding-bottom: 1.5rem; }
+
+    .lab-row-outer {
+      max-width: 1060px;
+      margin: 0 auto;
+      padding: 1rem 2rem 5rem;
+      position: relative;
+    }
+    @media(max-width:768px) { .lab-row-outer { padding: 1rem 1.2rem 4rem; } }
+
+    .lab-row-wrapper {
+      display: flex; align-items: center; gap: .9rem;
+    }
+
+    .lab-row {
+      display: flex;
+      gap: 1.4rem;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
+      padding: 1.2rem .2rem 2.4rem;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex: 1;
+      justify-content: center;
+    }
+    .lab-row::-webkit-scrollbar { display: none; }
+    @media(max-width:960px) { .lab-row { justify-content: flex-start; } }
+
+    .lab-card {
+      flex: 0 0 220px;
+      height: 336px;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      scroll-snap-align: start;
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+      border: 1.5px solid rgba(200,169,110,.1);
+    }
+    .lab-card:hover {
+      transform: scale(1.08) translateY(-7px);
+      box-shadow: 0 28px 70px rgba(0,0,0,.65), 0 0 0 1.5px rgba(200,169,110,.55);
+      z-index: 5;
+    }
+
+    .lab-card-img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform .45s var(--ease);
+      display: block;
+    }
+    .lab-card:hover .lab-card-img { transform: scale(1.06); }
+
+    .lab-card-noise {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,.18) 0%,
+        rgba(0,0,0,.05) 45%,
+        rgba(0,0,0,.0) 65%);
+      pointer-events: none;
+    }
+
+    .lab-card-play {
+      position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 50px; height: 50px; border-radius: 50%;
+      background: rgba(200,169,110,.92);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .3s var(--ease), opacity .3s;
+      opacity: 0; pointer-events: none;
+    }
+    .lab-card-play svg { margin-left: 3px; }
+    .lab-card:hover .lab-card-play {
+      transform: translate(-50%, -50%) scale(1);
+      opacity: 1;
+    }
+
+    .lab-card-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.92) 0%, rgba(0,0,0,.4) 55%, transparent 100%);
+      padding: 2.8rem 1rem 1.1rem;
+    }
+    .lab-card-tag {
+      font-family: 'DM Mono', monospace;
+      font-size: .57rem; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(200,169,110,.13);
+      border: 1px solid rgba(200,169,110,.3);
+      border-radius: 20px;
+      padding: .17rem .58rem;
+      display: inline-block; margin-bottom: .42rem;
+    }
+    .lab-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.12rem; font-weight: 600;
+      color: var(--cream); line-height: 1.2;
+    }
+    .lab-card-year {
+      font-family: 'DM Mono', monospace;
+      font-size: .59rem; color: rgba(250,248,243,.32);
+      margin-top: .22rem;
+    }
+
+    .lab-arrow {
+      flex-shrink: 0;
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(15,30,60,.8);
+      border: 1px solid rgba(200,169,110,.25);
+      color: var(--cream);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: all .2s;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      align-self: center;
+    }
+    .lab-arrow:hover {
+      background: rgba(200,169,110,.18);
+      border-color: var(--accent); color: var(--accent);
+    }
+    @media(max-width:600px) { .lab-arrow { display: none; } }
+
+    /* ─── LAB MODAL ─────────────────────────────────────── */
+    .lab-modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,.84);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      z-index: 500;
+      display: flex; align-items: center; justify-content: center;
+      padding: 2rem;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .lab-modal-overlay.open { opacity: 1; pointer-events: auto; }
+
+    .lab-modal {
+      background: #0f1e3c;
+      border: 1px solid rgba(200,169,110,.22);
+      border-radius: 14px;
+      max-width: 660px; width: 100%;
+      max-height: 90vh; overflow-y: auto;
+      position: relative;
+      transform: scale(.93) translateY(28px);
+      transition: transform .35s var(--ease);
+      scrollbar-width: none;
+      box-shadow: 0 40px 100px rgba(0,0,0,.7);
+    }
+    .lab-modal::-webkit-scrollbar { display: none; }
+    .lab-modal-overlay.open .lab-modal { transform: scale(1) translateY(0); }
+
+    .lab-modal-header {
+      height: 230px; position: relative;
+      border-radius: 14px 14px 0 0; overflow: hidden;
+    }
+    .lab-modal-video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+    }
+    .lab-modal-voverlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(0,0,0,.55) 100%);
+      pointer-events: none;
+    }
+    .lab-modal-close {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(0,0,0,.55); border: none; cursor: pointer;
+      color: var(--cream); font-size: .95rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s; z-index: 2;
+    }
+    .lab-modal-close:hover { background: rgba(200,169,110,.32); color: var(--accent); }
+
+    .lab-modal-body { padding: 2rem 2rem 2.2rem; }
+    .lab-modal-mtag {
+      font-family: 'DM Mono', monospace;
+      font-size: .63rem; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .5rem;
+    }
+    .lab-modal-mtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.1rem; font-weight: 600; color: var(--cream);
+      line-height: 1.05; margin-bottom: 1.1rem;
+    }
+    .lab-modal-mdesc {
+      font-size: .93rem; color: rgba(250,248,243,.58);
+      line-height: 1.83; margin-bottom: 1.5rem;
+    }
+    .lab-modal-mstack {
+      display: flex; flex-wrap: wrap; gap: .42rem; margin-bottom: 1.6rem;
+    }
+    .lab-stag {
+      font-family: 'DM Mono', monospace;
+      font-size: .67rem; padding: .28rem .7rem;
+      background: rgba(200,169,110,.08);
+      border: 1px solid rgba(200,169,110,.22);
+      border-radius: 20px; color: var(--accent);
+    }
+    .lab-modal-mactions { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .lab-mbtn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .68rem 1.45rem; border-radius: 3px;
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
+      transition: all .25s; text-decoration: none;
+    }
+    .lab-mbtn-primary { background: var(--accent); color: var(--navy); }
+    .lab-mbtn-primary:hover { background: #dfc080; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(200,169,110,.3); }
+    .lab-mbtn-ghost { border: 1px solid rgba(200,169,110,.28); color: rgba(250,248,243,.68); }
+    .lab-mbtn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
     /* ─── SCROLL PROGRESS ────────────────────────────────── */
     #progress-bar {
       position: fixed; top: 0; left: 0; height: 2px;
@@ -643,6 +879,7 @@
       <li><a href="#microsoft">Microsoft</a></li>
       <li><a href="#story">Before</a></li>
       <li><a href="#toolkit">Toolkit</a></li>
+      <li><a href="#lab">Lab</a></li>
       <li><a href="#voices">Voices</a></li>
       <li><a href="#beyond">Beyond</a></li>
       <li><a href="#connect">Connect</a></li>
@@ -988,6 +1225,108 @@
     </div>
   </section>
 
+  <!-- THE LAB -->
+  <section id="lab">
+    <div class="section-inner">
+      <p class="chapter-label reveal">Side Projects &middot; GitHub</p>
+      <h2 class="section-title reveal reveal-d1">The <em>Lab.</em></h2>
+      <div class="section-rule reveal reveal-d2"></div>
+      <p class="section-lead reveal reveal-d3">
+        What I build when the workday ends — AI agents, hospitality apps, food ventures, and productivity tools. All open-source, all shipping.
+      </p>
+    </div>
+
+    <div class="lab-row-outer reveal">
+      <div class="lab-row-wrapper">
+        <button class="lab-arrow" onclick="labScroll(-1)" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+
+        <div class="lab-row" id="labRow">
+
+          <!-- Delivery Excellence -->
+          <div class="lab-card" data-project="delivery-excellence">
+            <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">AI &middot; Enterprise</span>
+              <div class="lab-card-title">Delivery Excellence</div>
+              <div class="lab-card-year">2024</div>
+            </div>
+          </div>
+
+          <!-- The Gathering Silveira -->
+          <div class="lab-card" data-project="the-gathering">
+            <img class="lab-card-img" src="assets/lab-the-gathering.jpg" alt="The Gathering Silveira" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Hospitality &middot; Travel</span>
+              <div class="lab-card-title">The Gathering Silveira</div>
+              <div class="lab-card-year">2024</div>
+            </div>
+          </div>
+
+          <!-- Bella Bite -->
+          <div class="lab-card" data-project="bella-bite">
+            <img class="lab-card-img" src="assets/lab-bella-bite.jpg" alt="Bella Bite" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Food &amp; Beverage</span>
+              <div class="lab-card-title">Bella Bite</div>
+              <div class="lab-card-year">2025</div>
+            </div>
+          </div>
+
+          <!-- Career Coach -->
+          <div class="lab-card" data-project="career-coach">
+            <img class="lab-card-img" src="assets/lab-career-coach.jpg" alt="Career Coach" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">AI &middot; Productivity</span>
+              <div class="lab-card-title">Career Coach</div>
+              <div class="lab-card-year">2025</div>
+            </div>
+          </div>
+
+        </div>
+
+        <button class="lab-arrow" onclick="labScroll(1)" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAB MODAL -->
+  <div class="lab-modal-overlay" id="labModalOverlay">
+    <div class="lab-modal">
+      <div class="lab-modal-header">
+        <video class="lab-modal-video" id="labModalVideo" autoplay muted loop playsinline></video>
+        <div class="lab-modal-voverlay"></div>
+        <button class="lab-modal-close" id="labModalClose">&#x2715;</button>
+      </div>
+      <div class="lab-modal-body">
+        <div class="lab-modal-mtag" id="labModalTag"></div>
+        <div class="lab-modal-mtitle" id="labModalTitle"></div>
+        <p class="lab-modal-mdesc" id="labModalDesc"></p>
+        <div class="lab-modal-mstack" id="labModalStack"></div>
+        <div class="lab-modal-mactions" id="labModalActions"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- VOICES -->
   <section id="voices">
     <div class="section-inner">
@@ -1173,6 +1512,95 @@
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => observer.observe(s));
+
+    // ─── THE LAB ────────────────────────────────────────
+    const labData = {
+      'delivery-excellence': {
+        title: 'Delivery Excellence',
+        tag: 'AI · Enterprise · 2024',
+        desc: 'Microsoft Professional Services companion agent for end-to-end deal lifecycle management — pipeline health monitoring, contract governance, delivery risk profiling, and AI-powered advisory. Built to accelerate the MS PS lead-to-order and order-to-cash cycle for complex multi-million-dollar consulting engagements.',
+        stack: ['React', 'TypeScript', 'FastAPI', 'Python', 'Claude API', 'Tailwind CSS'],
+        video: 'assets/lab-delivery-excellence.webm',
+        live:  'https://fefoabreu.me/delivery-excellence/',
+        github:'https://github.com/fefoabreu/delivery-excellence'
+      },
+      'the-gathering': {
+        title: 'The Gathering Silveira',
+        tag: 'Hospitality · Travel · 2024',
+        desc: 'Premium hillside retreat booking and guest experience app — where the Atlantic Forest meets the surf at Praia da Silveira, Garopaba SC. Features real-time Firestore sync, 5-suite showcase, panoramic ocean photography, and a live guest activity guide powered by Firebase.',
+        stack: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Firestore'],
+        video: 'assets/lab-the-gathering.webm',
+        live:  'https://fefoabreu.me/TheGathering/',
+        github:'https://github.com/fefoabreu/TheGathering'
+      },
+      'bella-bite': {
+        title: 'Bella Bite',
+        tag: 'Food & Beverage · 2025',
+        desc: 'Fresh, healthy food truck concept bridging the coastal vibes of Malta and Garopaba, Brasil. Includes full branding identity, business plan, menu design, operational model, and investor pitch materials anchored on a $50K investment thesis — from idea to investor-ready in weeks.',
+        stack: ['HTML', 'CSS', 'JavaScript'],
+        video: 'assets/lab-bella-bite.webm',
+        live:  null,
+        github:'https://github.com/fefoabreu/bella-bite'
+      },
+      'career-coach': {
+        title: 'Career Coach',
+        tag: 'AI · Productivity · 2025',
+        desc: 'AI-powered job application assistant — paste a job description and your resume to get instant match scoring, skill gap analysis, tailored talking points, and a live mock interview chat. Built with a post-it board UX and powered by the Claude API for nuanced, context-aware coaching.',
+        stack: ['React', 'FastAPI', 'Python', 'Claude API', 'Vite'],
+        video: 'assets/lab-career-coach.webm',
+        live:  'https://fefoabreu.me/career-coach/',
+        github:'https://github.com/fefoabreu/career-coach'
+      }
+    };
+
+    const labOverlay  = document.getElementById('labModalOverlay');
+    const labClose    = document.getElementById('labModalClose');
+    const labModalVid = document.getElementById('labModalVideo');
+
+    document.querySelectorAll('.lab-card').forEach(card => {
+      card.addEventListener('click', () => {
+        const p = labData[card.dataset.project];
+        if (!p) return;
+        document.getElementById('labModalTag').textContent   = p.tag;
+        document.getElementById('labModalTitle').textContent = p.title;
+        document.getElementById('labModalDesc').textContent  = p.desc;
+        document.getElementById('labModalStack').innerHTML   =
+          p.stack.map(s => `<span class="lab-stag">${s}</span>`).join('');
+
+        const liveBtn = p.live
+          ? `<a href="${p.live}" target="_blank" rel="noopener" class="lab-mbtn lab-mbtn-primary">
+              <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M8 5v14l11-7z"/></svg>
+              See it Live
+            </a>` : '';
+
+        document.getElementById('labModalActions').innerHTML = `
+          ${liveBtn}
+          <a href="${p.github}" target="_blank" rel="noopener" class="lab-mbtn ${p.live ? 'lab-mbtn-ghost' : 'lab-mbtn-primary'}">
+            <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+            View on GitHub
+          </a>`;
+
+        labModalVid.src = p.video;
+        labModalVid.load();
+        labModalVid.play().catch(() => {});
+        labOverlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+
+    function closeLabModal() {
+      labOverlay.classList.remove('open');
+      document.body.style.overflow = '';
+      labModalVid.pause();
+      labModalVid.src = '';
+    }
+    labClose.addEventListener('click', closeLabModal);
+    labOverlay.addEventListener('click', e => { if (e.target === labOverlay) closeLabModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLabModal(); });
+
+    function labScroll(dir) {
+      document.getElementById('labRow').scrollBy({ left: dir * 260, behavior: 'smooth' });
+    }
 
     // Fade-in on scroll
     const reveals = document.querySelectorAll('.reveal');
