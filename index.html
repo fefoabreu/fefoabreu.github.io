@@ -855,6 +855,71 @@
     .lab-mbtn-ghost { border: 1px solid rgba(200,169,110,.28); color: rgba(250,248,243,.68); }
     .lab-mbtn-ghost:hover { border-color: var(--accent); color: var(--accent); }
 
+    /* ─── DEXIAN FEATURE ────────────────────────────────── */
+    .dexian-feature {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 2rem; align-items: start;
+    }
+    @media(max-width:640px) { .dexian-feature { grid-template-columns: 1fr; } }
+
+    .dexian-callout {
+      padding: 1.6rem 1.8rem;
+      border-left: 3px solid var(--accent);
+      background: rgba(200,169,110,.05);
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+    .dexian-callout p { font-size: .97rem; color: #374151; line-height: 1.82; }
+    .dexian-callout ul { padding-left: 1.1rem; margin-top: .8rem; }
+    .dexian-callout li { font-size: .92rem; color: #374151; margin-bottom: .3rem; line-height: 1.7; }
+    .dexian-callout-role {
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem; color: var(--muted);
+      letter-spacing: .05em; margin-bottom: .9rem;
+    }
+
+    .dexian-stats {
+      display: flex; flex-direction: column; gap: 1rem;
+    }
+    @media(max-width:640px) {
+      .dexian-stats { flex-direction: row; }
+    }
+    .dexian-stat {
+      text-align: center;
+      border: 1px solid rgba(200,169,110,.18);
+      border-radius: var(--r);
+      padding: .9rem .6rem;
+      background: rgba(200,169,110,.04);
+    }
+    .dexian-stat-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem; font-weight: 600;
+      color: var(--navy); line-height: 1;
+    }
+    .dexian-stat-label {
+      font-size: .6rem; color: var(--muted);
+      letter-spacing: .08em; text-transform: uppercase;
+      margin-top: .25rem; font-family: 'DM Mono', monospace;
+    }
+
+    .foundation-divider {
+      margin-top: 3.5rem; padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+    }
+    .foundation-sub-label {
+      font-family: 'DM Mono', monospace;
+      font-size: .7rem; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .5rem;
+      display: inline-block;
+    }
+    .foundation-sub-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.7rem; font-weight: 300;
+      color: var(--navy); line-height: 1.1;
+    }
+    .foundation-sub-title em { font-style: italic; color: var(--accent); }
+
     /* ─── SCROLL PROGRESS ────────────────────────────────── */
     #progress-bar {
       position: fixed; top: 0; left: 0; height: 2px;
@@ -1031,39 +1096,49 @@
     </div>
   </section>
 
-  <!-- STORY: Before Microsoft -->
+  <!-- STORY: Dexian + Foundation -->
   <section id="story">
     <div class="section-inner">
-      <p class="chapter-label reveal">Before Microsoft · 2000 – 2016</p>
-      <h2 class="section-title reveal reveal-d1">The <em>foundation.</em></h2>
+      <p class="chapter-label reveal">Chapter II · Dexian-DISYS</p>
+      <h2 class="section-title reveal reveal-d1">Built from <em>scratch.</em></h2>
       <div class="section-rule reveal reveal-d2"></div>
       <p class="section-lead reveal reveal-d3">
-        From writing code in Porto Alegre to building consulting practices in Houston — the foundation was always the same: deep technical roots, relentless curiosity, and a bias for delivery.
+        2010 – 2016. Before Microsoft, a six-year chapter building a Professional Services Modern Applications practice from zero — defining the offering, growing the team, and owning the full business lifecycle from Houston to the D.C. Metro.
       </p>
 
-      <div class="timeline">
-
-        <!-- DEXIAN-DISYS -->
-        <div class="tl-item reveal">
-          <div class="tl-year">2010 – 2016</div>
-          <div class="tl-dot"></div>
-          <div class="tl-content">
-            <div class="tl-company">Dexian-DISYS</div>
-            <div class="tl-role">Practice Leader, Application Development · Houston, TX → Washington D.C. Metro</div>
-            <div class="tl-body">
-              <p>Head of delivery, technical sales prospecting, and oversight of all operations and projects under the Practice. Built a Modern Applications professional services practice from the ground up leading a group of 22 people at peak. Moved from Brazil to Montréal, then Houston, then the D.C. Metro, expanding scope at every step.</p>
-              <ul>
-                <li>Built the Modern Applications practice ground-up — 22 people at peak</li>
-                <li>Delivered services to U.S. Postal Service, Schlumberger and HangIT</li>
-                <li>Full lead-to-order and order-to-cash lifecycle ownership</li>
-                <li>People management, technical presales, forecasting, P&amp;L, complex deal governance</li>
-              </ul>
-              <div class="tl-edu">
-                <p><strong>MBA in Business Strategy — Magna Cum Laude</strong> — PUC Rio Grande do Sul (2009–2011)</p>
-              </div>
-            </div>
+      <div class="dexian-feature reveal">
+        <div class="dexian-callout">
+          <p class="dexian-callout-role">Practice Leader, Application Development &nbsp;·&nbsp; Houston, TX → Washington D.C. Metro</p>
+          <p>Built a Professional Services Modern Applications practice from the ground up — from defining the service offering and recruiting the team to running technical presales, managing P&amp;L, and delivering complex engagements. Grew the practice to 22 people at peak, serving clients including the U.S. Postal Service, Schlumberger, and HangIT.</p>
+          <ul>
+            <li>Full lead-to-order and order-to-cash lifecycle ownership</li>
+            <li>People management, technical presales, forecasting, and complex deal governance</li>
+            <li>MBA in Business Strategy — Magna Cum Laude · PUC Rio Grande do Sul (2009–2011)</li>
+          </ul>
+        </div>
+        <div class="dexian-stats">
+          <div class="dexian-stat">
+            <div class="dexian-stat-num">22</div>
+            <div class="dexian-stat-label">People at peak</div>
+          </div>
+          <div class="dexian-stat">
+            <div class="dexian-stat-num">6</div>
+            <div class="dexian-stat-label">Years building</div>
+          </div>
+          <div class="dexian-stat">
+            <div class="dexian-stat-num">0→1</div>
+            <div class="dexian-stat-label">Practice built</div>
           </div>
         </div>
+      </div>
+
+      <!-- The Foundation -->
+      <div class="foundation-divider reveal">
+        <span class="foundation-sub-label">The Foundation · 2000 – 2010</span>
+        <h3 class="foundation-sub-title">Where it all <em>began.</em></h3>
+      </div>
+
+      <div class="timeline">
 
         <!-- META BRASIL -->
         <div class="tl-item reveal reveal-d1">
@@ -1122,7 +1197,6 @@
             <span class="tag">PMO Methodology</span>
             <span class="tag">SDLC</span>
             <span class="tag">CMMI</span>
-            <span class="tag">Kanban</span>
             <span class="tag">DevOps</span>
           </div>
         </div>
