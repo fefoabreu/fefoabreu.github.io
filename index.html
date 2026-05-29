@@ -616,7 +616,7 @@
     /* ─── THE LAB ─────────────────────────────────────── */
     #lab {
       background: #060d1f;
-      position: relative; overflow: hidden;
+      position: relative;
     }
     #lab::before {
       content: '';
@@ -651,7 +651,7 @@
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scroll-behavior: smooth;
-      padding: 1.2rem .2rem 2.4rem;
+      padding: 2.5rem 1rem 2.4rem;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
       flex: 1;
@@ -1244,20 +1244,6 @@
 
         <div class="lab-row" id="labRow">
 
-          <!-- Delivery Excellence -->
-          <div class="lab-card" data-project="delivery-excellence">
-            <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">AI &middot; Enterprise</span>
-              <div class="lab-card-title">Delivery Excellence</div>
-              <div class="lab-card-year">2024</div>
-            </div>
-          </div>
-
           <!-- The Gathering Silveira -->
           <div class="lab-card" data-project="the-gathering">
             <img class="lab-card-img" src="assets/lab-the-gathering.jpg" alt="The Gathering Silveira" />
@@ -1268,6 +1254,20 @@
             <div class="lab-card-overlay">
               <span class="lab-card-tag">Hospitality &middot; Travel</span>
               <div class="lab-card-title">The Gathering Silveira</div>
+              <div class="lab-card-year">2024</div>
+            </div>
+          </div>
+
+          <!-- Delivery Excellence -->
+          <div class="lab-card" data-project="delivery-excellence">
+            <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">AI &middot; Enterprise</span>
+              <div class="lab-card-title">Delivery Excellence</div>
               <div class="lab-card-year">2024</div>
             </div>
           </div>
@@ -1527,7 +1527,7 @@
       'delivery-excellence': {
         title: 'Delivery Excellence',
         tag: 'AI · Enterprise · 2024',
-        desc: 'Microsoft Professional Services companion agent for end-to-end deal lifecycle management — pipeline health monitoring, contract governance, delivery risk profiling, and AI-powered advisory. Built to accelerate the MS PS lead-to-order and order-to-cash cycle for complex multi-million-dollar consulting engagements.',
+        desc: 'IT Professional Services companion agent for end-to-end deal lifecycle management — pipeline health monitoring, contract governance, delivery risk profiling, and AI-powered advisory. Built to accelerate the lead-to-order and order-to-cash cycle for complex multi-million-dollar consulting engagements.',
         stack: ['React', 'TypeScript', 'FastAPI', 'Python', 'Claude API', 'Tailwind CSS'],
         video: 'assets/lab-delivery-excellence.webm',
         live:  'https://fefoabreu.me/delivery-excellence/',
