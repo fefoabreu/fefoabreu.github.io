@@ -93,8 +93,8 @@
       min-height: 100vh;
       background: var(--navy);
       display: grid;
-      place-items: start center;
-      padding: 5rem 2rem 3rem;
+      place-items: center;
+      padding: 6rem 2rem 4rem;
       position: relative;
       overflow: hidden;
     }
@@ -122,7 +122,7 @@
       max-width: 1100px; width: 100%;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 2.5rem; align-items: start;
+      gap: 2.5rem; align-items: center;
       position: relative; z-index: 1;
     }
     @media(max-width:700px){
@@ -300,7 +300,7 @@
     .tl-item::before {
       content: '';
       position: absolute;
-      left: 139px; top: 8px; bottom: 0;
+      left: 148px; top: 8px; bottom: 0;
       width: 1px; background: var(--border);
     }
     .tl-item:last-child::before { display: none; }
@@ -315,7 +315,7 @@
       text-align: right;
     }
     .tl-dot {
-      position: absolute; left: 132px; top: 5px;
+      position: absolute; left: 141px; top: 5px;
       width: 14px; height: 14px; border-radius: 50%;
       border: 2px solid var(--accent);
       background: var(--cream);
@@ -1108,11 +1108,11 @@
       <div class="dexian-feature reveal">
         <div class="dexian-callout">
           <p class="dexian-callout-role">Practice Leader, Application Development &nbsp;·&nbsp; Houston, TX → Washington D.C. Metro</p>
-          <p>Built a Professional Services Modern Applications practice from the ground up — from defining the service offering and recruiting the team to running technical presales, managing P&amp;L, and delivering complex engagements. Grew the practice to 22 people at peak, serving clients including the U.S. Postal Service, Schlumberger, and HangIT.</p>
+          <p>Built a Professional Services Modern Applications practice from the ground up — from defining the service offering and recruiting the team to running technical presales, managing P&amp;L, and delivering complex engagements. Operated across Houston and the D.C. Metro, leveraging a nearshore software factory out of Brazil. Grew the practice to 22 people at peak, serving clients including the U.S. Postal Service, Schlumberger, and HangIT.</p>
           <ul>
             <li>Full lead-to-order and order-to-cash lifecycle ownership</li>
             <li>People management, technical presales, forecasting, and complex deal governance</li>
-            <li>MBA in Business Strategy — Magna Cum Laude · PUC Rio Grande do Sul (2009–2011)</li>
+            <li>MBA in Business Strategy — Magna Cum Laude · Unisinos (2009–2011)</li>
           </ul>
         </div>
         <div class="dexian-stats">
@@ -1145,7 +1145,7 @@
           <div class="tl-dot"></div>
           <div class="tl-content">
             <div class="tl-company">Meta Brasil</div>
-            <div class="tl-role">SW Engineer → Dev Lead → IT Consultant → Technical Program Manager · Porto Alegre, Brazil</div>
+            <div class="tl-role">Dev Lead → IT Consultant → Technical Program Manager · Porto Alegre, Brazil</div>
             <div class="tl-body">
               <p>Eight years of progressive growth across every discipline: from writing production code to leading product teams, from implementing SDLC and PMO methodologies to managing outsourcing operations.</p>
               <ul>
@@ -1334,7 +1334,7 @@
             <div class="lab-card-overlay">
               <span class="lab-card-tag">AI &middot; Enterprise</span>
               <div class="lab-card-title">Delivery Excellence</div>
-              <div class="lab-card-year">2024</div>
+              <div class="lab-card-year">2026</div>
             </div>
           </div>
 
@@ -1348,7 +1348,7 @@
             <div class="lab-card-overlay">
               <span class="lab-card-tag">Hospitality &middot; Travel</span>
               <div class="lab-card-title">The Gathering Silveira</div>
-              <div class="lab-card-year">2024</div>
+              <div class="lab-card-year">2026</div>
             </div>
           </div>
 
@@ -1362,7 +1362,7 @@
             <div class="lab-card-overlay">
               <span class="lab-card-tag">AI &middot; Productivity</span>
               <div class="lab-card-title">Career Coach</div>
-              <div class="lab-card-year">2025</div>
+              <div class="lab-card-year">2026</div>
             </div>
           </div>
 
@@ -1376,7 +1376,7 @@
             <div class="lab-card-overlay">
               <span class="lab-card-tag">Food &amp; Beverage</span>
               <div class="lab-card-title">Bella Bite</div>
-              <div class="lab-card-year">2025</div>
+              <div class="lab-card-year">2026</div>
             </div>
           </div>
 
@@ -1606,7 +1606,7 @@
     const labData = {
       'delivery-excellence': {
         title: 'Delivery Excellence',
-        tag: 'AI · Enterprise · 2024',
+        tag: 'AI · Enterprise · 2026',
         desc: 'IT Professional Services companion agent for end-to-end deal lifecycle management — pipeline health monitoring, contract governance, delivery risk profiling, and AI-powered advisory. Built to accelerate the lead-to-order and order-to-cash cycle for complex multi-million-dollar consulting engagements.',
         stack: ['React', 'TypeScript', 'FastAPI', 'Python', 'Claude API', 'Tailwind CSS'],
         video: 'assets/lab-delivery-excellence.webm',
@@ -1615,7 +1615,7 @@
       },
       'the-gathering': {
         title: 'The Gathering Silveira',
-        tag: 'Hospitality · Travel · 2024',
+        tag: 'Hospitality · Travel · 2026',
         desc: 'Premium hillside retreat booking and guest experience app — where the Atlantic Forest meets the surf at Praia da Silveira, Garopaba SC. Features real-time Firestore sync, 5-suite showcase, panoramic ocean photography, and a live guest activity guide powered by Firebase.',
         stack: ['HTML', 'CSS', 'JavaScript', 'Firebase', 'Firestore'],
         video: 'assets/lab-the-gathering.webm',
@@ -1624,7 +1624,7 @@
       },
       'bella-bite': {
         title: 'Bella Bite',
-        tag: 'Food & Beverage · 2025',
+        tag: 'Food & Beverage · 2026',
         desc: 'Fresh, healthy food truck concept bridging the coastal vibes of Malta and Garopaba, Brasil. Includes full branding identity, business plan, menu design, operational model, and investor pitch materials anchored on a $50K investment thesis — from idea to investor-ready in weeks.',
         stack: ['HTML', 'CSS', 'JavaScript'],
         video: 'assets/lab-bella-bite.webm',
@@ -1633,7 +1633,7 @@
       },
       'career-coach': {
         title: 'Career Coach',
-        tag: 'AI · Productivity · 2025',
+        tag: 'AI · Productivity · 2026',
         desc: 'AI-powered job application assistant — paste a job description and your resume to get instant match scoring, skill gap analysis, tailored talking points, and a live mock interview chat. Built with a post-it board UX and powered by the Claude API for nuanced, context-aware coaching.',
         stack: ['React', 'FastAPI', 'Python', 'Claude API', 'Vite'],
         video: 'assets/lab-career-coach.webm',
