@@ -1122,6 +1122,45 @@
       background: var(--accent); z-index: 200;
       width: 0%; transition: width .1s linear;
     }
+
+    /* ─── FLOATING CTA ───────────────────────────────────── */
+    .cta-float {
+      position: fixed; right: 1.6rem; bottom: 1.6rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .55rem;
+      padding: .72rem 1.15rem; border-radius: 100px;
+      background: var(--navy); border: 1px solid rgba(200,169,110,.4);
+      color: var(--cream); text-decoration: none;
+      font-family: 'DM Mono', monospace; font-size: .8rem;
+      letter-spacing: .02em; white-space: nowrap;
+      box-shadow: 0 10px 30px rgba(15,30,60,.28);
+      opacity: 0; transform: translateY(16px) scale(.96);
+      pointer-events: none;
+      transition: opacity .4s var(--ease), transform .4s var(--ease),
+                  background .25s, border-color .25s, box-shadow .25s;
+    }
+    .cta-float.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .cta-float:hover {
+      background: var(--accent); border-color: var(--accent); color: var(--navy);
+      box-shadow: 0 12px 34px rgba(200,169,110,.4);
+    }
+    .cta-float-icon {
+      display: inline-flex; flex-shrink: 0; color: var(--accent);
+      transition: color .25s, transform .5s var(--ease);
+    }
+    .cta-float:hover .cta-float-icon { color: var(--navy); transform: rotate(180deg); }
+    .cta-float-label { display: inline-flex; align-items: center; }
+    .cta-float-label .t {
+      max-width: 200px; overflow: hidden; white-space: nowrap;
+      opacity: 1; transition: max-width .45s var(--ease), opacity .3s;
+    }
+    .cta-float-label .t.alt { max-width: 0; opacity: 0; }
+    .cta-float:hover .cta-float-label .t { max-width: 0; opacity: 0; }
+    .cta-float:hover .cta-float-label .t.alt { max-width: 340px; opacity: 1; }
+    @media (max-width: 600px) {
+      .cta-float { right: 1rem; bottom: 1rem; padding: .62rem .95rem; font-size: .72rem; }
+      .cta-float-label .t { max-width: 150px; }
+      .cta-float:hover .cta-float-label .t.alt { max-width: 240px; white-space: normal; }
+    }
   </style>
 </head>
 <body>
@@ -1784,6 +1823,18 @@
     &copy; 2026 Fernando Abreu · Richmond, VA · Built with intention.
   </footer>
 
+  <!-- FLOATING CTA -->
+  <a href="https://fefoabreu.me/career-coach/" target="_blank" rel="noopener"
+     class="cta-float" id="ctaFloat" aria-label="Build your own at Career Coach">
+    <span class="cta-float-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="15" height="15" style="fill:currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z"/></svg>
+    </span>
+    <span class="cta-float-label">
+      <span class="t">Like what you see?</span>
+      <span class="t alt">Build your own at CareerCoach.com</span>
+    </span>
+  </a>
+
   <!-- LOOM VIDEO LIGHTBOX -->
   <div class="loom-overlay" id="loomOverlay">
     <div class="loom-box">
@@ -1812,6 +1863,12 @@
     const nav = document.getElementById('main-nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Floating CTA — reveal after scrolling past the hero
+    const ctaFloat = document.getElementById('ctaFloat');
+    window.addEventListener('scroll', () => {
+      ctaFloat.classList.toggle('show', window.scrollY > window.innerHeight * 0.7);
     }, { passive: true });
 
     // Active nav links
