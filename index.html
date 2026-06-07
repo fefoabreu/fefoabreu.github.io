@@ -993,13 +993,14 @@
       width: 100%; max-width: 1000px; margin: auto;
       max-height: calc(100vh - 2rem); overflow-y: auto;
       scrollbar-width: none;
-      background: #eef1f6;
-      background-image: linear-gradient(rgba(26,31,46,.04) 1px,transparent 1px),
-                        linear-gradient(90deg,rgba(26,31,46,.04) 1px,transparent 1px);
+      background: #0d2b52; /* Xcode blueprint blue */
+      background-image: linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),
+                        linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);
       background-size: 22px 22px;
+      border: 1px solid rgba(255,255,255,.08);
       border-radius: 14px;
       padding: 1.4rem 1.5rem 1.5rem;
-      position: relative; color: var(--ink);
+      position: relative; color: #cdd9ec;
       transform: scale(.96); transition: transform .35s var(--ease);
       box-shadow: 0 40px 100px rgba(0,0,0,.7);
     }
@@ -1008,12 +1009,12 @@
     .arch-close {
       position: absolute; top: 1rem; right: 1rem; z-index: 3;
       width: 34px; height: 34px; border-radius: 50%;
-      background: rgba(26,31,46,.06); border: 1px solid rgba(26,31,46,.12);
-      color: var(--ink-soft); font-size: 1rem; cursor: pointer;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.18);
+      color: #cdd9ec; font-size: 1rem; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
       transition: all .2s;
     }
-    .arch-close:hover { background: rgba(26,31,46,.12); color: var(--ink); }
+    .arch-close:hover { background: rgba(255,255,255,.16); color: #fff; }
 
     .arch-kicker {
       font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .22em;
@@ -1022,15 +1023,15 @@
     .arch-h1 {
       font-family: 'Cormorant Garamond', serif; font-weight: 600;
       font-size: clamp(1.4rem, 3vw, 1.95rem); line-height: 1.02;
-      letter-spacing: -.01em; color: var(--ink); margin-bottom: .6rem;
+      letter-spacing: -.01em; color: #eef4fc; margin-bottom: .6rem;
     }
     .arch-legend {
       display: flex; flex-wrap: wrap; gap: 1.1rem; margin-bottom: .85rem;
-      font-size: .68rem; color: var(--ink-soft); align-items: center;
+      font-size: .68rem; color: #aebfd6; align-items: center;
     }
     .arch-legend .it { display: flex; align-items: center; gap: .42rem; }
-    .arch-legend .ln { width: 24px; height: 0; border-top: 2px solid var(--ink-soft); position: relative; }
-    .arch-legend .ln.arr::after { content: "▸"; color: var(--ink-soft); font-size: .65rem; position: absolute; right: -5px; top: -8px; }
+    .arch-legend .ln { width: 24px; height: 0; border-top: 2px solid rgba(255,255,255,.45); position: relative; }
+    .arch-legend .ln.arr::after { content: "▸"; color: #aebfd6; font-size: .65rem; position: absolute; right: -5px; top: -8px; }
     .arch-legend .dl { width: 22px; height: 13px; border: 1.5px dashed var(--ac-gov); border-radius: 3px; }
 
     .arch-layout { display: grid; grid-template-columns: 1fr 158px; gap: 12px; align-items: stretch; }
@@ -1038,7 +1039,7 @@
     .arch-tier { position: relative; }
     .arch-tlbl {
       font-family: 'DM Mono', monospace; font-size: .54rem; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--ink-faint); margin-bottom: .3rem;
+      text-transform: uppercase; color: #9fb2cf; margin-bottom: .3rem;
       display: flex; align-items: center; gap: .45rem;
     }
     .arch-tlbl::before { content: ""; width: 7px; height: 7px; border-radius: 2px; background: var(--tc, var(--ink-faint)); }
@@ -1054,7 +1055,7 @@
       animation: archRise .42s cubic-bezier(.2,.7,.3,1) forwards;
     }
     @keyframes archRise { to { opacity: 1; transform: translateY(0); } }
-    .arch-bx .nm, .arch-appbox .nm { font-size: .78rem; font-weight: 600; letter-spacing: -.005em; line-height: 1.15; }
+    .arch-bx .nm, .arch-appbox .nm { font-size: .78rem; font-weight: 600; letter-spacing: -.005em; line-height: 1.15; color: var(--ink); }
     .arch-bx .ty, .arch-appbox .ty {
       font-family: 'DM Mono', monospace; font-size: .55rem; color: var(--ink-faint);
       text-transform: uppercase; letter-spacing: .08em; margin-top: .1rem;
@@ -1063,21 +1064,21 @@
 
     .arch-appbox {
       flex: 0 1 auto; min-width: 270px; max-width: 500px;
-      background: var(--ink); color: #fff; border: none; border-radius: 9px;
+      background: var(--ink); color: #fff; border: 1px solid rgba(255,255,255,.2); border-radius: 9px;
       padding: .58rem 1.1rem; text-align: center; position: relative;
-      box-shadow: 0 8px 30px rgba(217,72,15,.16), 0 2px 8px rgba(26,31,46,.2);
+      box-shadow: 0 8px 30px rgba(0,0,0,.35), 0 0 0 4px rgba(255,255,255,.04);
       opacity: 0; transform: translateY(8px);
       animation: archRise .42s cubic-bezier(.2,.7,.3,1) forwards;
     }
-    .arch-appbox .nm { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; }
+    .arch-appbox .nm { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #fff; }
     .arch-appbox .ty { color: #f0a07d; }
     .arch-appbox .sub { color: #aeb8d0; }
 
-    .arch-conn { display: flex; justify-content: center; align-items: center; height: 15px; color: var(--ink-faint); }
+    .arch-conn { display: flex; justify-content: center; align-items: center; height: 15px; color: #9fb2cf; }
     .arch-conn .v { font-size: .72rem; line-height: 1; }
     .arch-conn small {
       font-family: 'DM Mono', monospace; font-size: .52rem; letter-spacing: .1em;
-      text-transform: uppercase; margin-left: .5rem; color: var(--ink-faint);
+      text-transform: uppercase; margin-left: .5rem; color: #8ea3c4;
     }
 
     .arch-rail {
