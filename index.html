@@ -1125,23 +1125,25 @@
 
     /* ─── FLOATING CTA ───────────────────────────────────── */
     .cta-float {
-      position: fixed; right: 1.6rem; bottom: 1.6rem; z-index: 300;
-      display: inline-flex; align-items: center; gap: .55rem;
-      padding: .72rem 1.15rem; border-radius: 100px;
-      background: var(--navy); border: 1px solid rgba(200,169,110,.4);
-      color: var(--cream); text-decoration: none;
-      font-family: 'DM Mono', monospace; font-size: .8rem;
+      position: fixed; right: 1.3rem; bottom: 1.3rem; z-index: 300;
+      display: inline-flex; align-items: center; gap: .42rem;
+      padding: .48rem .8rem; border-radius: 100px;
+      background: rgba(15,30,60,.82);
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      border: 1px solid rgba(200,169,110,.28);
+      color: rgba(250,248,243,.82); text-decoration: none;
+      font-family: 'DM Mono', monospace; font-size: .66rem;
       letter-spacing: .02em; white-space: nowrap;
-      box-shadow: 0 10px 30px rgba(15,30,60,.28);
-      opacity: 0; transform: translateY(16px) scale(.96);
+      box-shadow: 0 6px 18px rgba(15,30,60,.2);
+      opacity: 0; transform: translateY(14px) scale(.96);
       pointer-events: none;
       transition: opacity .4s var(--ease), transform .4s var(--ease),
-                  background .25s, border-color .25s, box-shadow .25s;
+                  background .25s, border-color .25s, box-shadow .25s, color .25s;
     }
-    .cta-float.show { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+    .cta-float.show { opacity: .82; transform: translateY(0) scale(1); pointer-events: auto; }
     .cta-float:hover {
-      background: var(--accent); border-color: var(--accent); color: var(--navy);
-      box-shadow: 0 12px 34px rgba(200,169,110,.4);
+      opacity: 1; background: var(--accent); border-color: var(--accent); color: var(--navy);
+      box-shadow: 0 8px 22px rgba(200,169,110,.32);
     }
     .cta-float-icon {
       display: inline-flex; flex-shrink: 0; color: var(--accent);
@@ -1150,16 +1152,16 @@
     .cta-float:hover .cta-float-icon { color: var(--navy); transform: rotate(180deg); }
     .cta-float-label { display: inline-flex; align-items: center; }
     .cta-float-label .t {
-      max-width: 200px; overflow: hidden; white-space: nowrap;
+      max-width: 170px; overflow: hidden; white-space: nowrap;
       opacity: 1; transition: max-width .45s var(--ease), opacity .3s;
     }
     .cta-float-label .t.alt { max-width: 0; opacity: 0; }
     .cta-float:hover .cta-float-label .t { max-width: 0; opacity: 0; }
-    .cta-float:hover .cta-float-label .t.alt { max-width: 340px; opacity: 1; }
+    .cta-float:hover .cta-float-label .t.alt { max-width: 300px; opacity: 1; }
     @media (max-width: 600px) {
-      .cta-float { right: 1rem; bottom: 1rem; padding: .62rem .95rem; font-size: .72rem; }
-      .cta-float-label .t { max-width: 150px; }
-      .cta-float:hover .cta-float-label .t.alt { max-width: 240px; white-space: normal; }
+      .cta-float { right: .85rem; bottom: .85rem; padding: .42rem .72rem; font-size: .6rem; }
+      .cta-float-label .t { max-width: 130px; }
+      .cta-float:hover .cta-float-label .t.alt { max-width: 220px; white-space: normal; }
     }
   </style>
 </head>
@@ -1831,7 +1833,7 @@
     </span>
     <span class="cta-float-label">
       <span class="t">Like what you see?</span>
-      <span class="t alt">Build your own at CareerCoach.com</span>
+      <span class="t alt">Build your own with CareerCoach</span>
     </span>
   </a>
 
@@ -1868,7 +1870,7 @@
     // Floating CTA — reveal after scrolling past the hero
     const ctaFloat = document.getElementById('ctaFloat');
     window.addEventListener('scroll', () => {
-      ctaFloat.classList.toggle('show', window.scrollY > window.innerHeight * 0.7);
+      ctaFloat.classList.toggle('show', window.scrollY > window.innerHeight * 0.8);
     }, { passive: true });
 
     // Active nav links
