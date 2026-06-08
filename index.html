@@ -802,6 +802,25 @@
       object-position: top center;
       display: block;
     }
+    .lab-modal-poster {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: none;
+      transform-origin: 50% 35%;
+    }
+    .lab-modal-poster.show {
+      display: block;
+      animation: labKenBurns 22s ease-in-out infinite alternate;
+    }
+    @keyframes labKenBurns {
+      from { transform: scale(1.02) translate(0, 0); }
+      to   { transform: scale(1.14) translate(-2.5%, -3.5%); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lab-modal-poster.show { animation: none; }
+    }
     .lab-modal-voverlay {
       position: absolute; inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(0,0,0,.55) 100%);
@@ -1436,16 +1455,16 @@
         <div class="lab-track" id="labTrack">
         <div class="lab-row" id="labRow">
 
-          <!-- NBA Fan Engagement -->
+          <!-- Fan Engagement -->
           <div class="lab-card" data-project="nba-fan-engagement">
-            <img class="lab-card-img" src="assets/lab-nba-fan-engagement.jpg" alt="NBA Fan Engagement" />
+            <img class="lab-card-img" src="assets/lab-nba-fan-engagement.jpg" alt="Fan Engagement" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
             </div>
             <div class="lab-card-overlay">
               <span class="lab-card-tag">Cloud &amp; AI &middot; Sports</span>
-              <div class="lab-card-title">NBA Fan Engagement</div>
+              <div class="lab-card-title">Fan Engagement</div>
               <div class="lab-card-year">2026</div>
             </div>
           </div>
@@ -1535,6 +1554,7 @@
     <div class="lab-modal">
       <div class="lab-modal-header">
         <video class="lab-modal-video" id="labModalVideo" autoplay muted loop playsinline></video>
+        <img class="lab-modal-poster" id="labModalPoster" alt="" />
         <div class="lab-modal-voverlay"></div>
         <button class="lab-modal-close" id="labModalClose">&#x2715;</button>
       </div>
@@ -2078,15 +2098,15 @@
         }
       },
       'nba-fan-engagement': {
-        title: 'NBA Fan Engagement',
+        title: 'Fan Engagement',
         tag: 'Cloud &amp; AI · Sports · 2026',
-        desc: 'An "art of the possible" prototype: an NBA fan-engagement platform rendered as an Xcode-style device simulator. Pick iPhone, iPad, Apple Watch or Web and navigate the companion app — onboarding & Fan 360, a For-You feed, live game with Favorite-Player POV, win-probability, RAG-powered trivia, AI auto-highlights, a where-to-watch concierge, smart-venue wayfinding and Memory Lane — while the Microsoft Azure reference architecture lights up 360° around it, with a live "brain panel" explaining which services power each screen and why.',
+        desc: 'An "art of the possible" prototype: a Major League Sports fan-engagement platform rendered as an Xcode-style device simulator. Pick iPhone, iPad, Apple Watch or Web and navigate the companion app — onboarding & Fan 360, a For-You feed, live game with Favorite-Player POV, win-probability, RAG-powered trivia, AI auto-highlights, a where-to-watch concierge, smart-venue wayfinding and Memory Lane — while the Microsoft Azure reference architecture lights up 360° around it, with a live "brain panel" explaining which services power each screen and why.',
         stack: ['Azure Cloud & AI', 'Azure OpenAI', 'AI Search · RAG', 'Microsoft Fabric', 'HTML', 'CSS', 'JavaScript'],
         poster: 'assets/lab-nba-fan-engagement-poster.jpg',
         live:  'https://fefoabreu.me/NBAFanEngagement/',
         github:'https://github.com/fefoabreu/NBAFanEngagement',
         arch: {
-          kicker: 'NBA Fan Engagement · Azure Reference Architecture',
+          kicker: 'Fan Engagement · Azure Reference Architecture',
           title: 'Fan-Engagement Platform — Azure Cloud & AI Reference',
           tiers: [
             { lbl: 'Tier 0 · Fan Clients', color: 'client', boxes: [
@@ -2133,6 +2153,7 @@
     const labOverlay  = document.getElementById('labModalOverlay');
     const labClose    = document.getElementById('labModalClose');
     const labModalVid = document.getElementById('labModalVideo');
+    const labModalPoster = document.getElementById('labModalPoster');
 
     document.querySelectorAll('.lab-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -2171,14 +2192,22 @@
             View on GitHub
           </a>`;
 
-        labModalVid.poster = p.poster || '';
         if (p.video) {
+          // Looping screen-recording demo.
+          labModalPoster.classList.remove('show');
+          labModalPoster.removeAttribute('src');
+          labModalVid.style.display = '';
           labModalVid.src = p.video;
           labModalVid.load();
           labModalVid.play().catch(() => {});
         } else {
+          // No demo video — show an animated still (Ken Burns) instead of a blank header.
+          labModalVid.pause();
           labModalVid.removeAttribute('src');
           labModalVid.load();
+          labModalVid.style.display = 'none';
+          labModalPoster.src = p.poster || '';
+          labModalPoster.classList.toggle('show', !!p.poster);
         }
         labOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
@@ -2189,7 +2218,9 @@
       labOverlay.classList.remove('open');
       document.body.style.overflow = '';
       labModalVid.pause();
-      labModalVid.src = '';
+      labModalVid.removeAttribute('src');
+      labModalPoster.classList.remove('show');
+      labModalPoster.removeAttribute('src');
     }
     labClose.addEventListener('click', closeLabModal);
     labOverlay.addEventListener('click', e => { if (e.target === labOverlay) closeLabModal(); });
