@@ -2013,34 +2013,54 @@
       'career-coach': {
         title: 'Career Coach',
         tag: 'AI · Productivity · 2026',
-        desc: 'AI-powered job application assistant — paste a job description and your resume to get instant match scoring, skill gap analysis, tailored talking points, and a live mock interview chat. Built with a post-it board UX and powered by the Claude API for nuanced, context-aware coaching.',
-        stack: ['React', 'FastAPI', 'Python', 'Claude API', 'Vite'],
+        desc: 'AI career platform with bring-your-own-model support across Claude, GPT, Gemini and Perplexity — instant JD-vs-résumé match scoring, skill-gap analysis, a résumé & one-page website builder, a voice-driven live mock interview, and a B2B Recruiter Mode that ranks candidate pipelines against a role. Accounts, cross-device sync and a free trial run on Supabase, with API keys stored zero-knowledge and lifecycle ops handled by scheduled AI agent loops.',
+        stack: ['React', 'Vite', 'Tailwind', 'Supabase', 'FastAPI', 'Multi-Provider AI', 'MCP'],
         video: 'assets/lab-career-coach.webm',
         live:  'https://fefoabreu.me/career-coach/',
         github:'https://github.com/fefoabreu/career-coach',
         arch: {
           kicker: 'Career Coach · Reference Architecture',
-          title: 'AI Application Assistant — Layered Architecture',
+          title: 'Multi-Provider AI Career Platform — Layered Architecture',
           tiers: [
-            { lbl: 'Tier 0 · Client', color: 'client', boxes: [ { nm: 'Browser', ty: 'web app' } ] },
+            { lbl: 'Tier 0 · Client', color: 'client', boxes: [
+              { nm: 'Browser SPA', ty: 'web app', sub: 'on-device encrypted key vault' } ] },
             { lbl: 'Tier 1 · Presentation', color: 'edge', flow: 'HTTPS', boxes: [
-              { nm: 'React', ty: 'ui · post-it board ux' },
-              { nm: 'Vite', ty: 'build · dev server' } ] },
-            { lbl: 'Tier 2 · API', color: 'app', flow: 'REST / JSON', center: true, boxes: [
-              { hub: true, nm: 'FastAPI Service', ty: 'Python · the hub', sub: 'routes scoring, analysis & chat to the model' } ] },
-            { lbl: 'Tier 3 · Capabilities', color: 'app', flow: 'four capabilities', boxes: [
-              { nm: 'Match Scoring', ty: 'analysis', sub: 'JD ↔ résumé fit' },
-              { nm: 'Skill Gap', ty: 'analysis' },
-              { nm: 'Talking Points', ty: 'generation' },
-              { nm: 'Mock Interview', ty: 'chat · realtime' } ] },
-            { lbl: 'Tier 4 · Intelligence', color: 'ai', flow: 'prompts & completions', arrows: '▲ ▼', boxes: [
-              { nm: 'Claude API', ty: 'generative · coaching', sub: 'Anthropic · nuanced, context-aware' } ] },
-            { lbl: 'Tier 5 · Data', color: 'data', flow: 'inputs', arrows: '▲ ▼', boxes: [
-              { nm: 'Résumé Store', ty: 'document' },
-              { nm: 'Job Description', ty: 'input' },
-              { nm: 'Saved Analyses', ty: 'json' } ] }
+              { nm: 'React 18', ty: 'ui' },
+              { nm: 'Vite', ty: 'build · dev server' },
+              { nm: 'Tailwind CSS', ty: 'design system' } ] },
+            { lbl: 'Tier 2 · Feature Surfaces', color: 'edge', flow: 'six product surfaces', boxes: [
+              { nm: 'Match + Skill Gap', ty: 'analysis', sub: 'JD ↔ résumé fit' },
+              { nm: 'Recruiter Mode', ty: 'B2B', sub: 'rank pipelines vs a role' },
+              { nm: 'Résumé / Website Builder', ty: 'generation' },
+              { nm: 'Live Interview', ty: 'voice · realtime', sub: 'Web Speech API' },
+              { nm: 'Interview Tracker', ty: 'pipeline' } ] },
+            { lbl: 'Tier 3 · Model Router', color: 'app', flow: 'one call → three routes', center: true, boxes: [
+              { hub: true, nm: 'api.js — Model Router', ty: 'client-side · the hub', sub: 'routes every call: local · direct · trial' } ] },
+            { lbl: 'Tier 4 · Intelligence', color: 'ai', flow: 'BYO key · direct from browser', arrows: '▲ ▼', boxes: [
+              { nm: 'Anthropic Claude', ty: 'default', sub: 'sonnet-4-6 / opus-4-8' },
+              { nm: 'OpenAI', ty: 'gpt' },
+              { nm: 'Google Gemini', ty: 'multimodal' },
+              { nm: 'Perplexity', ty: 'search-grounded' } ] },
+            { lbl: 'Tier 5 · Backend Services', color: 'app', flow: 'auth · billing · trial · tools', boxes: [
+              { nm: 'FastAPI', ty: 'local dev', sub: 'Claude Code OAuth' },
+              { nm: 'Edge Functions', ty: 'Deno · Supabase', sub: 'free trial 3/day · Stripe · PayPal' },
+              { nm: 'MCP Server', ty: 'Claude Desktop', sub: 'compute_match_score + tools' } ] },
+            { lbl: 'Tier 6 · Data & Identity', color: 'data', flow: 'RLS-scoped', arrows: '▲ ▼', boxes: [
+              { nm: 'Supabase Postgres', ty: 'auth + db', sub: 'row-level security' },
+              { nm: 'user_secrets', ty: 'zero-knowledge', sub: 'ciphertext only · no recovery' },
+              { nm: 'analyses · interviews · pro', ty: 'cross-device sync' },
+              { nm: 'agent_runs', ty: 'audit log' } ] }
           ],
-          note: 'A <b>React + Vite</b> front end with a post-it board UX calls a <b>FastAPI</b> backend that fans out to four capabilities, all powered by the <b>Claude API</b> for scoring, gap analysis, talking points and a live mock-interview chat.'
+          rail: {
+            lbl: 'Autonomous Agent Loops',
+            items: [
+              { nm: 'Orchestrator', ty: 'daily · CEO loop' },
+              { nm: 'Onboarding / Activation', ty: 'live · day 1/3/7' },
+              { nm: 'Inbound SDR', ty: 'planned' },
+              { nm: 'Billing / Dunning', ty: 'planned' } ],
+            span: 'every run audited via agent_runs'
+          },
+          note: 'A <b>React + Vite</b> SPA fans every model call through a client-side <b>Model Router</b> that picks one of three paths — local <b>FastAPI</b> (Claude Code OAuth), <b>direct browser</b> calls to the user&rsquo;s own provider (Anthropic, OpenAI, Gemini or Perplexity), or a <b>Supabase Edge Function</b> free trial. <b>Supabase Postgres</b> with row-level security holds accounts, cross-device analyses and interviews, while API keys are stored <b>zero-knowledge</b> (ciphertext only, encrypted in the browser). An <b>MCP server</b> exposes the real-math scoring tools to Claude Desktop, and scheduled <b>agent loops</b> run lifecycle ops — all audited through <code>agent_runs</code>.'
         }
       }
     };
