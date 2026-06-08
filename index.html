@@ -1416,6 +1416,124 @@
     </div>
   </section>
 
+  <!-- THE LAB -->
+  <section id="lab">
+    <div class="section-inner">
+      <p class="chapter-label reveal">Side Projects &middot; GitHub</p>
+      <h2 class="section-title reveal reveal-d1">The <em>Lab.</em></h2>
+      <div class="section-rule reveal reveal-d2"></div>
+      <p class="section-lead reveal reveal-d3">
+        What I build when the workday ends — AI agents, hospitality apps, food ventures, and productivity tools. All open-source, all shipping.
+      </p>
+    </div>
+
+    <div class="lab-row-outer reveal">
+      <div class="lab-row-wrapper">
+        <button class="lab-arrow" onclick="labScroll(-1)" aria-label="Scroll left">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+        </button>
+
+        <div class="lab-track" id="labTrack">
+        <div class="lab-row" id="labRow">
+
+          <!-- Delivery Excellence -->
+          <div class="lab-card" data-project="delivery-excellence">
+            <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">AI &middot; Enterprise</span>
+              <div class="lab-card-title">Delivery Excellence</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
+          <!-- The Gathering Silveira -->
+          <div class="lab-card" data-project="the-gathering">
+            <img class="lab-card-img" src="assets/lab-the-gathering.jpg" alt="The Gathering Silveira" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Hospitality &middot; Travel</span>
+              <div class="lab-card-title">The Gathering Silveira</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
+          <!-- Career Coach -->
+          <div class="lab-card" data-project="career-coach">
+            <img class="lab-card-img" src="assets/lab-career-coach.jpg" alt="Career Coach" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">AI &middot; Productivity</span>
+              <div class="lab-card-title">Career Coach</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
+          <!-- Bella Bite -->
+          <div class="lab-card" data-project="bella-bite">
+            <img class="lab-card-img" src="assets/lab-bella-bite.jpg" alt="Bella Bite" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Food &amp; Beverage</span>
+              <div class="lab-card-title">Bella Bite</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
+          <!-- Oneway Intercâmbio -->
+          <div class="lab-card" data-project="oneway-intercambio">
+            <img class="lab-card-img" src="assets/lab-oneway-intercambio.jpg" alt="Oneway Intercâmbio" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">AI &middot; EdTech</span>
+              <div class="lab-card-title">Oneway Intercâmbio</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
+        </div>
+        </div><!-- end .lab-track -->
+
+        <button class="lab-arrow" onclick="labScroll(1)" aria-label="Scroll right">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- LAB MODAL -->
+  <div class="lab-modal-overlay" id="labModalOverlay">
+    <div class="lab-modal">
+      <div class="lab-modal-header">
+        <video class="lab-modal-video" id="labModalVideo" autoplay muted loop playsinline></video>
+        <div class="lab-modal-voverlay"></div>
+        <button class="lab-modal-close" id="labModalClose">&#x2715;</button>
+      </div>
+      <div class="lab-modal-body">
+        <div class="lab-modal-mtag" id="labModalTag"></div>
+        <div class="lab-modal-mtitle" id="labModalTitle"></div>
+        <p class="lab-modal-mdesc" id="labModalDesc"></p>
+        <div class="lab-modal-mstack" id="labModalStack"></div>
+        <div class="lab-modal-mactions" id="labModalActions"></div>
+      </div>
+    </div>
+  </div>
+
   <!-- TOOLKIT -->
   <section id="toolkit">
     <div class="section-inner">
@@ -1540,124 +1658,6 @@
       </div>
     </div>
   </section>
-
-  <!-- THE LAB -->
-  <section id="lab">
-    <div class="section-inner">
-      <p class="chapter-label reveal">Side Projects &middot; GitHub</p>
-      <h2 class="section-title reveal reveal-d1">The <em>Lab.</em></h2>
-      <div class="section-rule reveal reveal-d2"></div>
-      <p class="section-lead reveal reveal-d3">
-        What I build when the workday ends — AI agents, hospitality apps, food ventures, and productivity tools. All open-source, all shipping.
-      </p>
-    </div>
-
-    <div class="lab-row-outer reveal">
-      <div class="lab-row-wrapper">
-        <button class="lab-arrow" onclick="labScroll(-1)" aria-label="Scroll left">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-        </button>
-
-        <div class="lab-track" id="labTrack">
-        <div class="lab-row" id="labRow">
-
-          <!-- Delivery Excellence -->
-          <div class="lab-card" data-project="delivery-excellence">
-            <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">AI &middot; Enterprise</span>
-              <div class="lab-card-title">Delivery Excellence</div>
-              <div class="lab-card-year">2026</div>
-            </div>
-          </div>
-
-          <!-- The Gathering Silveira -->
-          <div class="lab-card" data-project="the-gathering">
-            <img class="lab-card-img" src="assets/lab-the-gathering.jpg" alt="The Gathering Silveira" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">Hospitality &middot; Travel</span>
-              <div class="lab-card-title">The Gathering Silveira</div>
-              <div class="lab-card-year">2026</div>
-            </div>
-          </div>
-
-          <!-- Career Coach -->
-          <div class="lab-card" data-project="career-coach">
-            <img class="lab-card-img" src="assets/lab-career-coach.jpg" alt="Career Coach" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">AI &middot; Productivity</span>
-              <div class="lab-card-title">Career Coach</div>
-              <div class="lab-card-year">2026</div>
-            </div>
-          </div>
-
-          <!-- Bella Bite -->
-          <div class="lab-card" data-project="bella-bite">
-            <img class="lab-card-img" src="assets/lab-bella-bite.jpg" alt="Bella Bite" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">Food &amp; Beverage</span>
-              <div class="lab-card-title">Bella Bite</div>
-              <div class="lab-card-year">2026</div>
-            </div>
-          </div>
-
-          <!-- Oneway Intercâmbio -->
-          <div class="lab-card" data-project="oneway-intercambio">
-            <img class="lab-card-img" src="assets/lab-oneway-intercambio.jpg" alt="Oneway Intercâmbio" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">AI &middot; EdTech</span>
-              <div class="lab-card-title">Oneway Intercâmbio</div>
-              <div class="lab-card-year">2026</div>
-            </div>
-          </div>
-
-        </div>
-        </div><!-- end .lab-track -->
-
-        <button class="lab-arrow" onclick="labScroll(1)" aria-label="Scroll right">
-          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-        </button>
-      </div>
-    </div>
-  </section>
-
-  <!-- LAB MODAL -->
-  <div class="lab-modal-overlay" id="labModalOverlay">
-    <div class="lab-modal">
-      <div class="lab-modal-header">
-        <video class="lab-modal-video" id="labModalVideo" autoplay muted loop playsinline></video>
-        <div class="lab-modal-voverlay"></div>
-        <button class="lab-modal-close" id="labModalClose">&#x2715;</button>
-      </div>
-      <div class="lab-modal-body">
-        <div class="lab-modal-mtag" id="labModalTag"></div>
-        <div class="lab-modal-mtitle" id="labModalTitle"></div>
-        <p class="lab-modal-mdesc" id="labModalDesc"></p>
-        <div class="lab-modal-mstack" id="labModalStack"></div>
-        <div class="lab-modal-mactions" id="labModalActions"></div>
-      </div>
-    </div>
-  </div>
 
   <!-- VOICES -->
   <section id="voices">
