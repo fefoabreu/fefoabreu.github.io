@@ -1436,6 +1436,20 @@
         <div class="lab-track" id="labTrack">
         <div class="lab-row" id="labRow">
 
+          <!-- NBA Fan Engagement -->
+          <div class="lab-card" data-project="nba-fan-engagement">
+            <img class="lab-card-img" src="assets/lab-nba-fan-engagement.jpg" alt="NBA Fan Engagement" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Cloud &amp; AI &middot; Sports</span>
+              <div class="lab-card-title">NBA Fan Engagement</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
           <!-- Delivery Excellence -->
           <div class="lab-card" data-project="delivery-excellence">
             <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
@@ -2062,6 +2076,57 @@
           },
           note: 'A <b>React + Vite</b> SPA fans every model call through a client-side <b>Model Router</b> that picks one of three paths — local <b>FastAPI</b> (Claude Code OAuth), <b>direct browser</b> calls to the user&rsquo;s own provider (Anthropic, OpenAI, Gemini or Perplexity), or a <b>Supabase Edge Function</b> free trial. <b>Supabase Postgres</b> with row-level security holds accounts, cross-device analyses and interviews, while API keys are stored <b>zero-knowledge</b> (ciphertext only, encrypted in the browser). An <b>MCP server</b> exposes the real-math scoring tools to Claude Desktop, and scheduled <b>agent loops</b> run lifecycle ops — all audited through <code>agent_runs</code>.'
         }
+      },
+      'nba-fan-engagement': {
+        title: 'NBA Fan Engagement',
+        tag: 'Cloud &amp; AI · Sports · 2026',
+        desc: 'An "art of the possible" prototype: an NBA fan-engagement platform rendered as an Xcode-style device simulator. Pick iPhone, iPad, Apple Watch or Web and navigate the companion app — onboarding & Fan 360, a For-You feed, live game with Favorite-Player POV, win-probability, RAG-powered trivia, AI auto-highlights, a where-to-watch concierge, smart-venue wayfinding and Memory Lane — while the Microsoft Azure reference architecture lights up 360° around it, with a live "brain panel" explaining which services power each screen and why.',
+        stack: ['Azure Cloud & AI', 'Azure OpenAI', 'AI Search · RAG', 'Microsoft Fabric', 'HTML', 'CSS', 'JavaScript'],
+        poster: 'assets/lab-nba-fan-engagement-poster.jpg',
+        live:  'https://fefoabreu.me/NBAFanEngagement/',
+        github:'https://github.com/fefoabreu/NBAFanEngagement',
+        arch: {
+          kicker: 'NBA Fan Engagement · Azure Reference Architecture',
+          title: 'Fan-Engagement Platform — Azure Cloud & AI Reference',
+          tiers: [
+            { lbl: 'Tier 0 · Fan Clients', color: 'client', boxes: [
+              { nm: 'Web / iOS / Android', ty: 'companion app', sub: 'home 2nd-screen + in-venue' },
+              { nm: 'Web PubSub + SignalR', ty: 'realtime push' } ] },
+            { lbl: 'Tier 1 · Edge & Identity', color: 'edge', flow: 'global edge', boxes: [
+              { nm: 'Front Door + WAF', ty: 'cdn · routing' },
+              { nm: 'DDoS Protection', ty: 'shield' },
+              { nm: 'Entra External ID', ty: 'CIAM' },
+              { nm: 'API Management', ty: 'gateway' } ] },
+            { lbl: 'Tier 2 · App Platform', color: 'app', flow: 'routed traffic', center: true, boxes: [
+              { hub: true, nm: 'App Service / AKS', ty: 'compute · the hub', sub: 'hosts the fan app + channel APIs' } ] },
+            { lbl: 'Tier 3 · Channels & Commerce', color: 'app', flow: 'serves four channels', boxes: [
+              { nm: 'Azure CDN', ty: 'media delivery' },
+              { nm: 'Media Partner Encode', ty: 'live video', sub: 'Media Services retired' },
+              { nm: 'Dynamics 365 Commerce', ty: 'merch · tickets' },
+              { nm: 'Azure Maps', ty: 'venue wayfinding' } ] },
+            { lbl: 'Tier 4 · AI Office Core', color: 'ai', flow: 'inference · RAG · video AI', arrows: '▲ ▼', boxes: [
+              { nm: 'Azure OpenAI / AI Foundry', ty: 'generative', sub: 'feed, POV & concierge' },
+              { nm: 'Azure AI Search', ty: 'RAG', sub: 'trivia · team history' },
+              { nm: 'Azure ML', ty: 'recommendations', sub: 'Personalizer retiring' },
+              { nm: 'AI Video Indexer', ty: 'auto-highlights' } ] },
+            { lbl: 'Tier 5 · Data & Analytics', color: 'data', flow: 'events & analytics', arrows: '▲ ▼', boxes: [
+              { nm: 'Microsoft Fabric', ty: 'Fan 360', sub: 'unified fan profile' },
+              { nm: 'Event Hubs', ty: 'ingest' },
+              { nm: 'Stream Analytics', ty: 'live stats · win-prob' },
+              { nm: 'Cosmos DB / Azure SQL', ty: 'operational store' },
+              { nm: 'Data Lake', ty: 'analytics' } ] }
+          ],
+          rail: {
+            lbl: 'Cross-cutting · Security & Governance',
+            items: [
+              { nm: 'Defender for Cloud', ty: 'posture' },
+              { nm: 'Microsoft Sentinel', ty: 'SIEM' },
+              { nm: 'Microsoft Purview', ty: 'governance' },
+              { nm: 'Key Vault', ty: 'secrets' } ],
+            span: 'spans every tier, edge to data'
+          },
+          note: 'A self-contained vanilla <b>HTML / CSS / JS</b> device simulator that renders Microsoft&rsquo;s <b>Azure</b> fan-engagement reference architecture. As you navigate the app, the surrounding tiers light up to show which services power each screen: realtime via <b>Web PubSub + SignalR</b>, secured at the edge by <b>Front Door / WAF</b> and <b>Entra External ID</b>, served from <b>App Service / AKS</b>, made intelligent by <b>Azure OpenAI</b> + <b>AI Search</b> (RAG) and <b>AI Video Indexer</b>, and grounded on a <b>Microsoft Fabric</b> Fan 360 fed by <b>Event Hubs + Stream Analytics</b> — with <b>Defender, Sentinel, Purview</b> and <b>Key Vault</b> as cross-cutting governance. Reflects current Azure currency (Media Services retired → media-partner encode; Personalizer retiring → Azure ML).'
+        }
       }
     };
 
@@ -2106,9 +2171,15 @@
             View on GitHub
           </a>`;
 
-        labModalVid.src = p.video;
-        labModalVid.load();
-        labModalVid.play().catch(() => {});
+        labModalVid.poster = p.poster || '';
+        if (p.video) {
+          labModalVid.src = p.video;
+          labModalVid.load();
+          labModalVid.play().catch(() => {});
+        } else {
+          labModalVid.removeAttribute('src');
+          labModalVid.load();
+        }
         labOverlay.classList.add('open');
         document.body.style.overflow = 'hidden';
       });
