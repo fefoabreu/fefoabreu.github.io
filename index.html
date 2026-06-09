@@ -726,11 +726,13 @@
       font-family: 'DM Mono', monospace;
       font-size: .57rem; letter-spacing: .12em; text-transform: uppercase;
       color: var(--accent);
-      background: rgba(200,169,110,.13);
-      border: 1px solid rgba(200,169,110,.3);
+      background: rgba(10,16,30,.8);
+      border: 1px solid rgba(200,169,110,.45);
       border-radius: 20px;
       padding: .17rem .58rem;
       display: inline-block; margin-bottom: .42rem;
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
     }
     .lab-card-title {
       font-family: 'Cormorant Garamond', serif;
@@ -812,14 +814,11 @@
     }
     .lab-modal-poster.show {
       display: block;
-      animation: labKenBurns 22s ease-in-out infinite alternate;
+      animation: labKenBurns 16s ease-in-out infinite alternate;
     }
     @keyframes labKenBurns {
-      from { transform: scale(1.02) translate(0, 0); }
-      to   { transform: scale(1.14) translate(-2.5%, -3.5%); }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .lab-modal-poster.show { animation: none; }
+      from { transform: scale(1.06) translate(2.5%, 2%); }
+      to   { transform: scale(1.22) translate(-4.5%, -5.5%); }
     }
     .lab-modal-voverlay {
       position: absolute; inset: 0;
@@ -2099,7 +2098,7 @@
       },
       'nba-fan-engagement': {
         title: 'Fan Engagement',
-        tag: 'Cloud &amp; AI · Sports · 2026',
+        tag: 'Cloud & AI · Sports · 2026',
         desc: 'An "art of the possible" prototype: a Major League Sports fan-engagement platform rendered as an Xcode-style device simulator. Pick iPhone, iPad, Apple Watch or Web and navigate the companion app — onboarding & Fan 360, a For-You feed, live game with Favorite-Player POV, win-probability, RAG-powered trivia, AI auto-highlights, a where-to-watch concierge, smart-venue wayfinding and Memory Lane — while the Microsoft Azure reference architecture lights up 360° around it, with a live "brain panel" explaining which services power each screen and why.',
         stack: ['Azure Cloud & AI', 'Azure OpenAI', 'AI Search · RAG', 'Microsoft Fabric', 'HTML', 'CSS', 'JavaScript'],
         poster: 'assets/lab-nba-fan-engagement-poster.jpg',
