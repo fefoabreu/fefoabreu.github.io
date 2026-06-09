@@ -808,18 +808,10 @@
       position: absolute; inset: 0;
       width: 100%; height: 100%;
       object-fit: cover;
-      object-position: top center;
+      object-position: center;
       display: none;
-      transform-origin: 50% 35%;
     }
-    .lab-modal-poster.show {
-      display: block;
-      animation: labKenBurns 16s ease-in-out infinite alternate;
-    }
-    @keyframes labKenBurns {
-      from { transform: scale(1.06) translate(2.5%, 2%); }
-      to   { transform: scale(1.22) translate(-4.5%, -5.5%); }
-    }
+    .lab-modal-poster.show { display: block; }
     .lab-modal-voverlay {
       position: absolute; inset: 0;
       background: linear-gradient(to bottom, rgba(0,0,0,.08) 0%, rgba(0,0,0,.55) 100%);
@@ -2101,7 +2093,7 @@
         tag: 'Cloud & AI · Sports · 2026',
         desc: 'An "art of the possible" prototype: a Major League Sports fan-engagement platform rendered as an Xcode-style device simulator. Pick iPhone, iPad, Apple Watch or Web and navigate the companion app — onboarding & Fan 360, a For-You feed, live game with Favorite-Player POV, win-probability, RAG-powered trivia, AI auto-highlights, a where-to-watch concierge, smart-venue wayfinding and Memory Lane — while the Microsoft Azure reference architecture lights up 360° around it, with a live "brain panel" explaining which services power each screen and why.',
         stack: ['Azure Cloud & AI', 'Azure OpenAI', 'AI Search · RAG', 'Microsoft Fabric', 'HTML', 'CSS', 'JavaScript'],
-        poster: 'assets/lab-nba-fan-engagement-poster.jpg',
+        poster: 'assets/lab-fan-engagement-demo.webp',
         live:  'https://fefoabreu.me/NBAFanEngagement/',
         github:'https://github.com/fefoabreu/NBAFanEngagement',
         arch: {
