@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="13" fill="#0f1e3c"/>
+  <rect x="2.5" y="2.5" width="59" height="59" rx="11" fill="none" stroke="#c8a96e" stroke-opacity="0.45" stroke-width="1.5"/>
+  <text x="32" y="33" text-anchor="middle" dominant-baseline="central"
+        font-family="Georgia, 'Cormorant Garamond', 'Times New Roman', serif"
+        font-size="34" font-weight="600" fill="#c8a96e" letter-spacing="-1">FA</text>
+</svg>
