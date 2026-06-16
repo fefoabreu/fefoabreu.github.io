@@ -2271,8 +2271,8 @@
       'watchuwatchin': {
         title: 'WatchUWatchin’',
         tag: 'Social · Apple · 2026',
-        desc: 'A native SwiftUI social app for sharing what you watch — built around the Shared → Watching → Reacted LoopRing. Multiplatform across iPhone, Apple Watch and a Home Screen widget, with Siri voice capture, friend circles and a “taste calibration” engine, all styled by a custom OKLCH color system. Runs as a native prototype in the Xcode simulator rather than the web.',
-        stack: ['Swift', 'SwiftUI', 'iOS', 'watchOS', 'WidgetKit', 'App Intents'],
+        desc: 'A native SwiftUI social app for sharing what you watch — built around the Shared → Watching → Reacted LoopRing. Multiplatform across iPhone, Apple Watch, an Apple TV companion and a Home Screen widget, with Siri voice capture, friend circles and a “taste calibration” engine, all styled by a custom OKLCH color system. Runs as a native prototype in the Xcode simulator rather than the web.',
+        stack: ['Swift', 'SwiftUI', 'iOS', 'watchOS', 'tvOS', 'WidgetKit', 'App Intents'],
         poster: 'assets/lab-watchuwatchin-demo.jpg',
         github:'https://github.com/fefoabreu/WatchUWatchin',
         arch: {
@@ -2282,6 +2282,7 @@
             { lbl: 'Tier 0 · Surfaces', color: 'client', boxes: [
               { nm: 'iPhone App', ty: 'SwiftUI · iOS' },
               { nm: 'Apple Watch', ty: 'watchOS companion' },
+              { nm: 'Apple TV', ty: 'tvOS · living-room', sub: 'big-screen circle + watch loop' },
               { nm: 'Home Screen Widget', ty: 'WidgetKit · glanceable' } ] },
             { lbl: 'Tier 1 · Presentation', color: 'edge', flow: 'declarative UI', boxes: [
               { nm: 'SwiftUI Views', ty: 'feed · detail · circle' },
@@ -2300,7 +2301,7 @@
               { nm: 'Local Watch Store', ty: 'on-device' },
               { nm: 'Friend Graph', ty: 'circle + shared history' } ] }
           ],
-          note: 'A native <b>SwiftUI</b> app whose shared Swift package drives the <b>Shared → Watching → Reacted</b> LoopRing across iPhone, <b>Apple Watch</b> and a <b>WidgetKit</b> home-screen widget. <b>App Intents / SiriKit</b> power voice capture, a custom <b>OKLCH</b> color engine handles the palette, and a friend graph backs the “taste calibration” circle. Ships as a native Xcode-simulator prototype rather than a web deploy — hence the GitHub link in place of a live URL.'
+          note: 'A native <b>SwiftUI</b> app whose shared Swift package drives the <b>Shared → Watching → Reacted</b> LoopRing across iPhone, <b>Apple Watch</b>, an <b>Apple TV</b> (tvOS) living-room companion and a <b>WidgetKit</b> home-screen widget. <b>App Intents / SiriKit</b> power voice capture, a custom <b>OKLCH</b> color engine handles the palette, and a friend graph backs the “taste calibration” circle. Ships as a native Xcode-simulator prototype rather than a web deploy — hence the GitHub link in place of a live URL.'
         }
       }
     };
