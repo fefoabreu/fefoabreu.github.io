@@ -638,6 +638,75 @@
       to   { opacity: 1; }
     }
 
+    /* ─── APPLIED AI ─────────────────────────────────── */
+    #applied-ai {
+      background: var(--warm);
+      position: relative;
+    }
+    .aai-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.4rem; margin-top: 2.8rem;
+    }
+    @media(max-width:700px){ .aai-grid { grid-template-columns: 1fr; } }
+    @media(max-width:960px) and (min-width:701px){ .aai-grid { grid-template-columns: 1fr 1fr; } }
+    .aai-card {
+      background: var(--cream);
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--r);
+      padding: 1.5rem 1.5rem 1.35rem;
+      box-shadow: 0 1px 4px rgba(0,0,0,.04);
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      display: flex; flex-direction: column;
+    }
+    .aai-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(0,0,0,.09);
+      border-color: rgba(200,169,110,.4);
+    }
+    .aai-top {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: .95rem;
+    }
+    .aai-idx {
+      font-family: 'DM Mono', monospace; font-size: .72rem;
+      color: var(--accent); letter-spacing: .04em;
+      border: 1px solid rgba(200,169,110,.4);
+      border-radius: 50%; width: 30px; height: 30px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .aai-lens {
+      font-family: 'DM Mono', monospace; font-size: .58rem;
+      letter-spacing: .16em; text-transform: uppercase;
+      color: var(--muted); text-align: right;
+    }
+    .aai-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 600; line-height: 1.15;
+      color: var(--navy); margin-bottom: .5rem;
+    }
+    .aai-desc {
+      font-size: .89rem; color: #374151; line-height: 1.65;
+      flex: 1; margin-bottom: 1.1rem;
+    }
+    .aai-proof { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .aai-chip {
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem; letter-spacing: .02em;
+      padding: .26rem .62rem;
+      background: rgba(30,111,217,.07);
+      border: 1px solid rgba(30,111,217,.18);
+      border-radius: 20px; color: var(--blue);
+      white-space: nowrap;
+    }
+    .aai-foot {
+      margin-top: 2.4rem; text-align: center;
+      font-family: 'DM Mono', monospace; font-size: .72rem;
+      letter-spacing: .03em; color: var(--muted);
+    }
+    .aai-foot strong { color: var(--accent); font-weight: 500; }
+
     /* ─── THE LAB ─────────────────────────────────────── */
     #lab {
       background: #060d1f;
@@ -1241,6 +1310,7 @@
     <ul class="nav-links">
       <li><a href="#microsoft">Microsoft</a></li>
       <li><a href="#story">Before</a></li>
+      <li><a href="#applied-ai">Applied AI</a></li>
       <li><a href="#lab">Lab</a></li>
       <li><a href="#toolkit">Toolkit</a></li>
       <li><a href="#voices">Voices</a></li>
@@ -1482,6 +1552,80 @@
     </div>
   </section>
 
+  <!-- APPLIED AI -->
+  <section id="applied-ai">
+    <div class="section-inner">
+      <p class="chapter-label reveal">Hands-On AI Fluency</p>
+      <h2 class="section-title reveal reveal-d1">Applied <em>AI.</em></h2>
+      <div class="section-rule reveal reveal-d2"></div>
+      <p class="section-lead reveal reveal-d3">
+        Every project in The Lab is also a study in a different corner of modern AI. Together they map the patterns I reach for when turning a model into a real product &mdash; from agentic loops and retrieval to MCP tooling, multi-provider routing, and responsible-AI guardrails.
+      </p>
+
+      <div class="aai-grid">
+
+        <article class="aai-card reveal reveal-d1">
+          <div class="aai-top"><span class="aai-idx">01</span><span class="aai-lens">Agentic Systems</span></div>
+          <h3 class="aai-title">Autonomous Agent Loops</h3>
+          <p class="aai-desc">Orchestrator and lifecycle agents that run on a schedule, take real actions, and write every run to an audit log &mdash; not a chatbot, a workforce.</p>
+          <div class="aai-proof"><span class="aai-chip">Career Coach</span><span class="aai-chip">Delivery Excellence</span></div>
+        </article>
+
+        <article class="aai-card reveal reveal-d2">
+          <div class="aai-top"><span class="aai-idx">02</span><span class="aai-lens">Model Orchestration</span></div>
+          <h3 class="aai-title">Multi-Provider LLM Routing</h3>
+          <p class="aai-desc">A client-side Model Router that picks the right path and model per task across Anthropic, OpenAI, Gemini and Perplexity &mdash; with graceful fallbacks.</p>
+          <div class="aai-proof"><span class="aai-chip">Career Coach</span></div>
+        </article>
+
+        <article class="aai-card reveal reveal-d3">
+          <div class="aai-top"><span class="aai-idx">03</span><span class="aai-lens">Knowledge Grounding</span></div>
+          <h3 class="aai-title">RAG &amp; Grounded Retrieval</h3>
+          <p class="aai-desc">Generative answers grounded in domain knowledge through Azure AI Search vector retrieval &mdash; trivia, team history and concierge that stay factual.</p>
+          <div class="aai-proof"><span class="aai-chip">Fan Engagement</span></div>
+        </article>
+
+        <article class="aai-card reveal reveal-d1">
+          <div class="aai-top"><span class="aai-idx">04</span><span class="aai-lens">Model Context Protocol</span></div>
+          <h3 class="aai-title">MCP Servers &amp; Tool Use</h3>
+          <p class="aai-desc">Exposing real, deterministic tools &mdash; live scoring math &mdash; to Claude through a Model Context Protocol server, so the model reasons and the code computes.</p>
+          <div class="aai-proof"><span class="aai-chip">Career Coach</span></div>
+        </article>
+
+        <article class="aai-card reveal reveal-d2">
+          <div class="aai-top"><span class="aai-idx">05</span><span class="aai-lens">Solution Design</span></div>
+          <h3 class="aai-title">Cloud AI Reference Architecture</h3>
+          <p class="aai-desc">Mapping Azure OpenAI, AI Search, Microsoft Fabric and Video Indexer into production-grade, governed reference architectures &mdash; tier by tier.</p>
+          <div class="aai-proof"><span class="aai-chip">Fan Engagement</span><span class="aai-chip">Delivery Excellence</span></div>
+        </article>
+
+        <article class="aai-card reveal reveal-d3">
+          <div class="aai-top"><span class="aai-idx">06</span><span class="aai-lens">Native Intelligence</span></div>
+          <h3 class="aai-title">On-Device &amp; Voice AI</h3>
+          <p class="aai-desc">Siri / App Intents voice capture and on-device intelligence wired natively into SwiftUI &mdash; AI that lives on the watch and home screen, not just the cloud.</p>
+          <div class="aai-proof"><span class="aai-chip">WatchUWatchin'</span></div>
+        </article>
+
+        <article class="aai-card reveal reveal-d1">
+          <div class="aai-top"><span class="aai-idx">07</span><span class="aai-lens">Trust &amp; Safety</span></div>
+          <h3 class="aai-title">Responsible AI &amp; Governance</h3>
+          <p class="aai-desc">Zero-knowledge secret storage, row-level security, audit trails and Purview / Sentinel posture baked in from day one &mdash; AI you can take to an enterprise.</p>
+          <div class="aai-proof"><span class="aai-chip">Career Coach</span><span class="aai-chip">Fan Engagement</span></div>
+        </article>
+
+        <article class="aai-card reveal reveal-d2">
+          <div class="aai-top"><span class="aai-idx">08</span><span class="aai-lens">Build Velocity</span></div>
+          <h3 class="aai-title">Agentic Coding Workflow</h3>
+          <p class="aai-desc">All seven Lab projects shipped with Claude Code as the daily build partner &mdash; spec to design to code to deploy &mdash; proving the agentic SDLC end to end.</p>
+          <div class="aai-proof"><span class="aai-chip">The Lab &middot; all 7</span></div>
+        </article>
+
+      </div>
+
+      <p class="aai-foot reveal">Each pattern is shipping in a real project &mdash; <strong>see them in The Lab below &darr;</strong></p>
+    </div>
+  </section>
+
   <!-- THE LAB -->
   <section id="lab">
     <div class="section-inner">
@@ -1502,6 +1646,20 @@
         <div class="lab-track" id="labTrack">
         <div class="lab-row" id="labRow">
 
+          <!-- WatchUWatchin' -->
+          <div class="lab-card" data-project="watchuwatchin">
+            <img class="lab-card-img" src="assets/lab-watchuwatchin.jpg" alt="WatchUWatchin'" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Social &middot; Apple</span>
+              <div class="lab-card-title">WatchUWatchin'</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
           <!-- Fan Engagement -->
           <div class="lab-card" data-project="nba-fan-engagement">
             <img class="lab-card-img" src="assets/lab-nba-fan-engagement.jpg" alt="Fan Engagement" />
@@ -1512,48 +1670,6 @@
             <div class="lab-card-overlay">
               <span class="lab-card-tag">Cloud &amp; AI &middot; Sports</span>
               <div class="lab-card-title">Fan Engagement</div>
-              <div class="lab-card-year">2026</div>
-            </div>
-          </div>
-
-          <!-- The Gathering Silveira -->
-          <div class="lab-card" data-project="the-gathering">
-            <img class="lab-card-img" src="assets/lab-the-gathering.jpg" alt="The Gathering Silveira" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">Hospitality &middot; Travel</span>
-              <div class="lab-card-title">The Gathering Silveira</div>
-              <div class="lab-card-year">2026</div>
-            </div>
-          </div>
-
-          <!-- Delivery Excellence -->
-          <div class="lab-card" data-project="delivery-excellence">
-            <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">AI &middot; Enterprise</span>
-              <div class="lab-card-title">Delivery Excellence</div>
-              <div class="lab-card-year">2026</div>
-            </div>
-          </div>
-
-          <!-- Bella Bite -->
-          <div class="lab-card" data-project="bella-bite">
-            <img class="lab-card-img" src="assets/lab-bella-bite.jpg" alt="Bella Bite" />
-            <div class="lab-card-noise"></div>
-            <div class="lab-card-play">
-              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
-            </div>
-            <div class="lab-card-overlay">
-              <span class="lab-card-tag">Food &amp; Beverage</span>
-              <div class="lab-card-title">Bella Bite</div>
               <div class="lab-card-year">2026</div>
             </div>
           </div>
@@ -1572,6 +1688,20 @@
             </div>
           </div>
 
+          <!-- Delivery Excellence -->
+          <div class="lab-card" data-project="delivery-excellence">
+            <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">AI &middot; Enterprise</span>
+              <div class="lab-card-title">Delivery Excellence</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
           <!-- Oneway Intercâmbio -->
           <div class="lab-card" data-project="oneway-intercambio">
             <img class="lab-card-img" src="assets/lab-oneway-intercambio.jpg" alt="Oneway Intercâmbio" />
@@ -1586,16 +1716,30 @@
             </div>
           </div>
 
-          <!-- WatchUWatchin' -->
-          <div class="lab-card" data-project="watchuwatchin">
-            <img class="lab-card-img" src="assets/lab-watchuwatchin.jpg" alt="WatchUWatchin'" />
+          <!-- The Gathering Silveira -->
+          <div class="lab-card" data-project="the-gathering">
+            <img class="lab-card-img" src="assets/lab-the-gathering.jpg" alt="The Gathering Silveira" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
             </div>
             <div class="lab-card-overlay">
-              <span class="lab-card-tag">Social &middot; Apple</span>
-              <div class="lab-card-title">WatchUWatchin'</div>
+              <span class="lab-card-tag">Hospitality &middot; Travel</span>
+              <div class="lab-card-title">The Gathering Silveira</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
+          <!-- Bella Bite -->
+          <div class="lab-card" data-project="bella-bite">
+            <img class="lab-card-img" src="assets/lab-bella-bite.jpg" alt="Bella Bite" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Food &amp; Beverage</span>
+              <div class="lab-card-title">Bella Bite</div>
               <div class="lab-card-year">2026</div>
             </div>
           </div>
