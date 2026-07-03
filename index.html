@@ -638,106 +638,148 @@
       to   { opacity: 1; }
     }
 
-    /* ─── APPLIED AI ─────────────────────────────────── */
+    /* ─── APPLIED AI · knowledge map ─────────────────── */
     #applied-ai {
-      background: var(--warm);
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 46%, #f6f1e6 0%, var(--warm) 62%, #ebe4d5 100%);
       position: relative;
       overflow: hidden;
     }
-    .aai-deck-wrap { margin-top: 2.8rem; position: relative; }
-    .aai-deck {
+    .aai-map-wrap { margin-top: 2.4rem; }
+    .aai-legend {
+      display: flex; flex-wrap: wrap; gap: 1.3rem;
+      font-family: 'DM Mono', monospace; font-size: .62rem;
+      letter-spacing: .06em; color: var(--muted);
+      margin-bottom: 2.4rem;
+    }
+    .aai-legend span { display: inline-flex; align-items: center; gap: .45rem; }
+    .aai-key { width: 11px; height: 11px; flex-shrink: 0; }
+    .aai-key.cap { border-radius: 50%; background: var(--navy); box-shadow: 0 0 0 2px rgba(200,169,110,.55); }
+    .aai-key.tool { border-radius: 50%; background: var(--cream); border: 1.5px solid rgba(15,30,60,.5); }
+    .aai-key.bridge { background: var(--accent); transform: rotate(45deg); box-shadow: 0 0 0 1px rgba(200,169,110,.5); }
+
+    .aai-map {
       position: relative;
-      height: 366px;
-      margin: 0 auto;
-      touch-action: pan-y;
-      outline: none;
+      width: 100%;
+      aspect-ratio: 1000 / 660;
+      /* labels near the rim breathe into this inset */
     }
-    @media(max-width:600px){ .aai-deck { height: 440px; } }
+    .aai-edges {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      overflow: visible;
+    }
+    .aai-orbit { fill: none; stroke: rgba(200,169,110,.22); stroke-width: 1; stroke-dasharray: 2 7; }
+    .aai-edge {
+      fill: none;
+      stroke: rgba(15,30,60,.16);
+      stroke-width: 1.4;
+      pathLength: 1;
+      stroke-dasharray: 1;
+      stroke-dashoffset: 1;
+      transition: stroke-dashoffset 1.1s var(--ease), stroke .3s, stroke-width .3s, opacity .3s;
+    }
+    .aai-edge.bridge { stroke: rgba(200,169,110,.5); stroke-width: 1.6; }
+    .aai-map.drawn .aai-edge { stroke-dashoffset: 0; }
+    .aai-map.tracing .aai-edge { opacity: .07; }
+    .aai-map.tracing .aai-edge.lit { opacity: 1; stroke: var(--blue); stroke-width: 2.6; }
+    .aai-map.tracing .aai-edge.lit.bridge { stroke: var(--accent); }
 
-    .aai-card {
+    .aai-node {
       position: absolute;
-      top: 0; left: 50%;
-      width: min(388px, 86vw);
-      height: 100%;
-      background: var(--cream);
-      border: 1px solid rgba(0,0,0,.07);
-      border-radius: 14px;
-      padding: 1.9rem 1.8rem 1.7rem;
-      box-shadow: 0 14px 44px rgba(15,30,60,.12);
-      display: flex; flex-direction: column;
-      transform: translateX(-50%);
-      transition: transform .5s var(--ease), opacity .5s var(--ease), box-shadow .4s;
-      will-change: transform, opacity;
-      cursor: grab;
-    }
-    .aai-card.dragging { transition: none; }
-    .aai-card:not(.is-active) { cursor: pointer; }
-
-    .aai-top {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 1.05rem;
-    }
-    .aai-idx {
-      font-family: 'DM Mono', monospace; font-size: .72rem;
-      color: var(--accent); letter-spacing: .04em;
-      border: 1px solid rgba(200,169,110,.45);
-      border-radius: 50%; width: 32px; height: 32px;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .aai-lens {
-      font-family: 'DM Mono', monospace; font-size: .58rem;
-      letter-spacing: .16em; text-transform: uppercase;
-      color: var(--muted); text-align: right;
-    }
-    .aai-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 1.75rem; font-weight: 600; line-height: 1.12;
-      color: var(--navy); margin-bottom: .6rem;
-    }
-    .aai-desc {
-      font-size: .92rem; color: #374151; line-height: 1.68;
-      flex: 1; margin-bottom: 1.2rem;
-    }
-    .aai-tools { display: flex; flex-wrap: wrap; gap: .4rem; }
-    .aai-tool {
-      font-family: 'DM Mono', monospace;
-      font-size: .6rem; letter-spacing: .02em;
-      padding: .28rem .6rem;
-      background: rgba(30,111,217,.07);
-      border: 1px solid rgba(30,111,217,.2);
-      border-radius: 6px; color: var(--blue);
-      white-space: nowrap;
-    }
-
-    .aai-controls {
-      display: flex; align-items: center; justify-content: center;
-      gap: 1.1rem; margin-top: 1.7rem;
-    }
-    .aai-nav {
-      width: 42px; height: 42px; border-radius: 50%;
-      border: 1px solid rgba(200,169,110,.45);
-      background: var(--cream); color: var(--navy);
-      display: flex; align-items: center; justify-content: center;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity .5s var(--ease), transform .3s var(--ease);
       cursor: pointer;
-      transition: background .2s, color .2s, transform .2s, border-color .2s;
+      background: none; border: none; padding: 7px;
+      font: inherit; color: inherit;
     }
-    .aai-nav:hover { background: var(--accent); color: var(--cream); border-color: var(--accent); transform: translateY(-2px); }
-    .aai-dots { display: flex; gap: .5rem; align-items: center; }
+    .aai-map.drawn .aai-node { opacity: 1; }
+    .aai-node:focus-visible { outline: none; }
+    .aai-node:focus-visible .aai-dot { box-shadow: 0 0 0 3px var(--blue); }
+
     .aai-dot {
-      width: 8px; height: 8px; border-radius: 50%;
-      border: none; padding: 0; cursor: pointer;
-      background: rgba(15,30,60,.18);
-      transition: background .25s, width .25s, border-radius .25s;
+      display: block; margin: 0 auto;
+      border-radius: 50%;
+      transition: transform .25s var(--ease), background .25s, box-shadow .25s;
     }
-    .aai-dot.on { background: var(--accent); width: 22px; border-radius: 4px; }
+    .aai-node.core .aai-dot { width: 15px; height: 15px; background: var(--accent); box-shadow: 0 0 0 5px rgba(200,169,110,.18), 0 0 22px rgba(200,169,110,.5); }
+    .aai-node.cap  .aai-dot { width: 13px; height: 13px; background: var(--navy); box-shadow: 0 0 0 3px rgba(200,169,110,.5); }
+    .aai-node.tool .aai-dot { width: 8px;  height: 8px;  background: var(--cream); border: 1.5px solid rgba(15,30,60,.55); }
+    .aai-node.bridge .aai-dot { width: 11px; height: 11px; background: var(--accent); border-radius: 2px; transform: rotate(45deg); box-shadow: 0 0 0 1px rgba(200,169,110,.6), 0 0 14px rgba(200,169,110,.45); }
+
+    .aai-label {
+      position: absolute;
+      pointer-events: none;
+      color: var(--navy);
+      text-shadow: 0 0 6px var(--warm), 0 0 6px var(--warm), 0 0 3px var(--warm);
+      transition: color .25s, opacity .25s;
+    }
+    .aai-node.core .aai-label { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: clamp(1.35rem, 2.5vw, 1.95rem); color: var(--navy); }
+    .aai-node.cap  .aai-label { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: clamp(.95rem, 1.75vw, 1.32rem); line-height: 1.05; }
+    .aai-node.tool .aai-label,
+    .aai-node.bridge .aai-label { font-family: 'DM Mono', monospace; font-size: clamp(.52rem, 1.05vw, .72rem); letter-spacing: .01em; color: rgba(28,32,48,.82); }
+    .aai-node.bridge .aai-label { color: #9a7726; }
+
+    /* label placement relative to dot */
+    .aai-label { white-space: nowrap; }
+    .lbl-b { top: 100%; left: 50%; transform: translate(-50%, 5px); text-align: center; }
+    .lbl-t { bottom: 100%; left: 50%; transform: translate(-50%, -5px); text-align: center; }
+    .lbl-r { left: 100%; top: 50%; transform: translate(7px, -50%); text-align: left; }
+    .lbl-l { right: 100%; top: 50%; transform: translate(-7px, -50%); text-align: right; }
+
+    .aai-node:hover .aai-dot { transform: scale(1.28); }
+    .aai-node.bridge:hover .aai-dot { transform: rotate(45deg) scale(1.28); }
+
+    /* trace state: fade the crowd, spotlight the chosen path */
+    .aai-map.tracing .aai-node { opacity: .26; }
+    .aai-map.tracing .aai-node.lit { opacity: 1; }
+    .aai-map.tracing .aai-node.lit .aai-dot { box-shadow: 0 0 0 3px rgba(30,111,217,.28), 0 0 16px rgba(30,111,217,.35); }
+    .aai-map.tracing .aai-node.lit.cap .aai-label,
+    .aai-map.tracing .aai-node.lit.core .aai-label { color: var(--blue); }
+
+    .aai-readout {
+      margin-top: 1rem;
+      min-height: 2.6em;
+      font-family: 'DM Mono', monospace;
+      font-size: .78rem; letter-spacing: .02em; line-height: 1.6;
+      color: var(--muted); text-align: center;
+    }
+    .aai-readout b { color: var(--navy); font-weight: 500; }
+    .aai-readout .rc { color: var(--accent); }
 
     .aai-foot {
-      margin-top: 2.2rem; text-align: center;
+      margin-top: 1.2rem; text-align: center;
       font-family: 'DM Mono', monospace; font-size: .72rem;
       letter-spacing: .03em; color: var(--muted);
     }
     .aai-foot strong { color: var(--accent); font-weight: 500; }
+
+    /* mobile fallback: the same graph, read as a list */
+    .aai-list { display: none; margin-top: .6rem; }
+    .aai-lrow { padding: 1.1rem 0; border-bottom: 1px solid rgba(200,169,110,.22); }
+    .aai-lrow:last-child { border-bottom: none; }
+    .aai-lhead { display: flex; align-items: center; gap: .6rem; }
+    .aai-ldot { width: 11px; height: 11px; border-radius: 50%; background: var(--navy); box-shadow: 0 0 0 3px rgba(200,169,110,.42); flex-shrink: 0; }
+    .aai-lrow h3 { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 1.42rem; color: var(--navy); line-height: 1; }
+    .aai-lblurb { font-size: .85rem; color: var(--muted); margin: .35rem 0 .7rem; }
+    .aai-ltags { display: flex; flex-wrap: wrap; gap: .4rem; }
+    .aai-ltag {
+      font-family: 'DM Mono', monospace; font-size: .6rem;
+      padding: .26rem .55rem; border-radius: 6px;
+      background: rgba(30,111,217,.07); border: 1px solid rgba(30,111,217,.2); color: var(--blue);
+    }
+    .aai-ltag.shared { background: rgba(200,169,110,.14); border-color: rgba(200,169,110,.5); color: #9a7726; }
+    .aai-ltag.shared::before { content: '\25C6\00a0'; font-size: .5rem; vertical-align: 1px; }
+
+    @media(max-width:640px) {
+      .aai-legend, .aai-map, .aai-readout { display: none; }
+      .aai-list { display: block; }
+    }
+    @media(prefers-reduced-motion: reduce) {
+      .aai-edge { transition: stroke .3s, stroke-width .3s, opacity .3s; stroke-dashoffset: 0; }
+      .aai-node { transition: opacity .3s; opacity: 1; }
+    }
 
     /* ─── THE LAB ─────────────────────────────────────── */
     #lab {
@@ -1591,82 +1633,24 @@
       <h2 class="section-title reveal reveal-d1">Applied <em>AI.</em></h2>
       <div class="section-rule reveal reveal-d2"></div>
       <p class="section-lead reveal reveal-d3">
-        Patterns I reach for when turning a model into a real product &mdash; and the tools, models and frameworks I lean on lately, drawn straight from what&rsquo;s shipping in The Lab below. Swipe through &rarr;
+        Patterns I reach for when turning a model into a real product &mdash; charted as one connected map. Hover any capability or tool to trace how the pieces link up across everything shipping in The Lab.
       </p>
 
-      <div class="aai-deck-wrap reveal">
-        <div class="aai-deck" id="aaiDeck">
-
-          <article class="aai-card">
-            <div class="aai-top"><span class="aai-idx">01</span><span class="aai-lens">Agentic Systems</span></div>
-            <h3 class="aai-title">Autonomous Agent Loops</h3>
-            <p class="aai-desc">Orchestrator and lifecycle agents that run on a schedule, take real actions, and write every run to an audit trail &mdash; closer to a tireless teammate than a chatbot.</p>
-            <div class="aai-tools"><span class="aai-tool">Claude Agent SDK</span><span class="aai-tool">LangGraph</span><span class="aai-tool">Supabase Edge Functions</span><span class="aai-tool">Cron Schedules</span></div>
-          </article>
-
-          <article class="aai-card">
-            <div class="aai-top"><span class="aai-idx">02</span><span class="aai-lens">Model Orchestration</span></div>
-            <h3 class="aai-title">Multi-Provider LLM Routing</h3>
-            <p class="aai-desc">A router that sends each task to the model best suited for it, with graceful fallback when a provider is slow, throttled or down &mdash; never locked to one vendor.</p>
-            <div class="aai-tools"><span class="aai-tool">Claude Opus &amp; Sonnet</span><span class="aai-tool">GPT-4o</span><span class="aai-tool">Gemini</span><span class="aai-tool">Perplexity</span><span class="aai-tool">LangChain</span></div>
-          </article>
-
-          <article class="aai-card">
-            <div class="aai-top"><span class="aai-idx">03</span><span class="aai-lens">Knowledge Grounding</span></div>
-            <h3 class="aai-title">RAG &amp; Vector Retrieval</h3>
-            <p class="aai-desc">Answers grounded in your own data through embeddings and vector search, so the model stays factual instead of fluent-but-wrong.</p>
-            <div class="aai-tools"><span class="aai-tool">Azure AI Search</span><span class="aai-tool">pgvector</span><span class="aai-tool">Supabase</span><span class="aai-tool">LangChain</span></div>
-          </article>
-
-          <article class="aai-card">
-            <div class="aai-top"><span class="aai-idx">04</span><span class="aai-lens">Tool Use</span></div>
-            <h3 class="aai-title">MCP &amp; Tool-Calling</h3>
-            <p class="aai-desc">Exposing real, deterministic tools to the model over the Model Context Protocol &mdash; the LLM reasons, the code computes, and the math is always right.</p>
-            <div class="aai-tools"><span class="aai-tool">MCP Servers</span><span class="aai-tool">Claude Desktop</span><span class="aai-tool">Function Calling</span><span class="aai-tool">JSON Schema</span></div>
-          </article>
-
-          <article class="aai-card">
-            <div class="aai-top"><span class="aai-idx">05</span><span class="aai-lens">Solution Design</span></div>
-            <h3 class="aai-title">Cloud AI Reference Architecture</h3>
-            <p class="aai-desc">Composing managed AI services into governed, production-grade reference architectures &mdash; security, data and inference mapped tier by tier.</p>
-            <div class="aai-tools"><span class="aai-tool">Azure OpenAI</span><span class="aai-tool">AI Foundry</span><span class="aai-tool">Microsoft Fabric</span><span class="aai-tool">AI Video Indexer</span></div>
-          </article>
-
-          <article class="aai-card">
-            <div class="aai-top"><span class="aai-idx">06</span><span class="aai-lens">Native Intelligence</span></div>
-            <h3 class="aai-title">On-Device &amp; Voice AI</h3>
-            <p class="aai-desc">Voice capture and on-device intelligence wired natively into the OS &mdash; AI that lives on the watch, phone and home screen, in the user&rsquo;s own language.</p>
-            <div class="aai-tools"><span class="aai-tool">App Intents / SiriKit</span><span class="aai-tool">Apple Intelligence</span><span class="aai-tool">String Catalogs (l10n)</span></div>
-          </article>
-
-          <article class="aai-card">
-            <div class="aai-top"><span class="aai-idx">07</span><span class="aai-lens">Build Velocity</span></div>
-            <h3 class="aai-title">Agentic Coding Workflow</h3>
-            <p class="aai-desc">An AI-native dev cockpit: spec, design, code and deploy with an agent pair-programmer, driven largely hands-free by voice for near-frictionless flow.</p>
-            <div class="aai-tools"><span class="aai-tool">Claude Code</span><span class="aai-tool">Warp</span><span class="aai-tool">Wispr Flow</span><span class="aai-tool">GitHub</span></div>
-          </article>
-
-          <article class="aai-card">
-            <div class="aai-top"><span class="aai-idx">08</span><span class="aai-lens">Trust &amp; Safety</span></div>
-            <h3 class="aai-title">Responsible AI &amp; Governance</h3>
-            <p class="aai-desc">Guardrails from day one &mdash; zero-knowledge secrets, row-level security, audit logs and enterprise posture so AI is safe to ship.</p>
-            <div class="aai-tools"><span class="aai-tool">Supabase RLS</span><span class="aai-tool">Zero-Knowledge Keys</span><span class="aai-tool">Microsoft Purview</span><span class="aai-tool">Sentinel</span></div>
-          </article>
-
+      <div class="aai-map-wrap reveal">
+        <div class="aai-legend" aria-hidden="true">
+          <span><i class="aai-key cap"></i> Capability</span>
+          <span><i class="aai-key tool"></i> Tool · model · framework</span>
+          <span><i class="aai-key bridge"></i> Shared across capabilities</span>
         </div>
-
-        <div class="aai-controls">
-          <button class="aai-nav" id="aaiPrev" aria-label="Previous card">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-          </button>
-          <div class="aai-dots" id="aaiDots"></div>
-          <button class="aai-nav" id="aaiNext" aria-label="Next card">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-          </button>
+        <div class="aai-map" id="aaiMap">
+          <svg class="aai-edges" id="aaiEdges" viewBox="0 0 1000 660" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+          <!-- nodes injected here -->
         </div>
+        <p class="aai-readout" id="aaiReadout" role="status" aria-live="polite"></p>
+        <div class="aai-list" id="aaiList"><!-- mobile fallback injected here --></div>
       </div>
 
-      <p class="aai-foot reveal">Each pattern is shipping in a real project &mdash; <strong>see them in The Lab below &darr;</strong></p>
+      <p class="aai-foot reveal">Every node is shipping in a real project &mdash; <strong>meet them in The Lab below &darr;</strong></p>
     </div>
   </section>
 
@@ -2660,80 +2644,190 @@
       document.getElementById('labTrack').scrollBy({ left: dir * 260, behavior: 'smooth' });
     }
 
-    // ─── APPLIED AI · flashcard deck ────────────────────
+    // ─── APPLIED AI · connected knowledge map ───────────
     (function () {
-      const deck = document.getElementById('aaiDeck');
-      if (!deck) return;
-      const cards = Array.from(deck.querySelectorAll('.aai-card'));
-      const dotsWrap = document.getElementById('aaiDots');
-      let active = 0, dragging = false, startX = 0, dx = 0, moved = false;
+      const map = document.getElementById('aaiMap');
+      if (!map) return;
+      const svg = document.getElementById('aaiEdges');
+      const readout = document.getElementById('aaiReadout');
+      const SVGNS = 'http://www.w3.org/2000/svg';
+      const CX = 500, CY = 330;
+      const sx = v => v * 10, sy = v => v * 6.6;
 
-      const dots = cards.map((_, i) => {
-        const b = document.createElement('button');
-        b.className = 'aai-dot';
-        b.setAttribute('aria-label', 'Show card ' + (i + 1));
-        b.addEventListener('click', () => go(i));
-        dotsWrap.appendChild(b);
-        return b;
+      // capabilities — inner ring (what I can do)
+      const caps = [
+        { id:'agentic', label:'Agentic Systems',     blurb:'agents that run, act & audit themselves', x:50, y:20 },
+        { id:'orch',    label:'Model Orchestration', blurb:'routing each task to the right model',     x:75, y:27 },
+        { id:'rag',     label:'RAG & Retrieval',     blurb:'answers grounded in your own data',        x:84, y:50 },
+        { id:'mcp',     label:'Tool Use · MCP',      blurb:'deterministic tools the model can call',   x:73, y:74 },
+        { id:'cloud',   label:'Cloud Architecture',  blurb:'managed AI services, mapped tier by tier', x:50, y:83 },
+        { id:'native',  label:'Native & Voice',      blurb:'on-device, multilingual, voice-first',     x:26, y:74 },
+        { id:'coding',  label:'Agentic Coding',      blurb:'spec-to-ship with an agent pair',          x:16, y:50 },
+        { id:'gov',     label:'Governance',          blurb:'guardrails, secrets & audit from day one', x:25, y:26 },
+      ];
+      const capById = {}; caps.forEach(c => capById[c.id] = c);
+
+      // tools, models & frameworks — outer ring (what I use). to[] = capabilities; >1 = shared bridge
+      const tools = [
+        { label:'Claude Agent SDK',   x:46, y:10, to:['agentic'] },
+        { label:'LangGraph',          x:62, y:12, to:['agentic'] },
+        { label:'GPT-4o',             x:90, y:15, to:['orch'] },
+        { label:'Gemini',             x:96, y:26, to:['orch'] },
+        { label:'Perplexity',         x:93, y:39, to:['orch'] },
+        { label:'Azure AI Search',    x:96, y:47, to:['rag'] },
+        { label:'pgvector',           x:96, y:59, to:['rag'] },
+        { label:'MCP Servers',        x:95, y:72, to:['mcp'] },
+        { label:'Function Calling',   x:92, y:86, to:['mcp'] },
+        { label:'Azure OpenAI',       x:58, y:95, to:['cloud'] },
+        { label:'AI Foundry',         x:44, y:95, to:['cloud'] },
+        { label:'Microsoft Fabric',   x:36, y:92, to:['cloud'] },
+        { label:'Video Indexer',      x:69, y:89, to:['cloud'] },
+        { label:'App Intents',        x:10, y:82, to:['native'] },
+        { label:'Apple Intelligence', x:21, y:87, to:['native'] },
+        { label:'String Catalogs',    x:9,  y:72, to:['native'] },
+        { label:'Claude Code',        x:4,  y:42, to:['coding'] },
+        { label:'Warp',               x:3,  y:54, to:['coding'] },
+        { label:'Wispr Flow',         x:6,  y:63, to:['coding'] },
+        { label:'GitHub',             x:9,  y:34, to:['coding'] },
+        { label:'Zero-Knowledge',     x:14, y:16, to:['gov'] },
+        { label:'Microsoft Purview',  x:27, y:12, to:['gov'] },
+        // shared bridges — the connective tissue
+        { label:'Supabase',           x:38, y:64, to:['agentic','rag','gov'] },
+        { label:'LangChain',          x:66, y:36, to:['orch','rag'] },
+        { label:'Anthropic Claude',   x:63, y:58, to:['orch','mcp'] },
+      ];
+
+      const core = { id:'core', label:'Applied AI', x:50, y:50, core:true };
+
+      // ── faint astrolabe orbit guides ──
+      [[310,205],[452,300]].forEach(([rx, ry]) => {
+        const e = document.createElementNS(SVGNS, 'ellipse');
+        e.setAttribute('class', 'aai-orbit');
+        e.setAttribute('cx', CX); e.setAttribute('cy', CY);
+        e.setAttribute('rx', rx); e.setAttribute('ry', ry);
+        svg.appendChild(e);
       });
 
-      function go(i) {
-        active = Math.max(0, Math.min(cards.length - 1, i));
-        layout();
+      // ── edges (curved, bowing outward from centre) ──
+      const edges = [];
+      function addEdge(a, b, bridge) {
+        const ax = sx(a.x), ay = sy(a.y), bx = sx(b.x), by = sy(b.y);
+        const mx = (ax + bx) / 2, my = (ay + by) / 2;
+        let dx = mx - CX, dy = my - CY, d = Math.hypot(dx, dy) || 1, k = 26;
+        const p = document.createElementNS(SVGNS, 'path');
+        p.setAttribute('d', `M${ax.toFixed(1)} ${ay.toFixed(1)} Q${(mx + dx / d * k).toFixed(1)} ${(my + dy / d * k).toFixed(1)} ${bx.toFixed(1)} ${by.toFixed(1)}`);
+        p.setAttribute('class', 'aai-edge' + (bridge ? ' bridge' : ''));
+        p.setAttribute('pathLength', '1');
+        svg.appendChild(p);
+        edges.push({ el: p, a: a.id, b: b.id });
       }
+      caps.forEach(c => addEdge(core, c, false));
+      tools.forEach((t, i) => {
+        t.id = 't' + i;
+        const bridge = t.to.length > 1;
+        t.to.forEach(cid => addEdge(t, capById[cid], bridge));
+      });
 
-      function layout() {
-        cards.forEach((card, i) => {
-          const pos = i - active;
-          const ap = Math.abs(pos);
-          const x = pos * 54;                         // % of card width
-          const scale = Math.max(1 - ap * 0.12, 0.74);
-          const op = ap > 2 ? 0 : 1 - ap * 0.32;
-          card.style.transform = `translateX(calc(-50% + ${x}%)) scale(${scale})`;
-          card.style.opacity = op;
-          card.style.zIndex = String(100 - ap);
-          card.style.pointerEvents = ap <= 1 ? 'auto' : 'none';
-          card.classList.toggle('is-active', pos === 0);
+      // ── nodes (HTML, aligned to the SVG viewBox via % + locked aspect) ──
+      const nodesById = {};
+      // capability labels sit on the side that keeps them clear of neighbours and on-canvas
+      const capSide = { agentic:'t', orch:'t', gov:'t', rag:'l', coding:'r', mcp:'b', cloud:'b', native:'b' };
+      function side(n, type) {
+        if (type === 'core') return 'lbl-b';
+        if (type === 'cap') return 'lbl-' + (capSide[n.id] || 'b');
+        // tools & bridges point inward so long labels stay within the frame
+        if (n.x < 26) return 'lbl-r';
+        if (n.x > 74) return 'lbl-l';
+        if (n.y < 22) return 'lbl-t';
+        return 'lbl-b';
+      }
+      function makeNode(n, type) {
+        const el = document.createElement('button');
+        el.type = 'button';
+        el.className = 'aai-node ' + type;
+        el.style.left = n.x + '%';
+        el.style.top = n.y + '%';
+        el.dataset.id = n.id;
+        el.setAttribute('aria-label', n.label);
+        const dot = document.createElement('span'); dot.className = 'aai-dot';
+        const lab = document.createElement('span'); lab.className = 'aai-label ' + side(n, type); lab.textContent = n.label;
+        el.appendChild(dot); el.appendChild(lab);
+        el.addEventListener('mouseenter', () => activate(n.id));
+        el.addEventListener('mouseleave', () => { if (!pinned) clear(); });
+        el.addEventListener('focus', () => activate(n.id));
+        el.addEventListener('blur', () => { if (!pinned) clear(); });
+        el.addEventListener('click', e => {
+          e.stopPropagation();
+          if (pinned === n.id) { pinned = null; clear(); }
+          else { pinned = n.id; activate(n.id); }
         });
-        dots.forEach((d, i) => d.classList.toggle('on', i === active));
+        map.appendChild(el);
+        nodesById[n.id] = el;
+      }
+      makeNode(core, 'core');
+      caps.forEach(c => makeNode(c, 'cap'));
+      tools.forEach(t => makeNode(t, t.to.length > 1 ? 'bridge' : 'tool'));
+
+      let pinned = null;
+      const defaultReadout = `<span class="rc">&#10022;</span> ${caps.length} capabilities · ${tools.length} tools &amp; models — hover or tap a node to trace a connection`;
+
+      function clearMarks() {
+        edges.forEach(e => e.el.classList.remove('lit'));
+        Object.values(nodesById).forEach(el => el.classList.remove('lit'));
+      }
+      function activate(id) {
+        clearMarks();
+        map.classList.add('tracing');
+        const lit = new Set([id]);
+        edges.forEach(e => {
+          if (e.a === id || e.b === id) { e.el.classList.add('lit'); lit.add(e.a); lit.add(e.b); }
+        });
+        lit.forEach(nid => nodesById[nid] && nodesById[nid].classList.add('lit'));
+        readout.innerHTML = describe(id);
+      }
+      function clear() {
+        map.classList.remove('tracing');
+        clearMarks();
+        readout.innerHTML = defaultReadout;
+      }
+      function describe(id) {
+        if (id === 'core') return `<b>Applied AI</b> <span class="rc">·</span> ${caps.length} capabilities woven across ${tools.length} tools, models &amp; frameworks`;
+        const c = capById[id];
+        if (c) return `<b>${c.label}</b> <span class="rc">·</span> ${c.blurb}`;
+        const t = tools.find(x => x.id === id);
+        if (t) {
+          const names = t.to.map(cid => capById[cid].label);
+          return names.length > 1
+            ? `<b>${t.label}</b> <span class="rc">·</span> shared across ${names.length} capabilities — ${names.join(', ')}`
+            : `<b>${t.label}</b> <span class="rc">·</span> powers ${names[0]}`;
+        }
+        return defaultReadout;
+      }
+      readout.innerHTML = defaultReadout;
+
+      map.addEventListener('click', e => {
+        if (e.target === map || e.target === svg) { pinned = null; clear(); }
+      });
+
+      // mobile fallback — the same graph rendered as a legible list
+      const list = document.getElementById('aaiList');
+      if (list) {
+        caps.forEach(c => {
+          const its = tools.filter(t => t.to.includes(c.id));
+          const tags = its.map(t => `<span class="aai-ltag${t.to.length > 1 ? ' shared' : ''}">${t.label}</span>`).join('');
+          const row = document.createElement('div');
+          row.className = 'aai-lrow';
+          row.innerHTML = `<div class="aai-lhead"><span class="aai-ldot"></span><h3>${c.label}</h3></div>` +
+            `<p class="aai-lblurb">${c.blurb}</p><div class="aai-ltags">${tags}</div>`;
+          list.appendChild(row);
+        });
       }
 
-      cards.forEach((card, i) => {
-        card.addEventListener('click', () => { if (!moved && i !== active) go(i); });
-      });
-
-      deck.addEventListener('pointerdown', e => {
-        dragging = true; moved = false; startX = e.clientX; dx = 0;
-        deck.setPointerCapture(e.pointerId);
-        cards[active].classList.add('dragging');
-      });
-      deck.addEventListener('pointermove', e => {
-        if (!dragging) return;
-        dx = e.clientX - startX;
-        if (Math.abs(dx) > 4) moved = true;
-        cards[active].style.transform = `translateX(calc(-50% + ${dx}px)) scale(1) rotate(${dx * 0.02}deg)`;
-      });
-      function endDrag() {
-        if (!dragging) return;
-        dragging = false;
-        cards[active].classList.remove('dragging');
-        if (dx < -60 && active < cards.length - 1) active++;
-        else if (dx > 60 && active > 0) active--;
-        layout();
-      }
-      deck.addEventListener('pointerup', endDrag);
-      deck.addEventListener('pointercancel', endDrag);
-
-      document.getElementById('aaiPrev').addEventListener('click', () => go(active - 1));
-      document.getElementById('aaiNext').addEventListener('click', () => go(active + 1));
-
-      deck.setAttribute('tabindex', '0');
-      deck.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft') { go(active - 1); }
-        else if (e.key === 'ArrowRight') { go(active + 1); }
-      });
-
-      layout();
+      // draw the map in when it scrolls into view
+      const io = new IntersectionObserver((ents) => {
+        ents.forEach(en => { if (en.isIntersecting) { map.classList.add('drawn'); io.disconnect(); } });
+      }, { threshold: 0.2 });
+      io.observe(map);
     })();
 
     // Fade-in on scroll
