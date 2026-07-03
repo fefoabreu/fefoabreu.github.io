@@ -95,18 +95,20 @@
     .claude-badge:hover { opacity: 1; }
     .claude-badge svg { width: 15px; height: 15px; flex-shrink: 0; }
     .nav-links {
-      display: flex; gap: 2rem; list-style: none;
+      display: flex; gap: 2rem; list-style: none; flex-wrap: nowrap;
     }
     .nav-links a {
       font-size: .8rem; letter-spacing: .12em; text-transform: uppercase;
       font-weight: 500; color: rgba(250,248,243,.7);
-      transition: color .2s;
+      transition: color .2s; white-space: nowrap;
       font-family: 'DM Mono', monospace;
     }
     .nav-links a:hover, .nav-links a.active { color: var(--accent); }
     @media(max-width:680px){
-      .nav-links { gap: 1rem; }
-      .nav-links a { font-size: .68rem; }
+      nav { padding: .8rem 1rem; }
+      .nav-logo { display: none; }
+      .nav-links { gap: .85rem; }
+      .nav-links a { font-size: .66rem; letter-spacing: .05em; }
       .claude-badge span { display: none; }
     }
 
