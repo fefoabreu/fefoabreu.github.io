@@ -80,7 +80,9 @@
       font-size: 1.25rem; font-weight: 600;
       color: var(--cream); letter-spacing: .02em;
       opacity: 0; transition: opacity .4s;
+      text-decoration: none; cursor: pointer;
     }
+    .nav-logo:hover { color: var(--accent); }
     nav.scrolled .nav-logo { opacity: 1; }
     .claude-badge {
       display: flex; align-items: center; gap: .38rem;
@@ -216,11 +218,15 @@
       margin-top: .25rem; font-family: 'DM Mono', monospace;
     }
     .hero-ctas {
-      display: flex; gap: 1rem; flex-wrap: wrap;
+      display: flex; gap: .7rem; flex-wrap: nowrap;
       margin-top: 2.4rem;
       opacity: 0; animation: fadeUp .7s var(--ease) .75s forwards;
     }
-    @media(max-width:700px){ .hero-ctas { justify-content: center; } }
+    .hero-ctas .btn {
+      padding: .7rem 1.1rem; font-size: .75rem;
+      letter-spacing: .05em; gap: .45rem; white-space: nowrap;
+    }
+    @media(max-width:700px){ .hero-ctas { flex-wrap: wrap; justify-content: center; } }
     .btn {
       padding: .75rem 1.6rem; border-radius: 3px;
       font-size: .82rem; font-weight: 500; letter-spacing: .08em;
@@ -1379,17 +1385,13 @@
         </svg>
         <span>powered by Claude Code</span>
       </a>
-      <span class="nav-logo">Fernando Abreu</span>
+      <a href="#hero" class="nav-logo">Fernando Abreu</a>
     </div>
     <ul class="nav-links">
-      <li><a href="#microsoft">Microsoft</a></li>
-      <li><a href="#story">Before</a></li>
-      <li><a href="#applied-ai">Applied AI</a></li>
       <li><a href="#lab">Lab</a></li>
-      <li><a href="#toolkit">Toolkit</a></li>
+      <li><a href="#applied-ai">Applied AI</a></li>
       <li><a href="#voices">Voices</a></li>
       <li><a href="#beyond">Beyond</a></li>
-      <li><a href="#connect">Connect</a></li>
     </ul>
   </nav>
 
@@ -1437,7 +1439,7 @@
           </a>
           <a href="https://github.com/fefoabreu" target="_blank" rel="noopener" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            GitHub Repository
+            GitHub Repo
           </a>
           <a href="mailto:fefoabreu@gmail.com" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1445,7 +1447,7 @@
           </a>
           <a href="Fernando Abreu - Sr Tech PM Microsoft.pdf" download class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            Download Resume
+            Resume
           </a>
         </div>
 
@@ -1626,33 +1628,6 @@
     </div>
   </section>
 
-  <!-- APPLIED AI -->
-  <section id="applied-ai">
-    <div class="section-inner">
-      <p class="chapter-label reveal">Hands-On AI Fluency</p>
-      <h2 class="section-title reveal reveal-d1">Applied <em>AI.</em></h2>
-      <div class="section-rule reveal reveal-d2"></div>
-      <p class="section-lead reveal reveal-d3">
-        Patterns I reach for when turning a model into a real product &mdash; charted as one connected map. Hover any capability or tool to trace how the pieces link up across everything shipping in The Lab.
-      </p>
-
-      <div class="aai-map-wrap reveal">
-        <div class="aai-legend" aria-hidden="true">
-          <span><i class="aai-key cap"></i> Capability</span>
-          <span><i class="aai-key tool"></i> Tool · model · framework</span>
-          <span><i class="aai-key bridge"></i> Shared across capabilities</span>
-        </div>
-        <div class="aai-map" id="aaiMap">
-          <svg class="aai-edges" id="aaiEdges" viewBox="0 0 1000 660" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
-          <!-- nodes injected here -->
-        </div>
-        <p class="aai-readout" id="aaiReadout" role="status" aria-live="polite"></p>
-        <div class="aai-list" id="aaiList"><!-- mobile fallback injected here --></div>
-      </div>
-
-      <p class="aai-foot reveal">Every node is shipping in a real project &mdash; <strong>meet them in The Lab below &darr;</strong></p>
-    </div>
-  </section>
 
   <!-- THE LAB -->
   <section id="lab">
@@ -1779,6 +1754,34 @@
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
         </button>
       </div>
+    </div>
+  </section>
+
+  <!-- APPLIED AI -->
+  <section id="applied-ai">
+    <div class="section-inner">
+      <p class="chapter-label reveal">Hands-On AI Fluency</p>
+      <h2 class="section-title reveal reveal-d1">Applied <em>AI.</em></h2>
+      <div class="section-rule reveal reveal-d2"></div>
+      <p class="section-lead reveal reveal-d3">
+        Patterns I reach for when turning a model into a real product &mdash; charted as one connected map. Hover any capability or tool to trace how the pieces link up across everything shipping in The Lab.
+      </p>
+
+      <div class="aai-map-wrap reveal">
+        <div class="aai-legend" aria-hidden="true">
+          <span><i class="aai-key cap"></i> Capability</span>
+          <span><i class="aai-key tool"></i> Tool · model · framework</span>
+          <span><i class="aai-key bridge"></i> Shared across capabilities</span>
+        </div>
+        <div class="aai-map" id="aaiMap">
+          <svg class="aai-edges" id="aaiEdges" viewBox="0 0 1000 660" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+          <!-- nodes injected here -->
+        </div>
+        <p class="aai-readout" id="aaiReadout" role="status" aria-live="polite"></p>
+        <div class="aai-list" id="aaiList"><!-- mobile fallback injected here --></div>
+      </div>
+
+      <p class="aai-foot reveal">Every node is shipping in a real project &mdash; <strong>meet them in The Lab above &uarr;</strong></p>
     </div>
   </section>
 
@@ -2218,6 +2221,13 @@
       });
     }, { rootMargin: '-40% 0px -55% 0px' });
     sections.forEach(s => observer.observe(s));
+
+    // Logo → back to the very top (explicit scrollTo: anchor jumps can land
+    // stale when media loading reflows the page mid smooth-scroll).
+    document.querySelector('.nav-logo').addEventListener('click', (e) => {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     // ─── THE LAB ────────────────────────────────────────
     const labData = {
