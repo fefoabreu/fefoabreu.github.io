@@ -218,15 +218,11 @@
       margin-top: .25rem; font-family: 'DM Mono', monospace;
     }
     .hero-ctas {
-      display: flex; gap: .7rem; flex-wrap: nowrap;
+      display: flex; gap: 1rem; flex-wrap: wrap;
       margin-top: 2.4rem;
       opacity: 0; animation: fadeUp .7s var(--ease) .75s forwards;
     }
-    .hero-ctas .btn {
-      padding: .7rem 1.1rem; font-size: .75rem;
-      letter-spacing: .05em; gap: .45rem; white-space: nowrap;
-    }
-    @media(max-width:700px){ .hero-ctas { flex-wrap: wrap; justify-content: center; } }
+    @media(max-width:700px){ .hero-ctas { justify-content: center; } }
     .btn {
       padding: .75rem 1.6rem; border-radius: 3px;
       font-size: .82rem; font-weight: 500; letter-spacing: .08em;
@@ -1439,7 +1435,7 @@
           </a>
           <a href="https://github.com/fefoabreu" target="_blank" rel="noopener" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            GitHub Repo
+            GitHub Repository
           </a>
           <a href="mailto:fefoabreu@gmail.com" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1447,7 +1443,7 @@
           </a>
           <a href="Fernando Abreu - Sr Tech PM Microsoft.pdf" download class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            Resume
+            Download Resume
           </a>
         </div>
 
