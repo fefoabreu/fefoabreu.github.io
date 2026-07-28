@@ -4,5 +4,7 @@
 docs/.DS_Store
 docs/superpowers/
 
-# Local pretty-named resume copies (regenerate with resumes/build.sh)
-resumes/*.pdf
+# Local pretty-named resume copies in the project root, for attaching to
+# applications. Regenerate with resumes/build.sh. The published copies live
+# in resumes/ under slug names so the public URLs stay free of %20 escapes.
+/Fernando Abreu - *.pdf

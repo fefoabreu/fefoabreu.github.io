@@ -270,12 +270,19 @@
       letter-spacing: .12em; text-transform: uppercase;
       margin-top: .25rem; font-family: 'DM Mono', monospace;
     }
+    /* Mirrors .metrics-row so the CTAs sit on the same 4-column rhythm */
     .hero-ctas {
-      display: flex; gap: .7rem; flex-wrap: wrap;
-      margin-top: 2.4rem;
+      display: grid; grid-template-columns: repeat(4,1fr);
+      gap: 1rem; margin-top: 1.4rem;
       opacity: 0; animation: fadeUp .7s var(--ease) .75s forwards;
     }
-    @media(max-width:700px){ .hero-ctas { justify-content: center; } }
+    .hero-ctas > .btn, .hero-ctas .resume-picker > .btn {
+      width: 100%; justify-content: center;
+      padding-left: .5rem; padding-right: .5rem;
+      font-size: .78rem; letter-spacing: .05em;
+      white-space: nowrap; gap: .42rem;
+    }
+    @media(max-width:700px){ .hero-ctas { grid-template-columns: repeat(2,1fr); } }
 
     /* Resume picker — one button, two variants */
     .resume-picker { position: relative; }
@@ -1556,10 +1563,6 @@
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             GitHub Repo
           </a>
-          <a href="mailto:fefoabreu@gmail.com" class="btn btn-ghost">
-            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-            Get in Touch
-          </a>
           <div class="resume-picker" id="resumePicker">
             <button type="button" class="btn btn-ghost" id="resumePickerBtn" aria-haspopup="true" aria-expanded="false">
               <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
@@ -1567,16 +1570,20 @@
               <svg class="resume-caret" viewBox="0 0 24 24" style="width:11px;height:11px;fill:currentColor"><path d="M7 10l5 5 5-5z"/></svg>
             </button>
             <div class="resume-menu" role="menu" aria-labelledby="resumePickerBtn">
-              <a class="resume-opt" role="menuitem" href="resume-sr-tech-pm.pdf" download="Fernando Abreu - Sr Tech PM Applied-AI.pdf">
+              <a class="resume-opt" role="menuitem" href="resumes/resume-sr-tech-pm.pdf" download="Fernando Abreu - Sr Tech PM Applied-AI.pdf">
                 <div class="resume-opt-name">Sr Tech PM, Applied-AI</div>
                 <div class="resume-opt-desc">Frontier/FDE, Delivery Excellence, Practice Leadership</div>
               </a>
-              <a class="resume-opt" role="menuitem" href="resume-people-manager.pdf" download="Fernando Abreu - Practice Leader People Manager.pdf">
+              <a class="resume-opt" role="menuitem" href="resumes/resume-people-manager.pdf" download="Fernando Abreu - Practice Leader People Manager.pdf">
                 <div class="resume-opt-name">People Manager</div>
                 <div class="resume-opt-desc">Practice leader, head of delivery, team building</div>
               </a>
             </div>
           </div>
+          <a href="mailto:fefoabreu@gmail.com" class="btn btn-ghost">
+            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            Get in Touch
+          </a>
         </div>
 
       </div>
