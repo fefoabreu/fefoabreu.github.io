@@ -271,17 +271,51 @@
       margin-top: .25rem; font-family: 'DM Mono', monospace;
     }
     .hero-ctas {
-      display: flex; gap: 1rem; flex-wrap: wrap;
+      display: flex; gap: .7rem; flex-wrap: wrap;
       margin-top: 2.4rem;
       opacity: 0; animation: fadeUp .7s var(--ease) .75s forwards;
     }
     @media(max-width:700px){ .hero-ctas { justify-content: center; } }
+
+    /* Resume picker — one button, two variants */
+    .resume-picker { position: relative; }
+    .resume-picker > .btn { cursor: pointer; }
+    .resume-caret { transition: transform .25s; }
+    .resume-picker.open .resume-caret { transform: rotate(180deg); }
+    .resume-menu {
+      position: absolute; top: calc(100% + .5rem); left: 0; z-index: 40;
+      min-width: 240px; padding: .35rem;
+      background: #16264a;
+      border: 1px solid rgba(200,169,110,.28);
+      border-radius: 4px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.45);
+      opacity: 0; visibility: hidden; transform: translateY(-6px);
+      transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+    }
+    .resume-picker.open .resume-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .resume-opt {
+      display: block; padding: .6rem .8rem; border-radius: 3px;
+      color: var(--cream); transition: background .2s, color .2s;
+    }
+    .resume-opt:hover { background: rgba(200,169,110,.12); color: var(--accent); }
+    .resume-opt-name {
+      font-family: 'DM Mono', monospace; font-size: .78rem;
+      letter-spacing: .06em; text-transform: uppercase;
+    }
+    .resume-opt-desc {
+      font-size: .74rem; color: rgba(250,248,243,.45);
+      margin-top: .18rem; letter-spacing: .01em; text-transform: none;
+    }
+    .resume-opt:hover .resume-opt-desc { color: rgba(250,248,243,.6); }
+    @media(max-width:700px){ .resume-menu { left: 50%; transform: translate(-50%,-6px); }
+      .resume-picker.open .resume-menu { transform: translate(-50%,0); } }
     .btn {
-      padding: .75rem 1.6rem; border-radius: 3px;
+      padding: .75rem 1.15rem; border-radius: 3px;
       font-size: .82rem; font-weight: 500; letter-spacing: .08em;
       text-transform: uppercase; font-family: 'DM Mono', monospace;
       transition: all .25s;
       display: inline-flex; align-items: center; gap: .5rem;
+      background: none; border: none; cursor: pointer; line-height: 1.2;
     }
     .btn-primary {
       background: var(--accent); color: var(--navy);
@@ -1497,20 +1531,33 @@
         <div class="hero-ctas">
           <a href="https://linkedin.com/in/fefoabreu" target="_blank" rel="noopener" class="btn btn-primary">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            Connect on LinkedIn
+            Connect
           </a>
           <a href="https://github.com/fefoabreu" target="_blank" rel="noopener" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-            GitHub Repository
+            GitHub Repo
           </a>
           <a href="mailto:fefoabreu@gmail.com" class="btn btn-ghost">
             <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
             Get in Touch
           </a>
-          <a href="resume-sr-tech-pm.pdf" download="Fernando Abreu - Resume.pdf" class="btn btn-ghost">
-            <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
-            Download Resume
-          </a>
+          <div class="resume-picker" id="resumePicker">
+            <button type="button" class="btn btn-ghost" id="resumePickerBtn" aria-haspopup="true" aria-expanded="false">
+              <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/></svg>
+              Resume
+              <svg class="resume-caret" viewBox="0 0 24 24" style="width:11px;height:11px;fill:currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+            </button>
+            <div class="resume-menu" role="menu" aria-labelledby="resumePickerBtn">
+              <a class="resume-opt" role="menuitem" href="resume-sr-tech-pm.pdf" download="Fernando Abreu - Sr Tech PM.pdf">
+                <div class="resume-opt-name">Sr Tech PM</div>
+                <div class="resume-opt-desc">Program delivery, Cloud &amp; AI, practice leadership</div>
+              </a>
+              <a class="resume-opt" role="menuitem" href="resume-people-manager.pdf" download="Fernando Abreu - Practice Leader People Manager.pdf">
+                <div class="resume-opt-name">People Manager</div>
+                <div class="resume-opt-desc">Practice leader, head of delivery, team building</div>
+              </a>
+            </div>
+          </div>
         </div>
 
       </div>
@@ -2957,6 +3004,21 @@
           pill.hidden = false;
         })
         .catch(() => { /* offline / rate-limited: leave hidden */ });
+    })();
+
+    /* ── Resume picker ─────────────────────────────────── */
+    (function () {
+      const picker = document.getElementById('resumePicker');
+      if (!picker) return;
+      const btn = document.getElementById('resumePickerBtn');
+      const setOpen = on => {
+        picker.classList.toggle('open', on);
+        btn.setAttribute('aria-expanded', on ? 'true' : 'false');
+      };
+      btn.addEventListener('click', e => { e.stopPropagation(); setOpen(!picker.classList.contains('open')); });
+      picker.querySelectorAll('.resume-opt').forEach(a => a.addEventListener('click', () => setOpen(false)));
+      document.addEventListener('click', e => { if (!picker.contains(e.target)) setOpen(false); });
+      document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
     })();
   </script>
 </body>
