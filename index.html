@@ -1892,6 +1892,20 @@
             </div>
           </div>
 
+          <!-- PoMme 48 -->
+          <div class="lab-card" data-project="pomme48">
+            <img class="lab-card-img" src="assets/lab-pomme48.jpg" alt="PoMme 48&deg;" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Agentic AI &middot; Localization</span>
+              <div class="lab-card-title">PoMme 48&deg;</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
         </div>
         </div><!-- end .lab-track -->
 
@@ -1909,7 +1923,7 @@
       <h2 class="section-title reveal reveal-d1">Applied <em>AI.</em></h2>
       <div class="section-rule reveal reveal-d2"></div>
       <p class="section-lead reveal reveal-d3">
-        Patterns I reach for when turning a model into a real product &mdash; charted as one connected map. Hover any capability or tool to trace how the pieces link up across everything shipping in The Lab.
+        Patterns I reach for when turning a model into a real product &mdash; charted as one connected map. Everything here is load-bearing in something shipped: agent graphs and golden-dataset RAG in <strong>PoMme 48&deg;</strong>, multi-provider orchestration in <strong>Career Coach</strong>, on-device localization and voice in <strong>WatchUWatchin+</strong>. Hover any capability or tool to trace how the pieces link up.
       </p>
 
       <div class="aai-map-wrap reveal">
@@ -2246,6 +2260,14 @@
             <li><span class="beyond-icon">🏄</span><span><strong>Water Sports, Skiing, 10k Running, HIIT</strong></span></li>
             <li><span class="beyond-icon">🎭</span><span><strong>F1, Broadway, Major Leagues, World Travel</strong></span></li>
           </ul>
+
+          <div class="reveal reveal-d2" style="margin-top:2.2rem;">
+            <p style="font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;">Published Platforms</p>
+            <ul class="beyond-list">
+              <li><span class="beyond-icon">📱</span><span><a href="https://testflight.apple.com/join/rX8vWttz" target="_blank" rel="noopener"><strong>WatchUWatchin+</strong></a> &mdash; <span style="color:var(--accent);">public beta on TestFlight</span>, iPhone &middot; Watch &middot; Apple TV</span></li>
+              <li><span class="beyond-icon">🎯</span><span><a href="https://fefoabreu.me/career-coach/" target="_blank" rel="noopener"><strong>Career Coach</strong></a> &mdash; <span style="color:var(--accent);">live on the web</span>, free AI job-application coaching</span></li>
+            </ul>
+          </div>
 
           <div class="reveal reveal-d2" style="margin-top:2.2rem;">
             <p style="font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;">Philanthropy &amp; Volunteering</p>
@@ -2648,6 +2670,54 @@
           },
           note: 'A native <b>SwiftUI</b> app whose shared Swift package drives the <b>Shared → Watching → Reacted</b> LoopRing across iPhone, <b>Apple Watch</b>, an <b>Apple TV</b> (tvOS) living-room companion and a <b>WidgetKit</b> home-screen widget. <b>App Intents / SiriKit</b> power voice capture, a custom <b>OKLCH</b> color engine handles the palette, and a friend graph backs the “taste calibration” circle. A full <b>globalization layer</b> — <b>String Catalogs</b> (.xcstrings), locale-aware date/number formatting, RTL-ready mirrored layouts and per-locale Siri phrases — makes every surface speak the user’s language. Now in beta on <b>TestFlight</b>.'
         }
+      },
+
+      'pomme48': {
+        title: 'PoMme 48°',
+        tag: 'Agentic AI · Localization · 2026',
+        desc: 'An operations platform for UI Localization Program Managers, shipping app strings into 48 languages and 150+ markets. Its agentic engine — g48t (g11n + i18n + l10n + t9n) — runs a six-gate pipeline on LangGraph with Claude tool-use agents, MCP connectors and RAG grounded in a linguist-vetted “golden dataset”, so vendors post-edit only the genuinely new strings. Human-in-the-loop throughout: the AI pre-tags every intake request with a confidence score and the PM verifies, in bulk above 0.90. The whole surface is modelled on tvOS — a liquid-glass app dock, focus-to-preview tiles, light and dark modes — and the design was driven 0→1 from first principles as a high-fidelity prototype before a line of production code.',
+        stack: ['LangGraph', 'Claude Agent SDK', 'MCP', 'RAG · Golden Dataset', 'Evals', 'Human-in-the-Loop', 'i18n / l10n', 'Design Thinking'],
+        poster: 'assets/lab-pomme48-demo.jpg',
+        live:  'https://fefoabreu.me/PoMme48/',
+        loom:  'https://www.loom.com/share/35799adf3dfb4b7493ef4e4701bedc1d',
+        github:'https://github.com/fefoabreu/PoMme48',
+        arch: {
+          kicker: 'PoMme 48° · Reference Architecture',
+          title: 'g48t — Agentic Localization Pipeline',
+          tiers: [
+            { lbl: 'Tier 0 · Surface', color: 'client', boxes: [
+              { nm: 'tvOS-style Shell', ty: 'liquid-glass dock', sub: 'focus to preview · select to open' },
+              { nm: 'PM Workspaces', ty: '7 apps', sub: 'flow · board · projects · vendors · team · evals · engine' } ] },
+            { lbl: 'Tier 1 · Companion', color: 'edge', flow: 'always present', boxes: [
+              { nm: 'g48t Bubble', ty: 'in-context copilot', sub: 'suggested actions, pinned while you scroll' } ] },
+            { lbl: 'Tier 2 · Agentic Engine', color: 'ai', flow: 'orchestration', center: true, boxes: [
+              { hub: true, nm: 'g48t on LangGraph', ty: 'stateful agent graph · the hub', sub: 'Claude tool-use agents across six gates' } ] },
+            { lbl: 'Tier 3 · The Six Gates', color: 'app', flow: 'left to right', boxes: [
+              { nm: 'Intake & Triage', ty: 'Grab&Go', sub: 'AI pre-tags + confidence, PM verifies' },
+              { nm: 'i18n Readiness', ty: 'pseudo-loc · RTL audit' },
+              { nm: 'MTPE', ty: 'MT + post-edit', sub: 'vendors edit only the new 36%' },
+              { nm: 'QA Validation', ty: 'screenshot review' },
+              { nm: 'AIML Loop', ty: 'edit distance → fine-tune' },
+              { nm: 'Release', ty: 'GitHub package handoff' } ] },
+            { lbl: 'Tier 4 · Grounding', color: 'ai', flow: 'retrieval', arrows: '▲ ▼', boxes: [
+              { nm: 'Golden Dataset', ty: 'linguist-vetted strings', sub: '64% match — never re-translated' },
+              { nm: 'RAG Retrieval', ty: 'term base · style guide' },
+              { nm: 'MCP Connectors', ty: 'deterministic tool calls' } ] },
+            { lbl: 'Tier 5 · Governance', color: 'data', flow: 'guardrails', arrows: '▲ ▼', boxes: [
+              { nm: 'Regression Evals', ty: 'ship behind a gate' },
+              { nm: 'Human-in-the-Loop', ty: 'verify · override · audit' } ] }
+          ],
+          rail: {
+            lbl: 'Cross-cutting · 48 Languages / 150+ Markets',
+            items: [
+              { nm: 'Launch Back-planning', ty: 'every date, reverse-planned' },
+              { nm: 'Vendor Network', ty: 'per-language routing' },
+              { nm: 'Edit-Distance Telemetry', ty: 'quality signal to LM/DS' },
+              { nm: 'RTL & CJK', ty: 'script-aware QA' } ],
+            span: 'one pipeline, every locale'
+          },
+          note: 'A localization PM platform whose engine, <b>g48t</b>, is a <b>LangGraph</b> agent graph driving <b>Claude</b> tool-use agents through six gates — intake, i18n readiness, MTPE, QA, an AI/ML feedback loop, and release. <b>RAG</b> over a linguist-vetted <b>golden dataset</b> means roughly two-thirds of strings never get re-translated; vendors post-edit only what is genuinely new. <b>MCP connectors</b> keep tool calls deterministic, <b>regression evals</b> gate every fine-tune, and a <b>human-in-the-loop</b> verify step sits on the AI\'s confidence scores rather than behind them. The interface is a <b>tvOS</b> metaphor — liquid-glass dock, focus-to-preview — designed <b>0→1 from first principles</b> as a hi-fi prototype before any production code.'
+        }
       }
     };
 
@@ -2812,45 +2882,53 @@
 
       // capabilities — inner ring (what I can do)
       const caps = [
-        { id:'agentic', label:'Agentic Systems',     blurb:'agents that run, act & audit themselves', x:50, y:20 },
-        { id:'orch',    label:'Model Orchestration', blurb:'routing each task to the right model',     x:75, y:27 },
-        { id:'rag',     label:'RAG & Retrieval',     blurb:'answers grounded in your own data',        x:84, y:50 },
-        { id:'mcp',     label:'Tool Use · MCP',      blurb:'deterministic tools the model can call',   x:73, y:74 },
-        { id:'cloud',   label:'Cloud Architecture',  blurb:'managed AI services, mapped tier by tier', x:50, y:83 },
-        { id:'native',  label:'Native & Voice',      blurb:'on-device, multilingual, voice-first',     x:26, y:74 },
-        { id:'coding',  label:'Agentic Coding',      blurb:'spec-to-ship with an agent pair',          x:16, y:50 },
-        { id:'gov',     label:'Governance',          blurb:'guardrails, secrets & audit from day one', x:25, y:26 },
+        { id:'agentic', label:'Agentic Systems',     blurb:'agents that run, act & audit themselves',        x:50,   y:16 },
+        { id:'orch',    label:'Model Orchestration', blurb:'routing each task to the right model',           x:70,   y:22.5 },
+        { id:'rag',     label:'RAG & Retrieval',     blurb:'answers grounded in your own data',              x:82.3, y:39.5 },
+        { id:'mcp',     label:'Tool Use · MCP',      blurb:'deterministic tools the model can call',         x:82.3, y:60.5 },
+        { id:'evals',   label:'Evals & HITL',        blurb:'nothing ships until it beats the baseline',      x:70,   y:77.5 },
+        { id:'cloud',   label:'Cloud Architecture',  blurb:'managed AI services, mapped tier by tier',       x:50,   y:84 },
+        { id:'native',  label:'Native & Voice',      blurb:'on-device, multilingual, voice-first',           x:30,   y:77.5 },
+        { id:'coding',  label:'Agentic Coding',      blurb:'spec-to-ship with an agent pair',                x:17.7, y:60.5 },
+        { id:'proto',   label:'0→1 Prototyping',     blurb:'first principles to a hi-fi, clickable product', x:17.7, y:39.5 },
+        { id:'gov',     label:'Governance',          blurb:'guardrails, secrets & audit from day one',       x:30,   y:22.5 },
       ];
       const capById = {}; caps.forEach(c => capById[c.id] = c);
 
       // tools, models & frameworks — outer ring (what I use). to[] = capabilities; >1 = shared bridge
       const tools = [
-        { label:'Claude Agent SDK',   x:46, y:10, to:['agentic'] },
-        { label:'LangGraph',          x:62, y:12, to:['agentic'] },
-        { label:'GPT-4o',             x:90, y:15, to:['orch'] },
-        { label:'Gemini',             x:96, y:26, to:['orch'] },
-        { label:'Perplexity',         x:93, y:39, to:['orch'] },
-        { label:'Azure AI Search',    x:96, y:47, to:['rag'] },
-        { label:'pgvector',           x:96, y:59, to:['rag'] },
-        { label:'MCP Servers',        x:95, y:72, to:['mcp'] },
-        { label:'Function Calling',   x:92, y:86, to:['mcp'] },
-        { label:'Azure OpenAI',       x:58, y:95, to:['cloud'] },
-        { label:'AI Foundry',         x:44, y:95, to:['cloud'] },
-        { label:'Microsoft Fabric',   x:36, y:92, to:['cloud'] },
-        { label:'Video Indexer',      x:69, y:89, to:['cloud'] },
-        { label:'App Intents',        x:10, y:82, to:['native'] },
-        { label:'Apple Intelligence', x:21, y:87, to:['native'] },
-        { label:'String Catalogs',    x:9,  y:72, to:['native'] },
-        { label:'Claude Code',        x:4,  y:42, to:['coding'] },
-        { label:'Warp',               x:3,  y:54, to:['coding'] },
-        { label:'Wispr Flow',         x:6,  y:63, to:['coding'] },
-        { label:'GitHub',             x:9,  y:34, to:['coding'] },
-        { label:'Zero-Knowledge',     x:14, y:16, to:['gov'] },
-        { label:'Microsoft Purview',  x:27, y:12, to:['gov'] },
+        { label:'Claude Agent SDK',   x:42.4, y:6.7,  to:['agentic'] },
+        { label:'LangGraph',          x:57.6, y:6.7,  to:['agentic'] },
+        { label:'GPT-4o',             x:67.9, y:9.8,  to:['orch'] },
+        { label:'Gemini',             x:75.9, y:14.4, to:['orch'] },
+        { label:'Perplexity',         x:82.7, y:20.6, to:['orch'] },
+        { label:'Azure AI Search',    x:88.1, y:28,   to:['rag'] },
+        { label:'pgvector',           x:91.8, y:36.4, to:['rag'] },
+        { label:'Golden Dataset',     x:93.8, y:45.4, to:['rag'] },
+        { label:'MCP Servers',        x:93.6, y:56.1, to:['mcp'] },
+        { label:'Function Calling',   x:89.5, y:69.3, to:['mcp'] },
+        { label:'Regression Evals',   x:81.7, y:80.6, to:['evals'] },
+        { label:'Human-in-the-Loop',  x:70.7, y:88.8, to:['evals'] },
+        { label:'Video Indexer',      x:59.1, y:93,   to:['cloud'] },
+        { label:'Azure OpenAI',       x:50,   y:94,   to:['cloud'] },
+        { label:'AI Foundry',         x:40.9, y:93,   to:['cloud'] },
+        { label:'Microsoft Fabric',   x:32.1, y:90.2, to:['cloud'] },
+        { label:'Apple Intelligence', x:24.1, y:85.6, to:['native'] },
+        { label:'App Intents',        x:17.3, y:79.4, to:['native'] },
+        { label:'String Catalogs',    x:11.9, y:72,   to:['native'] },
+        { label:'Wispr Flow',         x:8.2,  y:63.6, to:['coding'] },
+        { label:'Claude Code',        x:6.4,  y:56.1, to:['coding'] },
+        { label:'Warp',               x:6,    y:48.5, to:['coding'] },
+        { label:'GitHub',             x:7,    y:40.9, to:['coding'] },
+        { label:'First Principles',   x:9.2,  y:33.5, to:['proto'] },
+        { label:'Design Thinking',    x:13.1, y:26,   to:['proto'] },
+        { label:'Zero-Knowledge',     x:19.4, y:18.3, to:['gov'] },
+        { label:'Microsoft Purview',  x:29.3, y:11.2, to:['gov'] },
         // shared bridges — the connective tissue
-        { label:'Supabase',           x:38, y:64, to:['agentic','rag','gov'] },
-        { label:'LangChain',          x:66, y:36, to:['orch','rag'] },
-        { label:'Anthropic Claude',   x:63, y:58, to:['orch','mcp'] },
+        { label:'Supabase',           x:36,   y:60,   to:['agentic','rag','gov'] },
+        { label:'LangChain',          x:70,   y:39,   to:['orch','rag'] },
+        { label:'Anthropic Claude',   x:64,   y:61,   to:['orch','mcp','proto'] },
+        { label:'i18n · l10n',        x:42,   y:71,   to:['native','evals'] },
       ];
 
       const core = { id:'core', label:'Applied AI', x:50, y:50, core:true };
@@ -2887,7 +2965,7 @@
       // ── nodes (HTML, aligned to the SVG viewBox via % + locked aspect) ──
       const nodesById = {};
       // capability labels sit on the side that keeps them clear of neighbours and on-canvas
-      const capSide = { agentic:'t', orch:'t', gov:'t', rag:'l', coding:'r', mcp:'b', cloud:'b', native:'b' };
+      const capSide = { agentic:'t', orch:'t', gov:'t', proto:'r', rag:'l', coding:'r', mcp:'b', evals:'b', cloud:'b', native:'b' };
       function side(n, type) {
         if (type === 'core') return 'lbl-b';
         if (type === 'cap') return 'lbl-' + (capSide[n.id] || 'b');
@@ -2923,6 +3001,42 @@
       makeNode(core, 'core');
       caps.forEach(c => makeNode(c, 'cap'));
       tools.forEach(t => makeNode(t, t.to.length > 1 ? 'bridge' : 'tool'));
+
+      /* Declutter — a label's preferred side is a guess based on where the node
+         sits; if it lands on a neighbour or off-canvas, try the other sides.
+         Keeps the map readable as nodes get added without hand-tuning every %. */
+      const SIDES = ['lbl-b', 'lbl-t', 'lbl-r', 'lbl-l'];
+      function declutter() {
+        const labels = Array.from(map.querySelectorAll('.aai-label'));
+        const box = el => el.getBoundingClientRect();
+        const overlaps = (a, b) =>
+          a.left < b.right - 2 && b.left < a.right - 2 && a.top < b.bottom - 2 && b.top < a.bottom - 2;
+        for (let pass = 0; pass < 3; pass++) {
+          const frame = map.getBoundingClientRect();
+          const fits = r => r.left >= frame.left - 2 && r.right <= frame.right + 2 &&
+                            r.top >= frame.top - 2 && r.bottom <= frame.bottom + 2;
+          const clean = (el, r) => fits(r) && !labels.some(o => o !== el && overlaps(r, box(o)));
+          let changed = false;
+          labels.forEach(el => {
+            if (clean(el, box(el))) return;
+            const from = SIDES.find(s => el.classList.contains(s));
+            for (const to of SIDES) {
+              if (to === from) continue;
+              el.classList.replace(from, to);
+              if (clean(el, box(el))) { changed = true; return; }
+              el.classList.replace(to, from);
+            }
+          });
+          if (!changed) break;
+        }
+      }
+      declutter();
+      window.addEventListener('load', declutter);
+      let declutterTimer;
+      window.addEventListener('resize', () => {
+        clearTimeout(declutterTimer);
+        declutterTimer = setTimeout(declutter, 150);
+      });
 
       let pinned = null;
       const defaultReadout = `<span class="rc">&#10022;</span> ${caps.length} capabilities · ${tools.length} tools &amp; models — hover or tap a node to trace a connection`;
