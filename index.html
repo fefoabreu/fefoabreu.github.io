@@ -157,10 +157,12 @@
       to   { transform: translate3d(80px,-60px,0) scale(1.15); }
     }
     .hero-inner {
-      max-width: 1100px; width: 100%;
+      max-width: 1220px; width: 100%;
       display: grid;
       grid-template-columns: 1fr auto;
-      gap: 2.5rem; align-items: center;
+      /* start, not center — keeps the left block's top level with the photo so
+         the CTA row stays above the fold on a 13" screen with a bookmarks bar */
+      gap: 2.5rem; align-items: start;
       position: relative; z-index: 1;
     }
     @media(max-width:700px){
@@ -272,9 +274,15 @@
     }
     /* Mirrors .metrics-row so the CTAs sit on the same 4-column rhythm */
     .hero-ctas {
-      display: grid; grid-template-columns: repeat(4,1fr);
+      display: grid; grid-template-columns: repeat(4,minmax(0,1fr));
       gap: 1rem; margin-top: 1.4rem;
       opacity: 0; animation: fadeUp .7s var(--ease) .75s forwards;
+    }
+    /* Below this the left column can't hold four labels on one line —
+       fall back to 2x2 rather than let them overflow their cells. */
+    @media(max-width:1275px){
+      .hero-photo-col { width: 400px; }
+      .hero-ctas { grid-template-columns: repeat(2,minmax(0,1fr)); }
     }
     .hero-ctas > .btn, .hero-ctas .resume-picker > .btn {
       width: 100%; justify-content: center;
@@ -361,7 +369,7 @@
     .hero-photo-col {
       opacity: 0; animation: fadeIn .9s var(--ease) .5s forwards;
       display: flex; flex-direction: column; align-items: center;
-      gap: 1.6rem; width: 400px;
+      gap: 1.6rem; width: 500px;
     }
     .hero-photo {
       width: 200px; height: 200px; border-radius: 50%;
