@@ -3,3 +3,6 @@
 .superpowers/
 docs/.DS_Store
 docs/superpowers/
+
+# Local pretty-named resume copies (regenerate with resumes/build.sh)
+resumes/*.pdf

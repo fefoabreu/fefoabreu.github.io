@@ -281,23 +281,42 @@
     .resume-picker { position: relative; }
     .resume-picker > .btn { cursor: pointer; }
     .resume-caret { transition: transform .25s; }
+    /* Open state adopts the site's gold accent */
+    .resume-picker.open > .btn {
+      background: var(--accent); color: var(--navy); border-color: var(--accent);
+      box-shadow: 0 8px 24px rgba(200,169,110,.3);
+    }
     .resume-picker.open .resume-caret { transform: rotate(180deg); }
     .resume-menu {
-      position: absolute; top: calc(100% + .5rem); left: 0; z-index: 40;
-      min-width: 240px; padding: .35rem;
-      background: #16264a;
-      border: 1px solid rgba(200,169,110,.28);
+      position: absolute; top: calc(100% + .55rem); left: 0; z-index: 40;
+      min-width: 262px; padding: .35rem;
+      background: #14233f;
+      border: 1px solid rgba(200,169,110,.42);
       border-radius: 4px;
-      box-shadow: 0 16px 40px rgba(0,0,0,.45);
+      box-shadow: 0 18px 44px rgba(0,0,0,.5), 0 0 0 1px rgba(200,169,110,.08);
       opacity: 0; visibility: hidden; transform: translateY(-6px);
       transition: opacity .2s var(--ease), transform .2s var(--ease), visibility .2s;
+    }
+    /* Gold pointer notch tying the menu to the button */
+    .resume-menu::before {
+      content: ''; position: absolute; top: -5px; left: 1.5rem;
+      width: 8px; height: 8px; background: #14233f;
+      border-left: 1px solid rgba(200,169,110,.42);
+      border-top: 1px solid rgba(200,169,110,.42);
+      transform: rotate(45deg);
     }
     .resume-picker.open .resume-menu { opacity: 1; visibility: visible; transform: translateY(0); }
     .resume-opt {
       display: block; padding: .6rem .8rem; border-radius: 3px;
-      color: var(--cream); transition: background .2s, color .2s;
+      color: var(--cream);
+      border-left: 2px solid transparent;
+      transition: background .2s, color .2s, border-color .2s;
     }
-    .resume-opt:hover { background: rgba(200,169,110,.12); color: var(--accent); }
+    .resume-opt + .resume-opt { border-top: 1px solid rgba(250,248,243,.07); }
+    .resume-opt:hover {
+      background: rgba(200,169,110,.13); color: var(--accent);
+      border-left-color: var(--accent);
+    }
     .resume-opt-name {
       font-family: 'DM Mono', monospace; font-size: .78rem;
       letter-spacing: .06em; text-transform: uppercase;
@@ -306,7 +325,7 @@
       font-size: .74rem; color: rgba(250,248,243,.45);
       margin-top: .18rem; letter-spacing: .01em; text-transform: none;
     }
-    .resume-opt:hover .resume-opt-desc { color: rgba(250,248,243,.6); }
+    .resume-opt:hover .resume-opt-desc { color: rgba(250,248,243,.62); }
     @media(max-width:700px){ .resume-menu { left: 50%; transform: translate(-50%,-6px); }
       .resume-picker.open .resume-menu { transform: translate(-50%,0); } }
     .btn {
@@ -1548,9 +1567,9 @@
               <svg class="resume-caret" viewBox="0 0 24 24" style="width:11px;height:11px;fill:currentColor"><path d="M7 10l5 5 5-5z"/></svg>
             </button>
             <div class="resume-menu" role="menu" aria-labelledby="resumePickerBtn">
-              <a class="resume-opt" role="menuitem" href="resume-sr-tech-pm.pdf" download="Fernando Abreu - Sr Tech PM.pdf">
-                <div class="resume-opt-name">Sr Tech PM</div>
-                <div class="resume-opt-desc">Program delivery, Cloud &amp; AI, practice leadership</div>
+              <a class="resume-opt" role="menuitem" href="resume-sr-tech-pm.pdf" download="Fernando Abreu - Sr Tech PM Applied-AI.pdf">
+                <div class="resume-opt-name">Sr Tech PM, Applied-AI</div>
+                <div class="resume-opt-desc">Frontier/FDE, Delivery Excellence, Practice Leadership</div>
               </a>
               <a class="resume-opt" role="menuitem" href="resume-people-manager.pdf" download="Fernando Abreu - Practice Leader People Manager.pdf">
                 <div class="resume-opt-name">People Manager</div>
