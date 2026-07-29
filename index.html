@@ -1096,7 +1096,7 @@
     .lab-modal-overlay.open .lab-modal { transform: scale(1) translateY(0); }
 
     .lab-modal-header {
-      height: 230px; position: relative;
+      height: 200px; position: relative;
       border-radius: 14px 14px 0 0; overflow: hidden;
     }
     .lab-modal-video {
@@ -1129,7 +1129,7 @@
     }
     .lab-modal-close:hover { background: rgba(200,169,110,.32); color: var(--accent); }
 
-    .lab-modal-body { padding: 2rem 2rem 2.2rem; }
+    .lab-modal-body { padding: 1.7rem 2rem 1.8rem; }
     .lab-modal-mtag {
       font-family: 'DM Mono', monospace;
       font-size: .63rem; letter-spacing: .16em; text-transform: uppercase;
@@ -1154,10 +1154,10 @@
       border: 1px solid rgba(200,169,110,.22);
       border-radius: 20px; color: var(--accent);
     }
-    .lab-modal-mactions { display: flex; gap: .8rem; flex-wrap: wrap; }
+    .lab-modal-mactions { display: flex; gap: .55rem; flex-wrap: wrap; }
     .lab-mbtn {
-      display: inline-flex; align-items: center; gap: .5rem;
-      padding: .68rem 1.45rem; border-radius: 3px;
+      display: inline-flex; align-items: center; gap: .42rem;
+      padding: .68rem .85rem; border-radius: 3px;
       font-family: 'DM Mono', monospace;
       font-size: .78rem; letter-spacing: .08em; text-transform: uppercase;
       transition: all .25s; text-decoration: none;
@@ -2675,11 +2675,11 @@
       'pomme48': {
         title: 'PoMme 48°',
         tag: 'Agentic AI · Localization · 2026',
-        desc: 'An operations platform for UI Localization Program Managers, shipping app strings into 48 languages and 150+ markets. Its agentic engine — g48t (g11n + i18n + l10n + t9n) — runs a six-gate pipeline on LangGraph with Claude tool-use agents, MCP connectors and RAG grounded in a linguist-vetted “golden dataset”, so vendors post-edit only the genuinely new strings. Human-in-the-loop throughout: the AI pre-tags every intake request with a confidence score and the PM verifies, in bulk above 0.90. The whole surface is modelled on tvOS — a liquid-glass app dock, focus-to-preview tiles, light and dark modes — and the design was driven 0→1 from first principles as a high-fidelity prototype before a line of production code.',
+        desc: 'An operations platform for UI Localization Program Managers, shipping app strings into 48 languages and 150+ markets. Its agentic engine — g48t — runs a six-gate pipeline on LangGraph with Claude tool-use agents, MCP connectors and RAG grounded in a linguist-vetted “golden dataset”, so vendors post-edit only the genuinely new strings. The AI pre-tags each intake request with a confidence score and the PM verifies, in bulk above 0.90. A tvOS-modelled surface, designed 0→1 from first principles before any production code.',
         stack: ['LangGraph', 'Claude Agent SDK', 'MCP', 'RAG · Golden Dataset', 'Evals', 'Human-in-the-Loop', 'i18n / l10n', 'Design Thinking'],
         poster: 'assets/lab-pomme48-demo.jpg',
         live:  'https://fefoabreu.me/PoMme48/',
-        loom:  'https://www.loom.com/share/35799adf3dfb4b7493ef4e4701bedc1d',
+        loom:  'https://www.loom.com/embed/35799adf3dfb4b7493ef4e4701bedc1d',
         github:'https://github.com/fefoabreu/PoMme48',
         arch: {
           kicker: 'PoMme 48° · Reference Architecture',
@@ -2745,7 +2745,7 @@
         const loomBtn = p.loom
           ? `<button onclick="openLoom('${p.loom}')" class="lab-mbtn lab-mbtn-loom">
               <svg role="img" viewBox="0 0 24 24" width="15" height="15" style="flex-shrink:0;fill:white" xmlns="http://www.w3.org/2000/svg"><path d="M24 10.665h-7.018l6.078-3.509-1.335-2.312-6.078 3.509 3.508-6.077L16.843.94l-3.508 6.077V0h-2.67v7.018L7.156.94 4.844 2.275l3.509 6.077-6.078-3.508L.94 7.156l6.078 3.509H0v2.67h7.017L.94 16.844l1.335 2.313 6.077-3.508-3.509 6.077 2.312 1.335 3.509-6.078V24h2.67v-7.017l3.508 6.077 2.312-1.335-3.509-6.078 6.078 3.509 1.335-2.313-6.077-3.508h7.017v-2.67H24zm-12 4.966a3.645 3.645 0 1 1 0-7.29 3.645 3.645 0 0 1 0 7.29z"/></svg>
-              Product Demo
+              Demo
             </button>` : '';
 
         const archBtn = p.arch
@@ -2855,7 +2855,9 @@
     const loomEmbed   = document.getElementById('loomEmbed');
 
     function openLoom(src) {
-      loomEmbed.innerHTML = `<iframe src="${src}?autoplay=1" frameborder="0"
+      // Loom refuses to render /share/ URLs in an iframe — always embed form.
+      const embed = src.replace('/share/', '/embed/');
+      loomEmbed.innerHTML = `<iframe src="${embed}?autoplay=1" frameborder="0"
         webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
       loomOverlay.classList.add('open');
     }
