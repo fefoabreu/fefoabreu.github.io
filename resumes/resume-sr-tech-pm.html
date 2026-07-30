@@ -73,22 +73,25 @@
       margin-top: .15rem;
       letter-spacing: .02em;
     }
-    .header-contact {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .2rem .9rem;
-      margin-top: .3rem;
+    /* Name and credential chips share the first line, LinkedIn-style */
+    .header-top {
+      display: flex; align-items: center;
+      gap: .7rem; flex-wrap: wrap;
+    }
+    /* Two contact rows on a shared column grid so the items tabulate */
+    .header-grid {
+      display: grid;
+      grid-template-columns: 1.35fr 1.25fr 1fr;
+      gap: .16rem .6rem;
+      margin-top: .34rem;
       font-size: 7.5pt;
       color: rgba(255,255,255,.68);
     }
-    .header-contact a { color: rgba(255,255,255,.68); text-decoration: none; }
-    /* Second contact row (phone + location) sits tighter under the links */
-    .header-contact-2 { margin-top: .1rem; }
+    .header-grid a { color: rgba(255,255,255,.68); text-decoration: none; }
     .cert-tags {
       display: flex;
       flex-wrap: wrap;
       gap: .25rem;
-      margin-top: .18rem;
     }
     .cert-tag {
       font-size: 6.5pt;
@@ -185,8 +188,11 @@
       color: var(--text-muted);
       margin-top: .05rem;
       margin-bottom: .1rem;
+      display: flex; justify-content: space-between;
+      align-items: baseline; gap: .6rem;
     }
     .job-meta strong { font-weight: 600; color: var(--text); }
+    .job-loc { white-space: nowrap; }
     .job-desc {
       font-size: 9.5pt;
       color: var(--text);
@@ -226,13 +232,46 @@
     .achievement-star { color: var(--gold); font-size: 9pt; flex-shrink: 0; margin-top: 1px; }
     .achievement p { font-size: 7pt; color: var(--text); line-height: 1.4; }
 
-    /* ── SIDEBAR: APPLIED-AI PLATFORMS (honorable mention) ── */
-    .proj { margin-bottom: .1rem; line-height: 1.34; }
-    .proj-name {
-      font-size: 7.5pt; font-weight: 700; color: var(--blue);
-      text-decoration: none;
+    /* ── SIDEBAR: APPLIED-AI PLATFORMS (2x2 app tiles) ── */
+    .app-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: .16rem .2rem;
     }
-    .proj-desc { font-size: 7pt; color: var(--text); }
+    .app-tile {
+      display: grid;
+      grid-template-columns: 17px 1fr;
+      column-gap: .2rem; row-gap: .1rem;
+      align-items: center;
+      text-decoration: none;
+      background: #ffffff;
+      border: 1px solid rgba(43,108,176,.18);
+      border-radius: 5px;
+      padding: .18rem .2rem;
+    }
+    .app-ico {
+      width: 17px; height: 17px; border-radius: 4px;
+      flex-shrink: 0; object-fit: cover;
+      border: .5px solid rgba(0,0,0,.10);
+    }
+    .app-name {
+      font-size: 6.6pt; font-weight: 700; color: #0f1f3d;
+      line-height: 1.18;
+    }
+    .app-state {
+      font-size: 5pt; font-weight: 700; letter-spacing: .06em;
+      text-transform: uppercase; border-radius: 6px;
+      padding: 0 .2rem; vertical-align: .5px; white-space: nowrap;
+    }
+    .app-state.live  { color: #1a7f4b; background: rgba(26,127,75,.10); }
+    .app-state.beta  { color: #2b6cb0; background: rgba(43,108,176,.12); }
+    .app-state.proto { color: #8a5a12; background: rgba(138,90,18,.12); }
+    .app-state.demo  { color: #57606f; background: rgba(87,96,111,.12); }
+    .app-desc {
+      grid-column: 1 / -1;
+      font-size: 6pt; color: #3b4454;
+      line-height: 1.22;
+    }
 
     /* ── SIDEBAR: CLIENT TAGS ─────────────────────────── */
     .client-tags {
@@ -283,21 +322,24 @@
     }
 
     /* ── SIDEBAR: TESTIMONIALS ────────────────────────── */
+    /* Measured from the Partner Commercial Lead PDF: solid white card,
+       soft #b9d2f2 rail, roomier gaps and larger quote type. */
     .testimonial {
-      background: rgba(255,255,255,.72);
-      border-left: 2.5px solid var(--blue);
-      padding: .15rem .2rem;
-      margin-bottom: .1rem;
-      border-radius: 0 4px 4px 0;
+      background: #ffffff;
+      border-left: 2.5px solid #b9d2f2;
+      padding: .28rem .42rem .3rem;
+      margin-bottom: .42rem;
+      border-radius: 0 3px 3px 0;
     }
+    .testimonial:last-child { margin-bottom: 0; }
     .testimonial-text {
-      font-size: 7.3pt;
+      font-size: 7.8pt;
       font-style: italic;
-      color: var(--text);
-      line-height: 1.5;
+      color: #1a2433;
+      line-height: 1.34;
     }
-    .testimonial-author { font-size: 7.5pt; font-weight: 700; color: var(--navy); margin-top: .08rem; }
-    .testimonial-role   { font-size: 6.5pt; color: var(--text-muted); }
+    .testimonial-author { font-size: 8.3pt; font-weight: 700; color: #0f1f3d; margin-top: .14rem; }
+    .testimonial-role   { font-size: 7.1pt; color: #57606f; }
 
     /* ── SIDEBAR: HOBBIES ─────────────────────────────── */
     .hobby-item {
@@ -330,24 +372,24 @@
 
   <header class="header">
     <div class="header-text">
-      <div class="header-name">Fernando Abreu</div>
-      <div class="header-contact">
-        <a href="mailto:fefoabreu@gmail.com">fefoabreu@gmail.com</a>
+      <div class="header-top">
+        <div class="header-name">Fernando Abreu</div>
+        <div class="cert-tags">
+          <span class="cert-tag">PMP</span>
+          <span class="cert-tag">CSPO</span>
+          <span class="cert-tag">CSM</span>
+          <span class="cert-tag">ITIL</span>
+          <span class="cert-tag">CMMI</span>
+          <span class="cert-tag">MBA</span>
+        </div>
+      </div>
+      <div class="header-grid">
         <a href="https://fefoabreu.me">fefoabreu.me</a>
         <a href="https://github.com/fefoabreu">github.com/fefoabreu</a>
         <a href="https://linkedin.com/in/fefoabreu">linkedin.com/in/fefoabreu</a>
-      </div>
-      <div class="header-contact header-contact-2">
-        <span>📞 804.773.5483</span>
-        <span>📍 Richmond, VA</span>
-      </div>
-      <div class="cert-tags">
-        <span class="cert-tag">PMP</span>
-        <span class="cert-tag">CSPO</span>
-        <span class="cert-tag">CSM</span>
-        <span class="cert-tag">ITIL</span>
-        <span class="cert-tag">CMMI</span>
-        <span class="cert-tag">MBA</span>
+        <a href="mailto:fefoabreu@gmail.com">fefoabreu@gmail.com</a>
+        <span>804.773.5483</span>
+        <span>Richmond, VA</span>
       </div>
     </div>
     <img src="../assets/profile.jpg" alt="Fernando Abreu" class="header-photo" />
@@ -370,6 +412,7 @@
           <li><strong>Agentic Architecture, Hands-On:</strong> Designs and builds the systems, not just the plan. Agent graphs and stateful orchestration (LangGraph, Claude Agent SDK), MCP connectors and function calling for deterministic tool use, RAG grounded in curated golden datasets, multi-provider routing across Claude, GPT, Gemini and Perplexity, and regression evals plus human-in-the-loop verification as release gates. Runs companion agents (Delivery, Pursuit, Sales) for portfolio-wide monitoring.</li>
           <li><strong>0→1 from First Principles:</strong> Decomposes a problem to its irreducible parts, then uses design thinking to reach a hi-fi, clickable prototype stakeholders can react to before production code exists, compressing discovery-to-alignment from months to days and giving engineering a spec it can build against rather than a document to interpret.</li>
           <li><strong>Stakeholder Management &amp; Program Governance:</strong> Translates complex technical concepts into clear updates for executive stakeholders. Manages plans, milestones, dependencies, budgets, risks and change requests; tracks OKRs, KPIs and delivery health in Monthly Business Reviews across Scrum, SAFe and hybrid models using Azure DevOps.</li>
+          <li><strong>Pursuit Leadership &amp; Go-to-Market:</strong> Intake, design and approval of consulting solutions driving deal velocity through technical proposals, WBS, staffing plans, pricing models, Statements of Work, Work Orders and Amendments. Manages P&amp;L health, forecasting and CSAT alongside sales and delivery executives.</li>
         </ul>
       </div>
 
@@ -380,7 +423,6 @@
           <li><strong>Prototype-Led Discovery:</strong> Replaces requirements-by-committee with a working artifact: first-principles framing and design-thinking workshops that land on a hi-fi prototype, so scope, architecture and success criteria are agreed against something people can click.</li>
           <li><strong>Evals, Guardrails &amp; Responsible Deployment:</strong> Treats AI features as testable systems: regression evals before rollout, human-in-the-loop verification on model confidence, grounding in vetted data to control hallucination, plus secrets, audit and governance designed in from the start.</li>
           <li><strong>Globalization &amp; Localization at Scale:</strong> Ships product in every market, not just English: String Catalogs and locale-aware formatting on Apple platforms, RTL and pseudo-localization audits, machine-translation post-editing through vendor networks, and retrieval grounded in vetted terminology so linguistic quality holds across 48 languages and 150+ markets.</li>
-          <li><strong>Pursuit Leadership &amp; Go-to-Market:</strong> Intake, design and approval of consulting solutions driving deal velocity through technical proposals, WBS, staffing plans, pricing models, Statements of Work, Work Orders and Amendments. Manages P&amp;L health, forecasting and CSAT alongside sales and delivery executives.</li>
         </ul>
       </div>
 
@@ -496,7 +538,24 @@
           <span class="client-tag">Pepsico</span>
           <span class="client-tag">Lumen</span>
           <span class="client-tag">Domino’s</span>
-          <span class="client-tag">Constellation</span>
+        </div>
+      </div>
+
+      <div class="sidebar-section">
+        <div class="section-label">Partner Network</div>
+        <div class="client-tags">
+          <span class="client-tag">3Cloud</span>
+          <span class="client-tag">Accenture</span>
+          <span class="client-tag">Avanade</span>
+          <span class="client-tag">Blue Yonder</span>
+          <span class="client-tag">Capgemini</span>
+          <span class="client-tag">Cognizant</span>
+          <span class="client-tag">Covenant</span>
+          <span class="client-tag">Deloitte</span>
+          <span class="client-tag">IBM-Kyndryl</span>
+          <span class="client-tag">Infosys</span>
+          <span class="client-tag">Vitalyst</span>
+          <span class="client-tag">Wipro</span>
         </div>
       </div>
 
@@ -519,7 +578,7 @@
             <div class="job-company">Microsoft <span class="job-tenure">· 10 years</span></div>
             <div class="job-dates">July 2016 – Present</div>
           </div>
-          <div class="job-meta"><strong>Principal Technical Program Manager</strong> · Azure Cloud &amp; AI Professional Services · Richmond, VA</div>
+          <div class="job-meta"><strong>Principal Technical Program Manager</strong><span class="job-loc">Richmond, VA</span></div>
           <div class="job-desc">Leads end-to-end technical program management of Azure Cloud, data platform and AI initiatives for Fortune 500 clients, increasingly in a Frontier/FDE model, embedded with customer engineering to take problems from Idea to Design, then driving Code to Launch with product and feature teams. Delivered Azure AI, Azure OpenAI and enterprise Copilot programs from planning through go-live, alongside Azure Data Lake implementations and Tableau-to-Power BI migrations. Architects the agentic layer hands-on: agent graphs and orchestration, MCP tool use, RAG grounded in curated data, model routing, and regression evals with human-in-the-loop verification as release gates, including companion agents (Delivery, Pursuit, Sales) now used for portfolio-wide monitoring. Coordinates engineers, cloud architects, analysts and vendors via Azure DevOps across Agile and SAFe; owns plans, milestones, risk registers, budgets and executive communication, tracking OKRs, KPIs, P&amp;L health and CSAT across a multi-million-dollar portfolio.</div>
         </div>
 
@@ -528,8 +587,8 @@
             <div class="job-company">Dexian-Disys <span class="job-tenure">· 6 years</span></div>
             <div class="job-dates">Nov 2010 – Jun 2016</div>
           </div>
-          <div class="job-meta"><strong>Practice Manager, Application Development</strong> · Houston, TX → Washington D.C. Metro</div>
-          <div class="job-desc">Head of delivery, technical sales prospecting, and oversight of all operations and projects under the Practice. Built a Modern Applications professional services practice from the ground up leading a group of 22 people at peak delivering services to U.S. Postal Service, Schlumberger and HangIT. Full lead-to-order and order-to-cash process ownership. Forecasting, strategic planning, contracts closure, sale profitability analysis, and market trend monitoring.</div>
+          <div class="job-meta"><strong>Practice Manager, Application Development</strong><span class="job-loc">Washington D.C. Metro</span></div>
+          <div class="job-desc">Head of delivery, technical sales prospecting, and oversight of all operations and projects under the Practice. Built a Modern Applications professional services practice from the ground up leading a group of 22 people at peak delivering services to U.S. Postal Service, Schlumberger and HangIT. Full lead-to-order and order-to-cash process ownership. Forecasting, strategic planning, contracts closure and sale profitability analysis.</div>
         </div>
 
         <div class="job">
@@ -537,7 +596,7 @@
             <div class="job-company">Meta Brasil <span class="job-tenure">· 8 years</span></div>
             <div class="job-dates">Sep 2002 – Oct 2010</div>
           </div>
-          <div class="job-meta"><strong>Dev Lead → IT Consultant → Technical Program Manager</strong> · Porto Alegre, Brazil</div>
+          <div class="job-meta"><strong>Dev Lead → IT Consultant → Technical Program Manager</strong><span class="job-loc">Porto Alegre, Brazil</span></div>
           <div class="job-desc">Designed and enhanced IT consulting service offerings, project management and sales prospecting for software development projects, implementation of management methodologies, outsourcing operations, and counseling clients for optimized IT &amp; Business integration via PMO.</div>
         </div>
 
@@ -546,7 +605,7 @@
             <div class="job-company">Dinamize Web Systems <span class="job-tenure">· 4 years</span></div>
             <div class="job-dates">Aug 2000 – Jul 2004</div>
           </div>
-          <div class="job-meta"><strong>Full Stack Software Engineer</strong> · Porto Alegre, Brazil</div>
+          <div class="job-meta"><strong>Full Stack Software Engineer</strong><span class="job-loc">Porto Alegre, Brazil</span></div>
           <div class="job-desc">Where it all began. Built client-server and web-based applications using Delphi, Visual Basic, ASP.NET, and SQL Server. Developed foundational skills in database administration, UX/UI wireframing, and product engineering.</div>
         </div>
 
@@ -622,10 +681,28 @@
 
       <div class="sidebar-section">
         <div class="section-label">Applied-AI Platforms</div>
-        <div class="proj"><a href="https://fefoabreu.me/career-coach/" class="proj-name">Career Coach</a> <span class="proj-desc">multi-provider AI career platform, live on the web</span></div>
-        <div class="proj"><a href="https://testflight.apple.com/join/rX8vWttz" class="proj-name">WatchUWatchin+</a> <span class="proj-desc">native SwiftUI social app, public beta on TestFlight</span></div>
-        <div class="proj"><a href="https://fefoabreu.me/PoMme48/" class="proj-name">PoMme 48°</a> <span class="proj-desc">agentic localization platform, 48 languages</span></div>
-        <div class="proj"><a href="https://fefoabreu.me/Fan-Engagement/" class="proj-name">Fan Engagement</a> <span class="proj-desc">Azure Cloud &amp; AI reference design</span></div>
+        <div class="app-grid">
+          <a class="app-tile" href="https://fefoabreu.me/career-coach/">
+            <img class="app-ico" src="../assets/app-icons/career-coach.png" alt="" />
+            <div class="app-name">Career Coach <span class="app-state live">live</span></div>
+            <div class="app-desc">Scoring and mock interviews on 4 model providers</div>
+          </a>
+          <a class="app-tile" href="https://testflight.apple.com/join/rX8vWttz">
+            <img class="app-ico" src="../assets/app-icons/watchuwatchin.png" alt="" />
+            <div class="app-name">WatchUWatchin+ <span class="app-state beta">beta</span></div>
+            <div class="app-desc">SwiftUI social app across iPhone, Watch and Apple TV</div>
+          </a>
+          <a class="app-tile" href="https://fefoabreu.me/PoMme48/">
+            <img class="app-ico" src="../assets/app-icons/pomme48.png" alt="" />
+            <div class="app-name">PoMme 48° <span class="app-state proto">proto</span></div>
+            <div class="app-desc">Six-gate agent graph shipping 48 languages</div>
+          </a>
+          <a class="app-tile" href="https://fefoabreu.me/Fan-Engagement/">
+            <img class="app-ico" src="../assets/app-icons/fan-engagement.png" alt="" />
+            <div class="app-name">Fan Engagement <span class="app-state demo">demo</span></div>
+            <div class="app-desc">Azure reference architecture and device simulator</div>
+          </a>
+        </div>
       </div>
 
       <div class="sidebar-section">
@@ -664,9 +741,7 @@
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Water Sports, Skiing, 10k Running, HIIT</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>F1, Broadway, Major Leagues, World Travel</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>"The Book of Alessia Faye": Girl Dad</span></div>
-        <div class="hobby-item"><span class="hobby-dot">·</span><span>Pet parent (Doce &amp; Salgada)</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Reading: J. Grisham, M. Gladwell, W. Isaacson</span></div>
-        <div class="hobby-item"><span class="hobby-dot">·</span><span>Passe Completo Rádio! &amp; How I Built This</span></div>
       </div>
 
     </div>
