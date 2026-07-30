@@ -73,25 +73,22 @@
       margin-top: .15rem;
       letter-spacing: .02em;
     }
-    /* Name and credential chips share the first line, LinkedIn-style */
-    .header-top {
-      display: flex; align-items: center;
-      gap: .7rem; flex-wrap: wrap;
-    }
-    /* Two contact rows on a shared column grid so the items tabulate */
-    .header-grid {
-      display: grid;
-      grid-template-columns: 1.35fr 1.25fr 1fr;
-      gap: .16rem .6rem;
-      margin-top: .34rem;
+    .header-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .2rem .9rem;
+      margin-top: .3rem;
       font-size: 7.5pt;
       color: rgba(255,255,255,.68);
     }
-    .header-grid a { color: rgba(255,255,255,.68); text-decoration: none; }
+    .header-contact a { color: rgba(255,255,255,.68); text-decoration: none; }
+    /* Second contact row (phone + location) sits tighter under the links */
+    .header-contact-2 { margin-top: .1rem; }
     .cert-tags {
       display: flex;
       flex-wrap: wrap;
       gap: .25rem;
+      margin-top: .18rem;
     }
     .cert-tag {
       font-size: 6.5pt;
@@ -296,7 +293,12 @@
     .cert-name   { font-size: 8pt; font-weight: 600; color: var(--text); white-space: nowrap; }
     .cert-issuer { font-size: 7pt; color: var(--text-muted); }
 
-    /* ── SIDEBAR: LANGUAGES ───────────────────────────── */
+    /* ── LANGUAGES (page 2, under Academic Background) ── */
+    .languages-block { margin-bottom: .14in; }
+    .languages-block .lang-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: .04in .4in;
+    }
     .lang-item { margin-bottom: .1rem; }
     .lang-row {
       display: flex;
@@ -309,12 +311,12 @@
     .lang-bar { height: 100%; background: var(--blue); border-radius: 2px; }
 
     /* ── SIDEBAR: SKILLS (tag groups) ────────────────── */
-    .tag-group { margin-bottom: .1rem; }
-    .tag-group-label { font-size: 6.5pt; color: var(--blue); font-weight: 700; margin-bottom: .1rem; }
-    .tags { display: flex; flex-wrap: wrap; gap: .16rem; }
+    .tag-group { margin-bottom: .16rem; }
+    .tag-group-label { font-size: 6.5pt; color: var(--blue); font-weight: 700; margin-bottom: .14rem; }
+    .tags { display: flex; flex-wrap: wrap; gap: .2rem; }
     .tag {
-      font-size: 6.6pt;
-      padding: .08rem .32rem;
+      font-size: 7pt;
+      padding: .11rem .38rem;
       background: rgba(30,111,217,.08);
       border: 1px solid rgba(30,111,217,.22);
       border-radius: 10px;
@@ -372,24 +374,24 @@
 
   <header class="header">
     <div class="header-text">
-      <div class="header-top">
-        <div class="header-name">Fernando Abreu</div>
-        <div class="cert-tags">
-          <span class="cert-tag">PMP</span>
-          <span class="cert-tag">CSPO</span>
-          <span class="cert-tag">CSM</span>
-          <span class="cert-tag">ITIL</span>
-          <span class="cert-tag">CMMI</span>
-          <span class="cert-tag">MBA</span>
-        </div>
-      </div>
-      <div class="header-grid">
+      <div class="header-name">Fernando Abreu</div>
+      <div class="header-contact">
+        <a href="mailto:fefoabreu@gmail.com">fefoabreu@gmail.com</a>
         <a href="https://fefoabreu.me">fefoabreu.me</a>
         <a href="https://github.com/fefoabreu">github.com/fefoabreu</a>
         <a href="https://linkedin.com/in/fefoabreu">linkedin.com/in/fefoabreu</a>
-        <a href="mailto:fefoabreu@gmail.com">fefoabreu@gmail.com</a>
-        <span>804.773.5483</span>
-        <span>Richmond, VA</span>
+      </div>
+      <div class="header-contact header-contact-2">
+        <span>📞 804.773.5483</span>
+        <span>📍 Richmond, VA</span>
+      </div>
+      <div class="cert-tags">
+        <span class="cert-tag">PMP</span>
+        <span class="cert-tag">CSPO</span>
+        <span class="cert-tag">CSM</span>
+        <span class="cert-tag">ITIL</span>
+        <span class="cert-tag">CMMI</span>
+        <span class="cert-tag">MBA</span>
       </div>
     </div>
     <img src="../assets/profile.jpg" alt="Fernando Abreu" class="header-photo" />
@@ -402,14 +404,14 @@
 
       <div class="summary">
         <div class="section-label">Objectives: Frontier/FDE Tech PM in Applied-AI, Delivery Excellence</div>
-        <p>25-year IT career with a decade at Microsoft leading Azure Cloud and AI delivery for Fortune 500 enterprises, now in the Frontier/FDE model, driving Idea to Design with Applied-AI and program managing Code to Launch with engineering and product teams. A Technical Program Manager rooted in software engineering who does not stop at the deck: personally designs and ships agentic systems (agent graphs, MCP tool use, RAG over curated data, evals and human-in-the-loop governance) with three platforms live or in public beta. Drives 0→1 from first principles and design thinking, turning an ambiguous problem into a hi-fi, clickable prototype before any production code, then leads cross-functional teams of engineers, architects and vendors through Agile, SAFe and hybrid delivery to launch.</p>
+        <p>25-year IT career with a decade at Microsoft leading Azure Cloud and AI delivery for Fortune 500 enterprises, now in the Frontier/FDE model, driving Idea to Design with Applied-AI and program managing Code to Launch with engineering and product teams. A Technical Program Manager rooted in software engineering who does not stop at the deck: personally designs and ships agentic systems (PRDs, SDDs, agent graphs, MCP tool use, RAG over curated data, evals and human-in-the-loop governance). Drives 0→1 from first principles and design thinking, turning an ambiguous problem into a hi-fi, clickable prototype before any production code, then leads cross-functional teams of engineers, architects and vendors through Agile, SAFe and hybrid delivery to launch.</p>
       </div>
 
       <div class="skills-section">
         <div class="section-label">Key Professional Skills</div>
         <ul class="skill-bullets">
           <li><strong>Applied-AI Delivery &amp; the Frontier/FDE Model:</strong> 10 years at Microsoft delivering Azure Cloud, AI and Copilot programs for Fortune 500 clients. Works forward-deployed, embedded with customer engineers to take an ambiguous problem from Idea to Design, then program manages Code to Launch with engineering and product teams. End-to-end lifecycle ownership: scope, schedule, budget, RAID log, governance, and enterprise data-architecture and security alignment.</li>
-          <li><strong>Agentic Architecture, Hands-On:</strong> Designs and builds the systems, not just the plan. Agent graphs and stateful orchestration (LangGraph, Claude Agent SDK), MCP connectors and function calling for deterministic tool use, RAG grounded in curated golden datasets, multi-provider routing across Claude, GPT, Gemini and Perplexity, and regression evals plus human-in-the-loop verification as release gates. Runs companion agents (Delivery, Pursuit, Sales) for portfolio-wide monitoring.</li>
+          <li><strong>Agentic Architecture:</strong> Designs and builds the systems, not just the plan. Agent graphs and stateful orchestration (LangGraph, Claude Agent SDK), MCP connectors and function calling for deterministic tool use, RAG grounded in curated golden datasets, multi-provider routing across Claude, GPT and Gemini, and regression evals plus human-in-the-loop verification as release gates.</li>
           <li><strong>0→1 from First Principles:</strong> Decomposes a problem to its irreducible parts, then uses design thinking to reach a hi-fi, clickable prototype stakeholders can react to before production code exists, compressing discovery-to-alignment from months to days and giving engineering a spec it can build against rather than a document to interpret.</li>
           <li><strong>Stakeholder Management &amp; Program Governance:</strong> Translates complex technical concepts into clear updates for executive stakeholders. Manages plans, milestones, dependencies, budgets, risks and change requests; tracks OKRs, KPIs and delivery health in Monthly Business Reviews across Scrum, SAFe and hybrid models using Azure DevOps.</li>
           <li><strong>Pursuit Leadership &amp; Go-to-Market:</strong> Intake, design and approval of consulting solutions driving deal velocity through technical proposals, WBS, staffing plans, pricing models, Statements of Work, Work Orders and Amendments. Manages P&amp;L health, forecasting and CSAT alongside sales and delivery executives.</li>
@@ -422,7 +424,7 @@
           <li><strong>Azure Platform, Copilot &amp; Analytics Delivery:</strong> Plans and manages end-to-end delivery of Azure data platform, analytics and AI initiatives across Azure OpenAI and AI Foundry, AI Search and RAG, Microsoft Fabric and Copilot rollouts, from roadmap and WBS to go-live.</li>
           <li><strong>Prototype-Led Discovery:</strong> Replaces requirements-by-committee with a working artifact: first-principles framing and design-thinking workshops that land on a hi-fi prototype, so scope, architecture and success criteria are agreed against something people can click.</li>
           <li><strong>Evals, Guardrails &amp; Responsible Deployment:</strong> Treats AI features as testable systems: regression evals before rollout, human-in-the-loop verification on model confidence, grounding in vetted data to control hallucination, plus secrets, audit and governance designed in from the start.</li>
-          <li><strong>Globalization &amp; Localization at Scale:</strong> Ships product in every market, not just English: String Catalogs and locale-aware formatting on Apple platforms, RTL and pseudo-localization audits, machine-translation post-editing through vendor networks, and retrieval grounded in vetted terminology so linguistic quality holds across 48 languages and 150+ markets.</li>
+          <li><strong>Globalization &amp; Localization at Scale:</strong> Ships product in every market, not just English: String Catalogs and locale-aware formatting on Apple platforms, RTL and pseudo-localization audits, machine-translation post-editing through vendor networks, and retrieval grounded in vetted terminology so linguistic quality holds across multiple languages and markets.</li>
         </ul>
       </div>
 
@@ -629,6 +631,33 @@
         </div>
       </div>
 
+      <div class="languages-block">
+        <div class="section-label">Languages</div>
+        <div class="lang-grid">
+        <div class="lang-item">
+          <div class="lang-row">
+            <span class="lang-name">English · Portuguese</span>
+            <span class="lang-level">Native</span>
+          </div>
+          <div class="lang-bar-wrap"><div class="lang-bar" style="width:100%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-row">
+            <span class="lang-name">French</span>
+            <span class="lang-level">Proficient</span>
+          </div>
+          <div class="lang-bar-wrap"><div class="lang-bar" style="width:78%"></div></div>
+        </div>
+        <div class="lang-item">
+          <div class="lang-row">
+            <span class="lang-name">Spanish</span>
+            <span class="lang-level">Conversational</span>
+          </div>
+          <div class="lang-bar-wrap"><div class="lang-bar" style="width:55%"></div></div>
+        </div>
+        </div>
+      </div>
+
     </div>
 
     <!-- RIGHT SIDEBAR -->
@@ -654,30 +683,6 @@
         </div>
       </div>
 
-      <div class="sidebar-section">
-        <div class="section-label">Languages</div>
-        <div class="lang-item">
-          <div class="lang-row">
-            <span class="lang-name">English · Portuguese</span>
-            <span class="lang-level">Native</span>
-          </div>
-          <div class="lang-bar-wrap"><div class="lang-bar" style="width:100%"></div></div>
-        </div>
-        <div class="lang-item">
-          <div class="lang-row">
-            <span class="lang-name">French</span>
-            <span class="lang-level">Proficient</span>
-          </div>
-          <div class="lang-bar-wrap"><div class="lang-bar" style="width:78%"></div></div>
-        </div>
-        <div class="lang-item">
-          <div class="lang-row">
-            <span class="lang-name">Spanish</span>
-            <span class="lang-level">Conversational</span>
-          </div>
-          <div class="lang-bar-wrap"><div class="lang-bar" style="width:55%"></div></div>
-        </div>
-      </div>
 
       <div class="sidebar-section">
         <div class="section-label">Applied-AI Platforms</div>
@@ -742,6 +747,9 @@
         <div class="hobby-item"><span class="hobby-dot">·</span><span>F1, Broadway, Major Leagues, World Travel</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>"The Book of Alessia Faye": Girl Dad</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Reading: J. Grisham, M. Gladwell, W. Isaacson</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Pet parent (Doce &amp; Salgada)</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Podcasts: Passe Completo Rádio! &amp; How I Built This</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Personal finances and real estate portfolio</span></div>
       </div>
 
     </div>
