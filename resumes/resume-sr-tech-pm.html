@@ -126,7 +126,7 @@
     .section-label {
       font-size: 6.5pt;
       font-weight: 700;
-      letter-spacing: .18em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
       color: var(--blue);
       border-bottom: 1.5px solid var(--blue);
@@ -185,11 +185,8 @@
       color: var(--text-muted);
       margin-top: .05rem;
       margin-bottom: .1rem;
-      display: flex; justify-content: space-between;
-      align-items: baseline; gap: .6rem;
     }
     .job-meta strong { font-weight: 600; color: var(--text); }
-    .job-loc { white-space: nowrap; }
     .job-desc {
       font-size: 9.5pt;
       color: var(--text);
@@ -256,6 +253,7 @@
       line-height: 1.18;
     }
     .app-state {
+      display: inline-block; margin-top: .08rem;
       font-size: 5pt; font-weight: 700; letter-spacing: .06em;
       text-transform: uppercase; border-radius: 6px;
       padding: 0 .2rem; vertical-align: .5px; white-space: nowrap;
@@ -376,12 +374,12 @@
     <div class="header-text">
       <div class="header-name">Fernando Abreu</div>
       <div class="header-contact">
-        <a href="mailto:fefoabreu@gmail.com">fefoabreu@gmail.com</a>
         <a href="https://fefoabreu.me">fefoabreu.me</a>
         <a href="https://github.com/fefoabreu">github.com/fefoabreu</a>
         <a href="https://linkedin.com/in/fefoabreu">linkedin.com/in/fefoabreu</a>
       </div>
       <div class="header-contact header-contact-2">
+        <span>✉️ <a href="mailto:fefoabreu@gmail.com">fefoabreu@gmail.com</a></span>
         <span>📞 804.773.5483</span>
         <span>📍 Richmond, VA</span>
       </div>
@@ -403,7 +401,7 @@
     <div class="col-left">
 
       <div class="summary">
-        <div class="section-label">Objectives: Frontier/FDE Tech PM in Applied-AI, Delivery Excellence</div>
+        <div class="section-label">Objectives: Tech PM, Applied-AI, Delivery Excellence, Practice Leadership</div>
         <p>25-year IT career with a decade at Microsoft leading Azure Cloud and AI delivery for Fortune 500 enterprises, now in the Frontier/FDE model, driving Idea to Design with Applied-AI and program managing Code to Launch with engineering and product teams. A Technical Program Manager rooted in software engineering who does not stop at the deck: personally designs and ships agentic systems (PRDs, SDDs, agent graphs, MCP tool use, RAG over curated data, evals and human-in-the-loop governance). Drives 0→1 from first principles and design thinking, turning an ambiguous problem into a hi-fi, clickable prototype before any production code, then leads cross-functional teams of engineers, architects and vendors through Agile, SAFe and hybrid delivery to launch.</p>
       </div>
 
@@ -441,7 +439,7 @@
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Fluent in AI-driven solutions and agentification, powering data-driven decisions across the portfolio</p>
+          <p>Fluent in AI-driven solutions and agentification, powering portfolio-wide, data-driven decisions</p>
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
@@ -469,13 +467,13 @@
           </div>
         </div>
         <div class="tag-group">
-          <div class="tag-group-label">Applied AI &amp; Agents</div>
+          <div class="tag-group-label">Applied-AI Frameworks</div>
           <div class="tags">
-            <span class="tag">Agent Graphs · LangGraph</span>
-            <span class="tag">Claude Agent SDK</span>
+            <span class="tag">Claude Code</span>
+            <span class="tag">Claude Design</span>
+            <span class="tag">LangGraph</span>
             <span class="tag">Tool Use · MCP</span>
             <span class="tag">RAG &amp; Retrieval</span>
-            <span class="tag">Multi-Provider Routing</span>
             <span class="tag">Evals &amp; HITL</span>
           </div>
         </div>
@@ -483,6 +481,7 @@
           <div class="tag-group-label">Azure &amp; Cloud</div>
           <div class="tags">
             <span class="tag">Microsoft Copilot</span>
+            <span class="tag">Copilot Studio</span>
             <span class="tag">Azure OpenAI · AI Foundry</span>
             <span class="tag">Azure AI Search</span>
             <span class="tag">Microsoft Fabric</span>
@@ -579,8 +578,8 @@
             <div class="job-company">Microsoft <span class="job-tenure">· 10 years</span></div>
             <div class="job-dates">July 2016 – Present</div>
           </div>
-          <div class="job-meta"><strong>Principal Technical Program Manager</strong><span class="job-loc">Richmond, VA</span></div>
-          <div class="job-desc">Leads end-to-end technical program management of Azure Cloud, data platform and AI initiatives for Fortune 500 clients, increasingly in a Frontier/FDE model, embedded with customer engineering to take problems from Idea to Design, then driving Code to Launch with product and feature teams. Delivered Azure AI, Azure OpenAI and enterprise Copilot programs from planning through go-live, alongside Azure Data Lake implementations and Tableau-to-Power BI migrations. Architects the agentic layer hands-on: agent graphs and orchestration, MCP tool use, RAG grounded in curated data, model routing, and regression evals with human-in-the-loop verification as release gates, including companion agents (Delivery, Pursuit, Sales) now used for portfolio-wide monitoring. Coordinates engineers, cloud architects, analysts and vendors via Azure DevOps across Agile and SAFe; owns plans, milestones, risk registers, budgets and executive communication, tracking OKRs, KPIs, P&amp;L health and CSAT across a multi-million-dollar portfolio.</div>
+          <div class="job-meta"><strong>Principal Technical Program Manager</strong> · Richmond, VA</div>
+          <div class="job-desc">Leads end-to-end technical program management of Azure Cloud, data platform and AI initiatives for Fortune 500 clients, increasingly in a Frontier/FDE model, embedded with customer engineering to take problems from Idea to Design, then driving Code to Launch with product and feature teams. Architects the agentic layer hands-on: agent graphs and orchestration, MCP tool use, RAG grounded in curated data, model routing, and regression evals with human-in-the-loop verification as release gates, including companion agents (Delivery, Pursuit, Sales) now used for portfolio-wide monitoring. Coordinates engineers, cloud architects, analysts and vendors via Azure DevOps across Agile and SAFe; owns plans, milestones, risk registers, budgets and executive communication, tracking OKRs, KPIs, P&amp;L health and CSAT across a multi-million-dollar portfolio.</div>
         </div>
 
         <div class="job">
@@ -588,7 +587,7 @@
             <div class="job-company">Dexian-Disys <span class="job-tenure">· 6 years</span></div>
             <div class="job-dates">Nov 2010 – Jun 2016</div>
           </div>
-          <div class="job-meta"><strong>Practice Manager, Application Development</strong><span class="job-loc">Washington D.C. Metro</span></div>
+          <div class="job-meta"><strong>Practice Manager, Application Development</strong> · Washington D.C. Metro</div>
           <div class="job-desc">Head of delivery, technical sales prospecting, and oversight of all operations and projects under the Practice. Built a Modern Applications professional services practice from the ground up leading a group of 22 people at peak delivering services to U.S. Postal Service, Schlumberger and HangIT. Full lead-to-order and order-to-cash process ownership. Forecasting, strategic planning, contracts closure and sale profitability analysis.</div>
         </div>
 
@@ -597,7 +596,7 @@
             <div class="job-company">Meta Brasil <span class="job-tenure">· 8 years</span></div>
             <div class="job-dates">Sep 2002 – Oct 2010</div>
           </div>
-          <div class="job-meta"><strong>Dev Lead → IT Consultant → Technical Program Manager</strong><span class="job-loc">Porto Alegre, Brazil</span></div>
+          <div class="job-meta"><strong>Dev Lead → IT Consultant → Technical Program Manager</strong> · Porto Alegre, Brazil</div>
           <div class="job-desc">Designed and enhanced IT consulting service offerings, project management and sales prospecting for software development projects, implementation of management methodologies, outsourcing operations, and counseling clients for optimized IT &amp; Business integration via PMO.</div>
         </div>
 
@@ -606,7 +605,7 @@
             <div class="job-company">Dinamize Web Systems <span class="job-tenure">· 4 years</span></div>
             <div class="job-dates">Aug 2000 – Jul 2004</div>
           </div>
-          <div class="job-meta"><strong>Full Stack Software Engineer</strong><span class="job-loc">Porto Alegre, Brazil</span></div>
+          <div class="job-meta"><strong>Full Stack Software Engineer</strong> · Porto Alegre, Brazil</div>
           <div class="job-desc">Where it all began. Built client-server and web-based applications using Delphi, Visual Basic, ASP.NET, and SQL Server. Developed foundational skills in database administration, UX/UI wireframing, and product engineering.</div>
         </div>
 
@@ -688,23 +687,23 @@
         <div class="app-grid">
           <a class="app-tile" href="https://fefoabreu.me/career-coach/">
             <img class="app-ico" src="../assets/app-icons/career-coach.png" alt="" />
-            <div class="app-name">Career Coach <span class="app-state live">live</span></div>
-            <div class="app-desc">Choose your journey, publish your site, get interview ready</div>
+            <div class="app-name">Career Coach<br /><span class="app-state live">live</span></div>
+            <div class="app-desc">Choose your journey, score your resume, get interview&nbsp;ready</div>
           </a>
           <a class="app-tile" href="https://testflight.apple.com/join/rX8vWttz">
             <img class="app-ico" src="../assets/app-icons/watchuwatchin.png" alt="" />
-            <div class="app-name">WatchUWatchin+ <span class="app-state beta">beta</span></div>
+            <div class="app-name">WatchUWatchin+<br /><span class="app-state beta">beta</span></div>
             <div class="app-desc">Social app across iPhone, Watch and Apple TV</div>
           </a>
           <a class="app-tile" href="https://fefoabreu.me/PoMme48/">
             <img class="app-ico" src="../assets/app-icons/pomme48.png" alt="" />
-            <div class="app-name">PoMme 48° <span class="app-state proto">proto</span></div>
+            <div class="app-name">PoMme 48°<br /><span class="app-state proto">proto</span></div>
             <div class="app-desc">AI-driven GILT platform run by the g48t agentic engine</div>
           </a>
           <a class="app-tile" href="https://fefoabreu.me/Fan-Engagement/">
             <img class="app-ico" src="../assets/app-icons/fan-engagement.png" alt="" />
-            <div class="app-name">Fan Engagement <span class="app-state demo">demo</span></div>
-            <div class="app-desc">Azure reference architecture and device simulator</div>
+            <div class="app-name">Fan Engagement<br /><span class="app-state demo">demo</span></div>
+            <div class="app-desc">Device Simulator and Azure architecture reference</div>
           </a>
         </div>
       </div>
@@ -747,7 +746,7 @@
         <div class="hobby-item"><span class="hobby-dot">·</span><span>"The Book of Alessia Faye": Girl Dad</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Reading: J. Grisham, M. Gladwell, W. Isaacson</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Pet parent (Doce &amp; Salgada)</span></div>
-        <div class="hobby-item"><span class="hobby-dot">·</span><span>Podcasts: Passe Completo Rádio! &amp; How I Built This</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Podcasts: How I Built This, Passe&nbsp;Completo&nbsp;Rádio!</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Personal finances and real estate portfolio</span></div>
       </div>
 
