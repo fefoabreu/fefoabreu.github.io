@@ -51,7 +51,7 @@
     .header {
       background: var(--navy);
       color: var(--white);
-      padding: 0.3in 0.4in;
+      padding: 0.275in 0.4in;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -77,16 +77,18 @@
       display: flex;
       flex-wrap: wrap;
       gap: .2rem .9rem;
-      margin-top: .38rem;
+      margin-top: .3rem;
       font-size: 7.5pt;
       color: rgba(255,255,255,.68);
     }
     .header-contact a { color: rgba(255,255,255,.68); text-decoration: none; }
+    /* Second contact row (phone + location) sits tighter under the links */
+    .header-contact-2 { margin-top: .1rem; }
     .cert-tags {
       display: flex;
       flex-wrap: wrap;
       gap: .25rem;
-      margin-top: .38rem;
+      margin-top: .18rem;
     }
     .cert-tag {
       font-size: 6.5pt;
@@ -224,16 +226,13 @@
     .achievement-star { color: var(--gold); font-size: 9pt; flex-shrink: 0; margin-top: 1px; }
     .achievement p { font-size: 7pt; color: var(--text); line-height: 1.4; }
 
-    /* ── SIDEBAR: SHIPPED PRODUCTS ────────────────────── */
-    .proj { margin-bottom: .12rem; }
-    .proj-name { font-size: 8pt; font-weight: 700; color: var(--navy); }
-    .proj-state {
-      font-size: 6pt; font-weight: 600; letter-spacing: .06em;
-      text-transform: uppercase; color: var(--blue);
-      border: 1px solid rgba(30,111,217,.3); border-radius: 8px;
-      padding: .02rem .26rem; margin-left: .12rem; vertical-align: 1px;
+    /* ── SIDEBAR: APPLIED-AI PLATFORMS (honorable mention) ── */
+    .proj { margin-bottom: .1rem; line-height: 1.34; }
+    .proj-name {
+      font-size: 7.5pt; font-weight: 700; color: var(--blue);
+      text-decoration: none;
     }
-    .proj-desc { font-size: 6.8pt; color: var(--text); line-height: 1.36; }
+    .proj-desc { font-size: 7pt; color: var(--text); }
 
     /* ── SIDEBAR: CLIENT TAGS ─────────────────────────── */
     .client-tags {
@@ -251,8 +250,11 @@
     }
 
     /* ── SIDEBAR: CERTS ───────────────────────────────── */
-    .cert-item { margin-bottom: .07rem; }
-    .cert-name   { font-size: 8pt; font-weight: 600; color: var(--text); }
+    .cert-item {
+      margin-bottom: .07rem;
+      display: flex; align-items: baseline; gap: .26rem;
+    }
+    .cert-name   { font-size: 8pt; font-weight: 600; color: var(--text); white-space: nowrap; }
     .cert-issuer { font-size: 7pt; color: var(--text-muted); }
 
     /* ── SIDEBAR: LANGUAGES ───────────────────────────── */
@@ -284,12 +286,12 @@
     .testimonial {
       background: rgba(255,255,255,.72);
       border-left: 2.5px solid var(--blue);
-      padding: .15rem .28rem;
+      padding: .15rem .2rem;
       margin-bottom: .1rem;
       border-radius: 0 4px 4px 0;
     }
     .testimonial-text {
-      font-size: 7.5pt;
+      font-size: 7.3pt;
       font-style: italic;
       color: var(--text);
       line-height: 1.5;
@@ -330,11 +332,13 @@
     <div class="header-text">
       <div class="header-name">Fernando Abreu</div>
       <div class="header-contact">
-        <span>📞 804.773.5483</span>
         <a href="mailto:fefoabreu@gmail.com">fefoabreu@gmail.com</a>
         <a href="https://fefoabreu.me">fefoabreu.me</a>
         <a href="https://github.com/fefoabreu">github.com/fefoabreu</a>
         <a href="https://linkedin.com/in/fefoabreu">linkedin.com/in/fefoabreu</a>
+      </div>
+      <div class="header-contact header-contact-2">
+        <span>📞 804.773.5483</span>
         <span>📍 Richmond, VA</span>
       </div>
       <div class="cert-tags">
@@ -356,26 +360,26 @@
 
       <div class="summary">
         <div class="section-label">Objectives: Frontier/FDE Tech PM in Applied-AI, Delivery Excellence</div>
-        <p>25-year IT career with a decade at Microsoft leading Azure Cloud and AI delivery for Fortune 500 enterprises, now in the Frontier/FDE model — driving Idea to Design with Applied-AI and program managing Code to Launch with engineering and product teams. A Technical Program Manager rooted in software engineering who does not stop at the deck: personally designs and ships agentic systems — agent graphs, MCP tool use, RAG over curated data, evals and human-in-the-loop governance — with three products live or in public beta. Drives 0→1 from first principles and design thinking, turning an ambiguous problem into a hi-fi, clickable prototype before any production code, then leads cross-functional teams of engineers, architects and vendors through Agile, SAFe and hybrid delivery to launch.</p>
+        <p>25-year IT career with a decade at Microsoft leading Azure Cloud and AI delivery for Fortune 500 enterprises, now in the Frontier/FDE model, driving Idea to Design with Applied-AI and program managing Code to Launch with engineering and product teams. A Technical Program Manager rooted in software engineering who does not stop at the deck: personally designs and ships agentic systems (agent graphs, MCP tool use, RAG over curated data, evals and human-in-the-loop governance) with three platforms live or in public beta. Drives 0→1 from first principles and design thinking, turning an ambiguous problem into a hi-fi, clickable prototype before any production code, then leads cross-functional teams of engineers, architects and vendors through Agile, SAFe and hybrid delivery to launch.</p>
       </div>
 
       <div class="skills-section">
         <div class="section-label">Key Professional Skills</div>
         <ul class="skill-bullets">
-          <li><strong>Applied-AI Delivery &amp; the Frontier/FDE Model:</strong> 10 years at Microsoft delivering Azure Cloud, AI and Copilot programs for Fortune 500 clients. Works forward-deployed — embedded with customer engineers to take an ambiguous problem from Idea to Design, then program manages Code to Launch with engineering and product teams. End-to-end lifecycle ownership: scope, schedule, budget, RAID log, governance, and enterprise data-architecture and security alignment.</li>
+          <li><strong>Applied-AI Delivery &amp; the Frontier/FDE Model:</strong> 10 years at Microsoft delivering Azure Cloud, AI and Copilot programs for Fortune 500 clients. Works forward-deployed, embedded with customer engineers to take an ambiguous problem from Idea to Design, then program manages Code to Launch with engineering and product teams. End-to-end lifecycle ownership: scope, schedule, budget, RAID log, governance, and enterprise data-architecture and security alignment.</li>
           <li><strong>Agentic Architecture, Hands-On:</strong> Designs and builds the systems, not just the plan. Agent graphs and stateful orchestration (LangGraph, Claude Agent SDK), MCP connectors and function calling for deterministic tool use, RAG grounded in curated golden datasets, multi-provider routing across Claude, GPT, Gemini and Perplexity, and regression evals plus human-in-the-loop verification as release gates. Runs companion agents (Delivery, Pursuit, Sales) for portfolio-wide monitoring.</li>
-          <li><strong>0→1 from First Principles:</strong> Decomposes a problem to its irreducible parts, then uses design thinking to reach a hi-fi, clickable prototype stakeholders can react to before production code exists — compressing discovery-to-alignment from months to days and giving engineering a spec it can build against rather than a document to interpret.</li>
-          <li><strong>Stakeholder Management &amp; Program Governance:</strong> Translates complex technical concepts into clear updates for executive stakeholders. Manages plans, milestones, dependencies, budgets, risks and change requests; tracks OKRs, KPIs and delivery health in Monthly Business Reviews across Scrum, SAFe and hybrid models using Azure DevOps and ServiceNow.</li>
+          <li><strong>0→1 from First Principles:</strong> Decomposes a problem to its irreducible parts, then uses design thinking to reach a hi-fi, clickable prototype stakeholders can react to before production code exists, compressing discovery-to-alignment from months to days and giving engineering a spec it can build against rather than a document to interpret.</li>
+          <li><strong>Stakeholder Management &amp; Program Governance:</strong> Translates complex technical concepts into clear updates for executive stakeholders. Manages plans, milestones, dependencies, budgets, risks and change requests; tracks OKRs, KPIs and delivery health in Monthly Business Reviews across Scrum, SAFe and hybrid models using Azure DevOps.</li>
         </ul>
       </div>
 
       <div class="skills-section">
         <div class="section-label">Key Activities &amp; Programs</div>
         <ul class="skill-bullets">
-          <li><strong>Azure Platform, Copilot &amp; Analytics Delivery:</strong> Plans and manages end-to-end delivery of Azure data platform, analytics and AI initiatives — Azure OpenAI and AI Foundry, AI Search and RAG, Microsoft Fabric, Copilot rollouts — from roadmap and WBS through sign-off and go-live.</li>
-          <li><strong>Prototype-Led Discovery:</strong> Replaces requirements-by-committee with a working artifact: first-principles framing and design-thinking workshops that land on a hi-fi prototype, so scope, architecture and success criteria are agreed against something people can click rather than imagine.</li>
-          <li><strong>Evals, Guardrails &amp; Responsible Deployment:</strong> Treats AI features as testable systems — regression evals before rollout, human-in-the-loop verification on model confidence, grounding in vetted data to control hallucination, and secrets, audit and governance designed in from day one.</li>
-          <li><strong>Globalization &amp; Localization at Scale:</strong> Ships product in every market, not just English — String Catalogs and locale-aware formatting on Apple platforms, RTL and pseudo-localization audits, machine-translation post-editing through vendor networks, and retrieval grounded in vetted terminology so linguistic quality holds across 48 languages and 150+ markets.</li>
+          <li><strong>Azure Platform, Copilot &amp; Analytics Delivery:</strong> Plans and manages end-to-end delivery of Azure data platform, analytics and AI initiatives across Azure OpenAI and AI Foundry, AI Search and RAG, Microsoft Fabric and Copilot rollouts, from roadmap and WBS to go-live.</li>
+          <li><strong>Prototype-Led Discovery:</strong> Replaces requirements-by-committee with a working artifact: first-principles framing and design-thinking workshops that land on a hi-fi prototype, so scope, architecture and success criteria are agreed against something people can click.</li>
+          <li><strong>Evals, Guardrails &amp; Responsible Deployment:</strong> Treats AI features as testable systems: regression evals before rollout, human-in-the-loop verification on model confidence, grounding in vetted data to control hallucination, plus secrets, audit and governance designed in from the start.</li>
+          <li><strong>Globalization &amp; Localization at Scale:</strong> Ships product in every market, not just English: String Catalogs and locale-aware formatting on Apple platforms, RTL and pseudo-localization audits, machine-translation post-editing through vendor networks, and retrieval grounded in vetted terminology so linguistic quality holds across 48 languages and 150+ markets.</li>
           <li><strong>Pursuit Leadership &amp; Go-to-Market:</strong> Intake, design and approval of consulting solutions driving deal velocity through technical proposals, WBS, staffing plans, pricing models, Statements of Work, Work Orders and Amendments. Manages P&amp;L health, forecasting and CSAT alongside sales and delivery executives.</li>
         </ul>
       </div>
@@ -389,35 +393,19 @@
         <div class="section-label">Key Achievements</div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Designed and shipped Applied-AI products end to end — live on the web and in public beta on TestFlight</p>
+          <p>Azure Cloud and AI, M365 and Dynamics implementation programs for Fortune 500 clients at Microsoft Professional Services</p>
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Azure Cloud, AI and Copilot implementation programs for Fortune 500 clients at Microsoft Professional Services</p>
+          <p>Fluent in AI-driven solutions and agentification, powering data-driven decisions across the portfolio</p>
         </div>
         <div class="achievement">
           <span class="achievement-star">★</span>
-          <p>Championed Global Programs — offshore software factory, Agile adoption, CMMI, Risk Management, deal-and-delivery automation, OKR/KPI telemetry</p>
+          <p>Landed and championed a multitude of Global Programs enabling nearshore and offshore software factory, Agile adoption, CMMI implementation, Risk Management and Lessons Learned, consulting deal and delivery process automation, IP harvesting, OKR/KPI telemetry and project health reviews</p>
         </div>
-      </div>
-
-      <div class="sidebar-section">
-        <div class="section-label">Shipped Applied-AI Products</div>
-        <div class="proj">
-          <div class="proj-name">WatchUWatchin+ <span class="proj-state">public beta</span></div>
-          <div class="proj-desc">Native SwiftUI social app across iPhone, Watch, Apple TV and widget. Siri voice capture via App Intents; full localization in String Catalogs.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">PoMme 48° <span class="proj-state">prototype</span></div>
-          <div class="proj-desc">Agentic localization platform for 48 languages / 150+ markets. LangGraph agent graph, Claude tool-use, MCP connectors, RAG over a linguist-vetted golden dataset, evals and human-in-the-loop gates.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">Career Coach <span class="proj-state">live</span></div>
-          <div class="proj-desc">Multi-provider AI career platform — Claude, GPT, Gemini, Perplexity — with JD-vs-résumé scoring, voice mock interviews and recruiter mode.</div>
-        </div>
-        <div class="proj">
-          <div class="proj-name">Fan Engagement <span class="proj-state">demo</span></div>
-          <div class="proj-desc">Azure Cloud &amp; AI reference architecture and device simulator for a major sports league showcase.</div>
+        <div class="achievement">
+          <span class="achievement-star">★</span>
+          <p>Built a Modern Applications professional services practice from the ground up, leading a group of 22 people at peak and delivering services to U.S. Postal Service, Schlumberger and HangIT</p>
         </div>
       </div>
 
@@ -463,8 +451,6 @@
           <div class="tags">
             <span class="tag">Azure Data Lake</span>
             <span class="tag">Power BI</span>
-            <span class="tag">Data Governance</span>
-            <span class="tag">ServiceNow</span>
           </div>
         </div>
         <div class="tag-group">
@@ -503,6 +489,14 @@
           <span class="client-tag">Nike</span>
           <span class="client-tag">T-Mobile</span>
           <span class="client-tag">Verizon</span>
+          <span class="client-tag">Coca-Cola</span>
+          <span class="client-tag">Electronic Arts</span>
+          <span class="client-tag">GM-Cruise</span>
+          <span class="client-tag">WarnerBros.</span>
+          <span class="client-tag">Pepsico</span>
+          <span class="client-tag">Lumen</span>
+          <span class="client-tag">Domino’s</span>
+          <span class="client-tag">Constellation</span>
         </div>
       </div>
 
@@ -526,7 +520,7 @@
             <div class="job-dates">July 2016 – Present</div>
           </div>
           <div class="job-meta"><strong>Principal Technical Program Manager</strong> · Azure Cloud &amp; AI Professional Services · Richmond, VA</div>
-          <div class="job-desc">Leads end-to-end technical program management of Azure Cloud, data platform and AI initiatives for Fortune 500 clients, increasingly in a Frontier/FDE model — embedded with customer engineering to take problems from Idea to Design, then driving Code to Launch with product and feature teams. Delivered Azure AI, Azure OpenAI and enterprise Copilot programs from planning through go-live, alongside Azure Data Lake implementations and Tableau-to-Power BI migrations. Architects the agentic layer hands-on: agent graphs and orchestration, MCP tool use, RAG grounded in curated data, model routing, and regression evals with human-in-the-loop verification as release gates — including companion agents (Delivery, Pursuit, Sales) now used for portfolio-wide monitoring. Coordinates engineers, cloud architects, analysts and vendors via Azure DevOps across Agile and SAFe; owns plans, milestones, risk registers, budgets and executive communication, tracking OKRs, KPIs, P&amp;L health and CSAT across a multi-million-dollar portfolio.</div>
+          <div class="job-desc">Leads end-to-end technical program management of Azure Cloud, data platform and AI initiatives for Fortune 500 clients, increasingly in a Frontier/FDE model, embedded with customer engineering to take problems from Idea to Design, then driving Code to Launch with product and feature teams. Delivered Azure AI, Azure OpenAI and enterprise Copilot programs from planning through go-live, alongside Azure Data Lake implementations and Tableau-to-Power BI migrations. Architects the agentic layer hands-on: agent graphs and orchestration, MCP tool use, RAG grounded in curated data, model routing, and regression evals with human-in-the-loop verification as release gates, including companion agents (Delivery, Pursuit, Sales) now used for portfolio-wide monitoring. Coordinates engineers, cloud architects, analysts and vendors via Azure DevOps across Agile and SAFe; owns plans, milestones, risk registers, budgets and executive communication, tracking OKRs, KPIs, P&amp;L health and CSAT across a multi-million-dollar portfolio.</div>
         </div>
 
         <div class="job">
@@ -584,20 +578,20 @@
       <div class="sidebar-section">
         <div class="section-label">Certifications</div>
         <div class="cert-item">
-          <div class="cert-name">PMP</div>
-          <div class="cert-issuer">Project Management Institute</div>
+          <span class="cert-name">PMP</span>
+          <span class="cert-issuer">Project Management Institute</span>
         </div>
         <div class="cert-item">
-          <div class="cert-name">CSPO · CSM</div>
-          <div class="cert-issuer">Scrum Alliance</div>
+          <span class="cert-name">CSPO · CSM</span>
+          <span class="cert-issuer">Scrum Alliance</span>
         </div>
         <div class="cert-item">
-          <div class="cert-name">ITIL</div>
-          <div class="cert-issuer">Exin</div>
+          <span class="cert-name">ITIL</span>
+          <span class="cert-issuer">Exin</span>
         </div>
         <div class="cert-item">
-          <div class="cert-name">CMMI SCAMPI A &amp; B</div>
-          <div class="cert-issuer">SEI Carnegie Mellon</div>
+          <span class="cert-name">CMMI SCAMPI A &amp; B</span>
+          <span class="cert-issuer">SEI Carnegie Mellon</span>
         </div>
       </div>
 
@@ -605,14 +599,7 @@
         <div class="section-label">Languages</div>
         <div class="lang-item">
           <div class="lang-row">
-            <span class="lang-name">English</span>
-            <span class="lang-level">Native</span>
-          </div>
-          <div class="lang-bar-wrap"><div class="lang-bar" style="width:100%"></div></div>
-        </div>
-        <div class="lang-item">
-          <div class="lang-row">
-            <span class="lang-name">Portuguese</span>
+            <span class="lang-name">English · Portuguese</span>
             <span class="lang-level">Native</span>
           </div>
           <div class="lang-bar-wrap"><div class="lang-bar" style="width:100%"></div></div>
@@ -634,29 +621,37 @@
       </div>
 
       <div class="sidebar-section">
+        <div class="section-label">Applied-AI Platforms</div>
+        <div class="proj"><a href="https://fefoabreu.me/career-coach/" class="proj-name">Career Coach</a> <span class="proj-desc">multi-provider AI career platform, live on the web</span></div>
+        <div class="proj"><a href="https://testflight.apple.com/join/rX8vWttz" class="proj-name">WatchUWatchin+</a> <span class="proj-desc">native SwiftUI social app, public beta on TestFlight</span></div>
+        <div class="proj"><a href="https://fefoabreu.me/PoMme48/" class="proj-name">PoMme 48°</a> <span class="proj-desc">agentic localization platform, 48 languages</span></div>
+        <div class="proj"><a href="https://fefoabreu.me/Fan-Engagement/" class="proj-name">Fan Engagement</a> <span class="proj-desc">Azure Cloud &amp; AI reference design</span></div>
+      </div>
+
+      <div class="sidebar-section">
         <div class="section-label">Voices</div>
 
         <div class="testimonial">
           <div class="testimonial-text">"Fernando is one of the most knowledgeable and effective resources I have come across in my +20yrs at MSFT. Your approach and structured working style keeping Team on point for the multitude of tasks and approvals it takes is SUPER. VERY few can accomplish this."</div>
-          <div class="testimonial-author">Adam Ryncarz</div>
+          <div class="testimonial-author">Adam R.</div>
           <div class="testimonial-role">Ford/GM/Cruise Account Delivery Executive · Microsoft</div>
         </div>
 
         <div class="testimonial">
           <div class="testimonial-text">"I have unwavering confidence in everything you do. I have witnessed your exponential growth over the years. You are intentional, focused, and do not shy away from challenges. I genuinely see you as a leader in your field."</div>
-          <div class="testimonial-author">Dawna Covey</div>
-          <div class="testimonial-role">Enterprise ADL · Microsoft</div>
+          <div class="testimonial-author">Dawna C.</div>
+          <div class="testimonial-role">Enterprise Account Delivery Lead · Microsoft</div>
         </div>
 
         <div class="testimonial">
-          <div class="testimonial-text">"Fernando has a can do attitude. Even on areas outside of his remit, he has leaned in to support the team. Fernando is a joy to work with."</div>
-          <div class="testimonial-author">Melissa Hooper</div>
-          <div class="testimonial-role">Sales Director · Microsoft</div>
+          <div class="testimonial-text">"Strong technical acumen and genuine depth in AI, including testing, evaluation, and applied projects. An excellent communicator, effective at engaging stakeholders at all levels, who builds buy-in and shows real curiosity about the business and the team."</div>
+          <div class="testimonial-author">Stephen W.</div>
+          <div class="testimonial-role">Senior Leader · Microsoft</div>
         </div>
 
         <div class="testimonial">
           <div class="testimonial-text">"Fernando and I are on the same page 99% of the time, which makes it really easy to work through issues when they arise. He is a very collaborative partner and is genuinely interested in coming up with acceptable solutions to very difficult challenges, often in extremely tight timelines."</div>
-          <div class="testimonial-author">Joe Newel</div>
+          <div class="testimonial-author">Joe N.</div>
           <div class="testimonial-role">Architect Manager · Microsoft</div>
         </div>
 
@@ -664,15 +659,14 @@
 
       <div class="sidebar-section">
         <div class="section-label">Hobbies &amp; Interests</div>
-        <div class="hobby-item"><span class="hobby-dot">·</span><span>"That One Picture" — amateur photography</span></div>
-        <div class="hobby-item"><span class="hobby-dot">·</span><span>"Project Footprint" — 30+ countries visited</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>"That One Picture": amateur photography</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>"Project Footprint": 30+ countries visited</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Water Sports, Skiing, 10k Running, HIIT</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>F1, Broadway, Major Leagues, World Travel</span></div>
-        <div class="hobby-item"><span class="hobby-dot">·</span><span>"The Book of Alessia Faye" — Girl Dad</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>"The Book of Alessia Faye": Girl Dad</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Pet parent (Doce &amp; Salgada)</span></div>
-        <div class="hobby-item"><span class="hobby-dot">·</span><span>Reading — J. Grisham, M. Gladwell, W. Isaacson</span></div>
+        <div class="hobby-item"><span class="hobby-dot">·</span><span>Reading: J. Grisham, M. Gladwell, W. Isaacson</span></div>
         <div class="hobby-item"><span class="hobby-dot">·</span><span>Passe Completo Rádio! &amp; How I Built This</span></div>
-        <div class="hobby-item"><span class="hobby-dot">·</span><span>Personal finances and real estate portfolio</span></div>
       </div>
 
     </div>
