@@ -935,6 +935,40 @@
     #lab .section-lead  { color: rgba(250,248,243,.5); }
     #lab .section-inner { padding-bottom: 1.5rem; }
 
+    /* ─── STUDIO · problem rail ──────────────────────────
+       Filters the carousel by the problem a project answers,
+       not by its stack. Non-matching cards dim rather than
+       disappear, so the shape of the whole body of work stays. */
+    .studio-rail { margin-top: 2.6rem; }
+    .studio-rail-label {
+      display: block;
+      font-family: 'DM Mono', monospace;
+      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
+      color: rgba(250,248,243,.38); margin-bottom: .85rem;
+    }
+    .studio-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
+    .studio-chip {
+      font-family: 'DM Mono', monospace;
+      font-size: .72rem; letter-spacing: .04em;
+      padding: .42rem .85rem;
+      color: rgba(250,248,243,.62);
+      background: none;
+      border: 1px solid rgba(250,248,243,.16);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: color .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
+    }
+    .studio-chip:hover { color: var(--accent); border-color: rgba(200,169,110,.5); }
+    .studio-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .studio-chip.is-on {
+      color: var(--navy); background: var(--accent); border-color: var(--accent);
+    }
+    .studio-rail-note {
+      font-family: 'DM Sans', sans-serif;
+      font-size: .82rem; font-weight: 300;
+      color: rgba(250,248,243,.34);
+      margin-top: .9rem; min-height: 1.2em;
+    }
     .lab-row-outer {
       max-width: 1060px;
       margin: 0 auto;
@@ -976,8 +1010,15 @@
       overflow: hidden;
       cursor: pointer;
       scroll-snap-align: start;
-      transition: transform .35s var(--ease), box-shadow .35s var(--ease);
+      transition: transform .35s var(--ease), box-shadow .35s var(--ease),
+                  opacity .35s var(--ease), filter .35s var(--ease);
       border: 1.5px solid rgba(200,169,110,.1);
+    }
+    /* dimmed state for cards outside the chosen problem */
+    .lab-card.is-muted { opacity: .26; filter: saturate(.25); }
+    .lab-card.is-muted:hover { opacity: .55; }
+    @media (prefers-reduced-motion: reduce) {
+      .lab-card { transition: none; }
     }
     .lab-card:hover {
       transform: scale(1.08) translateY(-7px);
@@ -1516,7 +1557,7 @@
       <a href="#hero" class="nav-logo">Fernando Abreu</a>
     </div>
     <ul class="nav-links">
-      <li><a href="#lab">The Lab</a></li>
+      <li><a href="#lab">The Studio</a></li>
       <li><a href="#applied-ai">Applied-AI</a></li>
       <li><a href="#voices">Voices</a></li>
       <li><a href="#beyond">Beyond</a></li>
@@ -1774,15 +1815,29 @@
   </section>
 
 
-  <!-- THE LAB -->
+  <!-- THE STUDIO -->
   <section id="lab">
     <div class="section-inner">
-      <p class="chapter-label reveal">Side Projects &middot; GitHub</p>
-      <h2 class="section-title reveal reveal-d1">The <em>Lab.</em></h2>
+      <p class="chapter-label reveal">Envisioned &middot; Built &middot; Published</p>
+      <h2 class="section-title reveal reveal-d1">The <em>Studio.</em></h2>
       <div class="section-rule reveal reveal-d2"></div>
       <p class="section-lead reveal reveal-d3">
-        What I build when the workday ends — Azure Cloud &amp; AI reference architectures, agentic enterprise and delivery tools, EdTech and productivity apps, and hospitality and food ventures. All hands-on, all shipping.
+        Every one of these started the same way: a problem I could not stop turning over. Some come from the day job — delivery risk, localization at scale, agentic tooling. Some come from the rest of life — the job hunt, live events, what we watch, where we gather. I envision them, build them, and publish them. Then I use them myself, which is the part that keeps them honest.
       </p>
+
+      <div class="studio-rail reveal reveal-d3" role="group" aria-label="Filter projects by problem">
+        <span class="studio-rail-label">The problems</span>
+        <div class="studio-chips" id="studioChips">
+          <button type="button" class="studio-chip is-on" data-domain="all" aria-pressed="true">Everything</button>
+          <button type="button" class="studio-chip" data-domain="ai" aria-pressed="false">Applied AI</button>
+          <button type="button" class="studio-chip" data-domain="apple" aria-pressed="false">Apple platforms</button>
+          <button type="button" class="studio-chip" data-domain="events" aria-pressed="false">Live events</button>
+          <button type="button" class="studio-chip" data-domain="global" aria-pressed="false">Globalization</button>
+          <button type="button" class="studio-chip" data-domain="learning" aria-pressed="false">Learning</button>
+          <button type="button" class="studio-chip" data-domain="hospitality" aria-pressed="false">Hospitality</button>
+        </div>
+        <p class="studio-rail-note" id="studioNote" role="status" aria-live="polite">Nine platforms. Pick a problem to see which ones answer it.</p>
+      </div>
     </div>
 
     <div class="lab-row-outer reveal">
@@ -1795,7 +1850,7 @@
         <div class="lab-row" id="labRow">
 
           <!-- Career Coach -->
-          <div class="lab-card" data-project="career-coach">
+          <div class="lab-card" data-project="career-coach" data-domains="ai,learning">
             <img class="lab-card-img" src="assets/lab-career-coach.jpg" alt="Career Coach" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1809,7 +1864,7 @@
           </div>
 
           <!-- WatchUWatchin+ -->
-          <div class="lab-card" data-project="watchuwatchin">
+          <div class="lab-card" data-project="watchuwatchin" data-domains="apple,global">
             <img class="lab-card-img" src="assets/lab-watchuwatchin.jpg" alt="WatchUWatchin+" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1822,22 +1877,22 @@
             </div>
           </div>
 
-          <!-- Fan Engagement -->
-          <div class="lab-card" data-project="nba-fan-engagement">
-            <img class="lab-card-img" src="assets/lab-nba-fan-engagement.jpg" alt="Fan Engagement" />
+          <!-- Katraca -->
+          <div class="lab-card" data-project="katraca" data-domains="apple,events">
+            <img class="lab-card-img" src="assets/lab-katraca.jpg" alt="Katraca" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
             </div>
             <div class="lab-card-overlay">
-              <span class="lab-card-tag">Cloud &amp; AI &middot; Sports</span>
-              <div class="lab-card-title">Fan Engagement</div>
+              <span class="lab-card-tag">Live Events &middot; Apple</span>
+              <div class="lab-card-title">Katraca</div>
               <div class="lab-card-year">2026</div>
             </div>
           </div>
 
           <!-- PoMme 48 -->
-          <div class="lab-card" data-project="pomme48">
+          <div class="lab-card" data-project="pomme48" data-domains="ai,global">
             <img class="lab-card-img" src="assets/lab-pomme48.jpg" alt="PoMme 48&deg;" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1850,8 +1905,22 @@
             </div>
           </div>
 
+          <!-- Fan Engagement -->
+          <div class="lab-card" data-project="nba-fan-engagement" data-domains="ai,events">
+            <img class="lab-card-img" src="assets/lab-nba-fan-engagement.jpg" alt="Fan Engagement" />
+            <div class="lab-card-noise"></div>
+            <div class="lab-card-play">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+            <div class="lab-card-overlay">
+              <span class="lab-card-tag">Cloud &amp; AI &middot; Sports</span>
+              <div class="lab-card-title">Fan Engagement</div>
+              <div class="lab-card-year">2026</div>
+            </div>
+          </div>
+
           <!-- Oneway Intercâmbio -->
-          <div class="lab-card" data-project="oneway-intercambio">
+          <div class="lab-card" data-project="oneway-intercambio" data-domains="ai,learning">
             <img class="lab-card-img" src="assets/lab-oneway-intercambio.jpg" alt="Oneway Intercâmbio" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1865,7 +1934,7 @@
           </div>
 
           <!-- Delivery Excellence -->
-          <div class="lab-card" data-project="delivery-excellence">
+          <div class="lab-card" data-project="delivery-excellence" data-domains="ai">
             <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1879,7 +1948,7 @@
           </div>
 
           <!-- The Gathering Silveira -->
-          <div class="lab-card" data-project="the-gathering">
+          <div class="lab-card" data-project="the-gathering" data-domains="hospitality">
             <img class="lab-card-img" src="assets/lab-the-gathering.jpg" alt="The Gathering Silveira" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1893,7 +1962,7 @@
           </div>
 
           <!-- Bella Bite -->
-          <div class="lab-card" data-project="bella-bite">
+          <div class="lab-card" data-project="bella-bite" data-domains="hospitality">
             <img class="lab-card-img" src="assets/lab-bella-bite.jpg" alt="Bella Bite" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1940,7 +2009,7 @@
         <div class="aai-list" id="aaiList"><!-- mobile fallback injected here --></div>
       </div>
 
-      <p class="aai-foot reveal">Every node is shipping in a real project &mdash; <strong>meet them in The Lab above &uarr;</strong></p>
+      <p class="aai-foot reveal">Every node is shipping in a real project &mdash; <strong>meet them in The Studio above &uarr;</strong></p>
     </div>
   </section>
 
@@ -2672,6 +2741,49 @@
         }
       },
 
+      'katraca': {
+        title: 'Katraca',
+        tag: 'Live Events · Apple · 2026',
+        desc: 'Every event you pushed through a turnstile to reach becomes a Punch: a collectible, big-league ticket that lives in your Memory Lane. Nothing logs without the ritual — you rotate the catraca, a 120° turnstile drag that answers with a haptic click, and on Apple Watch the Digital Crown is the catraca. Built on the honor system, so there is no ticket to scan and nothing to verify. Native on both platforms, offline-first, with tickets that stay warm paper even in dark mode while the at-the-gate surfaces go stadium black. Design system locked; in build with my brother.',
+        stack: ['SwiftUI', 'watchOS', 'Kotlin · Compose', 'Offline-first', 'GRDB / Room', 'i18n · pt-BR', 'MCP'],
+        poster: 'assets/lab-katraca-demo.jpg',
+        arch: {
+          kicker: 'Katraca · Reference Architecture',
+          title: 'The Punch — Ritual to Memory Lane',
+          tiers: [
+            { lbl: 'Tier 0 · Surfaces', color: 'client', boxes: [
+              { nm: 'iPhone', ty: 'SwiftUI · Memory Lane' },
+              { nm: 'Apple Watch', ty: 'the crown is the catraca', sub: 'At the Gate, stadium black' },
+              { nm: 'Android', ty: 'Kotlin · Compose' } ] },
+            { lbl: 'Tier 1 · The Ritual', color: 'edge', flow: 'nothing logs without it', center: true, boxes: [
+              { hub: true, nm: 'Rotate the Catraca', ty: '120° drag · haptic click', sub: 'press-and-hold for reduced motion' } ] },
+            { lbl: 'Tier 2 · The Artifact', color: 'app', flow: 'what you keep', boxes: [
+              { nm: 'The Punch', ty: 'collectible ticket', sub: 'serial KTR-nnnn-yy' },
+              { nm: 'Memory Lane', ty: 'your years, in order' },
+              { nm: 'Four Favourites', ty: 'the ones that stuck' },
+              { nm: 'Quests', ty: 'circuits · ballparks · slams' } ] },
+            { lbl: 'Tier 3 · Data', color: 'data', flow: 'offline-first, non-negotiable', arrows: '▲ ▼', boxes: [
+              { nm: 'GRDB / Room', ty: 'on-device store' },
+              { nm: 'Sync Queue', ty: 'reconciles when you surface' },
+              { nm: 'Event Canon', ty: 'shared truth + backfill' } ] },
+            { lbl: 'Tier 4 · Services', color: 'ai', flow: 'server side', arrows: '▲ ▼', boxes: [
+              { nm: 'AI Gateway', ty: 'stub scanning · recaps', sub: 'instrumented by LangSmith' },
+              { nm: 'GILT Localization', ty: 'en-US + pt-BR at launch', sub: 'pseudo-locale CI gate' },
+              { nm: 'MCP, both ways', ty: 'adapters in · Katraca out' } ] }
+          ],
+          rail: {
+            lbl: 'Cross-cutting · Product Guardrails',
+            items: [
+              { nm: 'Honor System', ty: 'no ticket scan, ever' },
+              { nm: 'No Streaks', ty: 'no leaderboards, no badges' },
+              { nm: 'Non-transferable', ty: 'zero collectible-market framing' },
+              { nm: 'Memory Stays Free', ty: 'no paywall on your own past' } ],
+            span: 'the rules that keep it warm'
+          },
+          note: 'A live-event memory app whose whole product rests on one <b>ritual</b>: you rotate the catraca to log a night out, and it answers with a haptic click. The artifact is <b>The Punch</b>, a commemorative ticket in your <b>Memory Lane</b>. <b>Offline-first</b> (GRDB on iOS, Room on Android, with a sync queue) is the single non-negotiable, because the gate is exactly where signal dies. A server-side <b>AI gateway</b> handles stub scanning and recaps, <b>GILT localization</b> ships en-US and pt-BR from day one, and <b>MCP</b> runs both directions. The guardrails are the design: no streaks, no leaderboards, no NFTs, and never a paywall between you and your own memories.'
+        }
+      },
+
       'pomme48': {
         title: 'PoMme 48°',
         tag: 'Agentic AI · Localization · 2026',
@@ -2758,10 +2870,10 @@
           ${liveBtn}
           ${loomBtn}
           ${archBtn}
-          <a href="${p.github}" target="_blank" rel="noopener" class="lab-mbtn ${p.live ? 'lab-mbtn-ghost' : 'lab-mbtn-primary'}">
+          ${p.github ? `<a href="${p.github}" target="_blank" rel="noopener" class="lab-mbtn ${p.live ? 'lab-mbtn-ghost' : 'lab-mbtn-primary'}">
             <svg viewBox="0 0 24 24" style="width:13px;height:13px;fill:currentColor"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
             View on GitHub
-          </a>`;
+          </a>` : ''}`;
 
         if (p.video) {
           // Looping screen-recording demo.
@@ -2871,6 +2983,42 @@
     function labScroll(dir) {
       document.getElementById('labTrack').scrollBy({ left: dir * 260, behavior: 'smooth' });
     }
+
+    /* ─── STUDIO · filter the carousel by problem ─────────
+       Cards dim instead of unmounting, so the size and shape
+       of the whole body of work stays legible while filtered. */
+    (function () {
+      const chipBar = document.getElementById('studioChips');
+      if (!chipBar) return;
+      const note  = document.getElementById('studioNote');
+      const cards = Array.from(document.querySelectorAll('.lab-card'));
+      const chips = Array.from(chipBar.querySelectorAll('.studio-chip'));
+      const track = document.getElementById('labTrack');
+
+      function apply(domain, label) {
+        let hits = 0;
+        cards.forEach(card => {
+          const list = (card.dataset.domains || '').split(',');
+          const on = domain === 'all' || list.includes(domain);
+          card.classList.toggle('is-muted', !on);
+          if (on) hits++;
+        });
+        chips.forEach(c => {
+          const on = c.dataset.domain === domain;
+          c.classList.toggle('is-on', on);
+          c.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+        note.textContent = domain === 'all'
+          ? 'Nine platforms. Pick a problem to see which ones answer it.'
+          : `${label}: ${hits} of ${cards.length} platforms.`;
+        if (track) track.scrollTo({ left: 0, behavior: 'smooth' });
+      }
+
+      chipBar.addEventListener('click', e => {
+        const chip = e.target.closest('.studio-chip');
+        if (chip) apply(chip.dataset.domain, chip.textContent.trim());
+      });
+    })();
 
     // ─── APPLIED AI · connected knowledge map ───────────
     (function () {
