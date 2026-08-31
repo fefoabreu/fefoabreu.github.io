@@ -42,11 +42,33 @@
       --muted:   #6b7280;
       --border:  rgba(200,169,110,.2);
       --r:       6px;
-      --fs-hero: clamp(3.5rem, 8vw, 7.5rem);
+      --fs-hero: clamp(2.9rem, 7.2vw, 6.8rem);
       --fs-h2:   clamp(2.4rem, 5vw, 4.2rem);
       --fs-h3:   clamp(1.4rem, 2.5vw, 2rem);
       --ease:    cubic-bezier(.22,.68,0,1.1);
     }
+
+    /* ─── LINE BREAKING ───────────────────────────────────
+       No one- or two-word last lines. `pretty` is the browser's
+       orphan-avoidance pass for running copy; `balance` evens out
+       the lines of short blocks like headings and labels. Both
+       degrade silently to normal wrapping where unsupported. */
+    body { text-wrap: pretty; }
+    h1, h2, h3, h4,
+    .section-title, .section-lead, .chapter-label,
+    .ct-role-title, .ct-teaser, .ct-inter-label,
+    .ms-card h4, .metric-label, .foundation-sub-title,
+    .lab-modal-mtitle, .lab-card-title, .tl-company,
+    .beyond-quote p, .arch-h1, .toolkit-card h4,
+    .interlude-title, .ild-name, .ild-what, .ild-why {
+      /* Headings and label-length text only. `balance` evens every line, which
+         on a running paragraph means it stops short of the available width —
+         so paragraphs stay on `pretty`, which fills the measure and only
+         rescues the last line. */
+      text-wrap: balance;
+    }
+    /* Never split the language list onto a line of its own. */
+    .metric-sublabel { white-space: nowrap; }
 
     /* ─── RESET ──────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -118,7 +140,7 @@
       background: var(--navy);
       display: grid;
       place-items: center;
-      padding: 6rem 2rem 4rem;
+      padding: 6rem 2.75rem 4rem;
       position: relative;
       overflow: hidden;
     }
@@ -157,7 +179,7 @@
       to   { transform: translate3d(80px,-60px,0) scale(1.15); }
     }
     .hero-inner {
-      max-width: 1220px; width: 100%;
+      max-width: 1260px; width: 100%;
       display: grid;
       grid-template-columns: 1fr auto;
       /* start, not center — keeps the left block's top level with the photo so
@@ -181,7 +203,9 @@
     .hero-name {
       font-family: 'Cormorant Garamond', serif;
       font-size: var(--fs-hero);
-      font-weight: 300; line-height: .95;
+      /* Each line is one word — never let either of them break. */
+      white-space: nowrap;
+      font-weight: 300; line-height: .96;
       color: var(--cream);
       opacity: 0; animation: fadeUp .8s var(--ease) .2s forwards;
     }
@@ -229,11 +253,16 @@
       color: rgba(250,248,243,.6);
       opacity: 0; animation: fadeUp .7s var(--ease) .35s forwards;
     }
+    /* All six credentials read as one row, so they take their own line under
+       the name rather than being squeezed beside "Abreu". */
     .cert-row {
-      display: flex; flex-wrap: wrap; gap: .5rem;
-      margin-top: 1.6rem;
+      display: flex; flex-wrap: nowrap; gap: .5rem;
+      margin-top: 1.5rem;
       opacity: 0; animation: fadeUp .7s var(--ease) .45s forwards;
     }
+    /* Below this the left column is narrower than the row, so let it wrap
+       rather than push the chips out of the column. */
+    @media(max-width:960px){ .cert-row { flex-wrap: wrap; } }
     @media(max-width:700px){ .cert-row { justify-content: center; } }
     .cert-tag {
       font-family: 'DM Mono', monospace;
@@ -371,7 +400,7 @@
     .hero-photo-col {
       opacity: 0; animation: fadeIn .9s var(--ease) .5s forwards;
       display: flex; flex-direction: column; align-items: center;
-      gap: 1.6rem; width: 500px;
+      gap: 1.6rem; width: 605px;
     }
     .hero-photo {
       width: 200px; height: 200px; border-radius: 50%;
@@ -384,7 +413,7 @@
     }
     @media(max-width:700px){ .hero-photo { width: 150px; height: 150px; } }
     .hero-intro {
-      font-size: .85rem; font-weight: 300; line-height: 1.8;
+      font-size: 1rem; font-weight: 300; line-height: 1.72;
       color: rgba(250,248,243,.58);
       font-family: 'DM Sans', sans-serif;
     }
@@ -395,11 +424,52 @@
       .hero-intro { text-align: left; }
     }
 
+    /* Roomy displays — a large external monitor. There is vertical slack to
+       spare here, so give the bio a larger measure rather than leave the
+       column short and the type small. */
+    @media (min-width: 1500px) and (min-height: 860px) {
+      .hero-photo-col { width: 665px; }
+      .hero-photo { width: 224px; height: 224px; }
+      .hero-intro { font-size: 1.06rem; line-height: 1.74; }
+      .hero-intro p { margin-bottom: .8rem; }
+    }
+
+    /* Short laptop viewports (13" MacBook Air, more so with a bookmarks bar).
+       The right column — photo plus bio — is the taller of the two and is what
+       decides whether the hero fits, so tighten it there and nowhere else. */
+    @media (min-width: 701px) and (max-height: 820px) {
+      #hero { padding: 4.6rem 2.75rem 3.2rem; }
+      .hero-photo-col { gap: 1.15rem; }
+      .hero-intro { font-size: .93rem; line-height: 1.6; }
+      .hero-intro p { margin-bottom: .5rem; }
+      .hero-subtitle { margin-top: 1rem; }
+      .metrics-row { margin-top: 1.7rem; }
+      .metric { padding: .85rem .6rem; }
+    }
+
+    /* Shorter still (1366x768 laptops with browser chrome). Squeeze the
+       same knobs harder rather than dropping anything from the hero. */
+    @media (min-width: 701px) and (max-height: 700px) {
+      #hero { padding: 4.2rem 2.75rem 2.15rem; }
+      .hero-photo { width: 168px; height: 168px; }
+      .hero-photo-col { gap: .85rem; }
+      .hero-intro { font-size: .86rem; line-height: 1.52; }
+      .hero-intro p { margin-bottom: .45rem; }
+      /* The chip row costs a line here, so buy it back from the name. */
+      .hero-name { font-size: clamp(2.6rem, 5.4vw, 5rem); }
+      .hero-live { margin-top: .65rem; }
+      .hero-subtitle { margin-top: .9rem; }
+      .cert-row { margin-top: 1.1rem; }
+      .metrics-row { margin-top: 1.5rem; }
+      .metric { padding: .7rem .6rem; }
+      .hero-ctas { margin-top: .9rem; }
+    }
+
     /* ─── SECTION SCAFFOLDING ────────────────────────────── */
     section { scroll-margin-top: 60px; }
     .section-inner {
       max-width: 900px; margin: 0 auto;
-      padding: 7rem 2rem;
+      padding: 7rem 2.75rem;
     }
     .chapter-label {
       display: inline-block;
@@ -491,6 +561,176 @@
     }
     .tl-edu p { font-size: .85rem; color: var(--muted); }
     .tl-edu strong { color: var(--navy); font-weight: 500; }
+
+    /* ─── CAPTECH (current chapter) ─────────────────────── */
+    #captech { background: var(--warm); }
+    /* Long enough to break at 640px, short enough to fit on one line if we
+       let it have the room the section already has. */
+    #captech .section-lead { max-width: 820px; }
+
+    .ct-role {
+      margin-top: 2.5rem;
+      padding: 1.6rem 1.7rem;
+      background: #fff;
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--blue);
+      border-radius: 0 var(--r) var(--r) 0;
+    }
+    .ct-role-head {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      gap: 1rem; margin-bottom: .85rem;
+    }
+    .ct-role-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem; font-weight: 600; color: var(--navy);
+      line-height: 1.2;
+    }
+    .ct-role-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: .66rem; letter-spacing: .13em; text-transform: uppercase;
+      color: var(--muted); margin-top: .4rem;
+    }
+    .ct-flag {
+      flex-shrink: 0; padding-top: .1rem;
+      font-size: 1.05rem; line-height: 1; letter-spacing: .12em;
+    }
+    /* CapTech's brand face. Gibson (Canada Type) is a licensed commercial
+       font, not served from Google Fonts, so this renders in Gibson only where
+       it is installed or once a licensed webfont is added; DM Sans, the site's
+       own geometric sans, carries it everywhere else. */
+    .ct-teaser {
+      font-family: 'Gibson', 'Canada Type Gibson', 'DM Sans', sans-serif;
+      font-size: 1.08rem; font-weight: 500; letter-spacing: .01em;
+      color: var(--blue);
+      margin-bottom: .8rem;
+    }
+    .ct-body { font-size: .97rem; color: #374151; line-height: 1.82; }
+
+    /* .client-tag is tuned for the navy Microsoft section — restate it for
+       the warm CapTech ground. */
+    #captech .client-cloud { margin-top: 0; }
+    #captech .client-tag {
+      color: var(--text);
+      border-color: var(--border);
+      background: rgba(255,255,255,.55);
+    }
+    /* Section label inside the CapTech block (Client Portfolio). */
+    .ct-inter-label {
+      font-family: 'DM Mono', monospace;
+      font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .85rem;
+    }
+
+    /* ─── THE IN-BETWEEN ─────────────────────────────────
+       The four months between Microsoft and CapTech. This is the
+       chapter, not a footnote, so it takes the site's dark ground
+       and sits inset in the warm CapTech section. Each card carries
+       the platform's own mark, what it does, and why it exists —
+       the "why" is the part The Studio further down does not tell. */
+    .interlude {
+      position: relative;
+      margin-top: 3.2rem;
+      padding: 2.6rem 2.4rem 2.2rem;
+      background: var(--navy);
+      border-radius: var(--r);
+      border: 1px solid rgba(200,169,110,.22);
+      box-shadow: 0 26px 60px rgba(15,30,60,.22);
+      overflow: hidden;
+    }
+    .interlude-grain {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(200,169,110,.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200,169,110,.045) 1px, transparent 1px);
+      background-size: 64px 64px;
+    }
+    .interlude-head { position: relative; }
+    .interlude-kicker {
+      font-family: 'DM Mono', monospace;
+      font-size: .64rem; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: .7rem;
+    }
+    .interlude-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.8rem, 3.2vw, 2.5rem); font-weight: 300;
+      line-height: 1.1; color: var(--cream);
+    }
+    .interlude-title em { font-style: italic; color: var(--accent); }
+    .interlude-lead {
+      font-size: .97rem; font-weight: 300; line-height: 1.75;
+      color: rgba(250,248,243,.55);
+      max-width: 620px; margin-top: .9rem;
+    }
+
+    .interlude-grid {
+      position: relative;
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: .9rem; margin-top: 2rem;
+    }
+    .ild {
+      display: flex; align-items: flex-start; gap: .95rem;
+      padding: 1.15rem 1.15rem 1.2rem;
+      border: 1px solid rgba(200,169,110,.16);
+      border-radius: var(--r);
+      background: rgba(255,255,255,.035);
+      transition: background .25s, border-color .25s, transform .25s var(--ease);
+    }
+    .ild:hover {
+      background: rgba(255,255,255,.07);
+      border-color: rgba(200,169,110,.42);
+      transform: translateY(-3px);
+    }
+    .ild-mark { flex-shrink: 0; width: 42px; height: 42px; }
+    .ild-mark svg, .ild-mark img {
+      width: 100%; height: 100%; display: block;
+      border-radius: 9px;
+      box-shadow: 0 4px 14px rgba(0,0,0,.35);
+    }
+    .ild-body { display: block; min-width: 0; }
+    .ild-name {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.22rem; font-weight: 600; color: var(--cream);
+      line-height: 1.15;
+      border-bottom: 1px solid transparent;
+    }
+    .ild:hover .ild-name { color: var(--accent); }
+    .ild-what {
+      display: block; margin-top: .3rem;
+      font-size: .84rem; line-height: 1.6;
+      color: rgba(250,248,243,.5);
+    }
+    .ild-why {
+      display: block; margin-top: .6rem;
+      padding-top: .6rem;
+      border-top: 1px solid rgba(200,169,110,.16);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 1rem; line-height: 1.5;
+      color: rgba(200,169,110,.92);
+    }
+    .interlude-foot {
+      position: relative;
+      margin-top: 1.6rem; padding-top: 1.2rem;
+      border-top: 1px solid rgba(250,248,243,.1);
+      font-family: 'DM Mono', monospace;
+      font-size: .68rem; letter-spacing: .06em;
+      color: rgba(250,248,243,.42);
+    }
+    .interlude-foot a {
+      color: var(--accent);
+      border-bottom: 1px solid rgba(200,169,110,.45);
+      transition: border-color .2s;
+    }
+    .interlude-foot a:hover { border-color: var(--accent); }
+    /* Two cards side by side get cramped below this — iPad portrait included. */
+    @media(max-width:820px){
+      .interlude { padding: 2rem 1.3rem 1.8rem; margin-top: 2.4rem; }
+      .interlude-grid { grid-template-columns: 1fr; }
+    }
+    @media(max-width:600px){
+      .ct-role { padding: 1.3rem 1.2rem; }
+      .ct-role-title { font-size: 1.2rem; }
+    }
 
     /* ─── DARK SECTION (Microsoft) ──────────────────────── */
     #microsoft {
@@ -702,6 +942,13 @@
     }
     .path-arrow { color: var(--accent); font-family: 'DM Mono', monospace; font-size: .8rem; }
     .path-flag { font-size: 1rem; display: flex; align-items: center; }
+    /* Québec has no Unicode flag emoji, so the Fleurdelisé is drawn inline
+       and sized to sit with the emoji flags on either side of it. */
+    .qc-flag svg {
+      width: 1.15em; height: auto; display: block;
+      border-radius: 1px;
+      box-shadow: 0 0 0 .5px rgba(0,0,0,.25);
+    }
     .flag-img { height: 14px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(0,0,0,.18); display: block; }
 
     /* ─── CONNECT ────────────────────────────────────────── */
@@ -916,11 +1163,11 @@
     }
 
     /* ─── THE LAB ─────────────────────────────────────── */
-    #lab {
+    #The-Studio {
       background: #060d1f;
       position: relative;
     }
-    #lab::before {
+    #The-Studio::before {
       content: '';
       position: absolute; inset: 0;
       background-image:
@@ -929,46 +1176,14 @@
       background-size: 70px 70px;
       pointer-events: none;
     }
-    #lab .section-title { color: var(--cream); }
-    #lab .section-rule  { background: var(--accent); }
-    #lab .chapter-label { color: var(--accent); }
-    #lab .section-lead  { color: rgba(250,248,243,.5); }
-    #lab .section-inner { padding-bottom: 1.5rem; }
+    #The-Studio .section-title { color: var(--cream); }
+    #The-Studio .section-rule  { background: var(--accent); }
+    #The-Studio .chapter-label { color: var(--accent); }
+    #The-Studio .section-lead  { color: rgba(250,248,243,.5); }
+    /* The problem rail used to live under the rule; without it the header
+       block ends at the rule, so close the gap to the carousel. */
+    #The-Studio .section-inner { padding-bottom: 0; }
 
-    /* ─── STUDIO · problem rail ──────────────────────────
-       Filters the carousel by the problem a project answers,
-       not by its stack. Non-matching cards dim rather than
-       disappear, so the shape of the whole body of work stays. */
-    .studio-rail { margin-top: 2.6rem; }
-    .studio-rail-label {
-      display: block;
-      font-family: 'DM Mono', monospace;
-      font-size: .62rem; letter-spacing: .22em; text-transform: uppercase;
-      color: rgba(250,248,243,.38); margin-bottom: .85rem;
-    }
-    .studio-chips { display: flex; flex-wrap: wrap; gap: .45rem; }
-    .studio-chip {
-      font-family: 'DM Mono', monospace;
-      font-size: .72rem; letter-spacing: .04em;
-      padding: .42rem .85rem;
-      color: rgba(250,248,243,.62);
-      background: none;
-      border: 1px solid rgba(250,248,243,.16);
-      border-radius: 2px;
-      cursor: pointer;
-      transition: color .25s var(--ease), border-color .25s var(--ease), background .25s var(--ease);
-    }
-    .studio-chip:hover { color: var(--accent); border-color: rgba(200,169,110,.5); }
-    .studio-chip:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-    .studio-chip.is-on {
-      color: var(--navy); background: var(--accent); border-color: var(--accent);
-    }
-    .studio-rail-note {
-      font-family: 'DM Sans', sans-serif;
-      font-size: .82rem; font-weight: 300;
-      color: rgba(250,248,243,.34);
-      margin-top: .9rem; min-height: 1.2em;
-    }
     .lab-row-outer {
       max-width: 1060px;
       margin: 0 auto;
@@ -1108,6 +1323,258 @@
     @media(max-width:600px) { .lab-arrow { display: none; } }
 
     /* ─── LAB MODAL ─────────────────────────────────────── */
+    /* ─── STUDIO · animated banners ───────────────────────
+       Some projects have no screen recording worth looping, so the
+       modal header runs a live, self-contained animation built from
+       that product's own motion spec instead of a video file. */
+    .lab-modal-banner {
+      position: absolute; inset: 0;
+      display: none;
+      z-index: 1;
+    }
+    .lab-modal-banner.show { display: block; }
+    /* When a banner is up the video gradient would muddy it. */
+    .lab-modal-header.has-banner .lab-modal-voverlay {
+      background: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,.28) 100%);
+    }
+
+    /* ── Katraca · rotate the catraca ──
+       Ported from katraca.app: the locked idle brand tick
+       (0/68% 0deg, 80% 127deg overshoot, 86/100% 120deg, 4.6s). */
+    .kb {
+      position: absolute; inset: 0;
+      background: #0E1319;
+      display: flex; align-items: center; gap: 1.4rem;
+      padding: 0 1.9rem;
+      overflow: hidden;
+    }
+    .kb-grid {
+      position: absolute; inset: 0;
+      background-image: linear-gradient(90deg, rgba(52,226,122,.07) 1px, transparent 1px);
+      background-size: 26px 100%;
+      mask-image: linear-gradient(to right, #000 0%, transparent 62%);
+      -webkit-mask-image: linear-gradient(to right, #000 0%, transparent 62%);
+      pointer-events: none;
+    }
+    .kb-rotor {
+      position: relative; flex-shrink: 0;
+      width: 132px; height: 132px;
+      border-radius: 50%;
+      background: #161D26;
+      border: 1px solid #2A3542;
+      box-shadow: 0 14px 30px rgba(0,0,0,.45);
+      display: flex; align-items: center; justify-content: center;
+      color: #34E27A;
+    }
+    .kb-svg { width: 104px; height: 104px; display: block; }
+    .kb-guide { stroke: rgba(255,255,255,.14); }
+    .kb-arms {
+      transform-box: view-box;
+      transform-origin: 57px 48px;
+      animation: kturn 4.6s cubic-bezier(.55, 0, .3, 1.15) infinite;
+    }
+    @keyframes kturn {
+      0%, 68%   { transform: rotate(0deg); }
+      80%       { transform: rotate(127deg); }
+      86%, 100% { transform: rotate(120deg); }
+    }
+    /* The 800ms flash ring, fired on the click at the end of the turn. */
+    .kb-ring {
+      position: absolute; inset: 0; border-radius: 50%;
+      pointer-events: none; opacity: 0;
+      animation: kflash 4.6s ease-out infinite;
+    }
+    @keyframes kflash {
+      0%, 76%  { opacity: 0; box-shadow: 0 0 0 0 rgba(52,226,122,.55); }
+      80%      { opacity: 1; box-shadow: 0 0 0 0 rgba(52,226,122,.55); }
+      96%,100% { opacity: 0; box-shadow: 0 0 0 26px rgba(52,226,122,0); }
+    }
+    .kb-copy { position: relative; min-width: 0; }
+    .kb-word {
+      font-family: 'DM Mono', monospace;
+      font-size: 2.05rem; font-weight: 500; line-height: 1;
+      letter-spacing: .1em; color: #F2F6FA;
+    }
+    .kb-word .kb-k { color: #34E27A; }
+    .kb-slogan {
+      font-family: 'DM Mono', monospace;
+      font-size: .6rem; letter-spacing: .21em;
+      color: #34E27A; margin-top: .6rem;
+    }
+    .kb-meta {
+      font-family: 'DM Mono', monospace;
+      font-size: .56rem; letter-spacing: .15em;
+      color: #93A1B0; margin-top: .45rem;
+    }
+    @media(max-width:560px){
+      .kb { gap: 1rem; padding: 0 1.1rem; }
+      .kb-rotor { width: 104px; height: 104px; }
+      .kb-svg { width: 82px; height: 82px; }
+      .kb-word { font-size: 1.5rem; }
+      .kb-slogan { font-size: .53rem; letter-spacing: .16em; }
+      .kb-meta { display: none; }
+    }
+
+    /* ── Jornada.careers · choose your journey → the interview loop ──
+       Two staged scenes on one 13s loop: the persona picker that opens
+       the product, then the live mock-interview panel it leads to. */
+    .jb {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(120% 100% at 12% 0%, #1b2b4d 0%, #0d1730 55%, #0a1226 100%);
+      overflow: hidden;
+    }
+    .jb-scene {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 1.9rem;
+      opacity: 0;
+    }
+    .jb-a { animation: jbA 13s var(--ease) infinite; }
+    .jb-b { animation: jbB 13s var(--ease) infinite; }
+    @keyframes jbA {
+      0%, 40%  { opacity: 1; transform: translateY(0); }
+      48%, 92% { opacity: 0; transform: translateY(-14px); }
+      100%     { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes jbB {
+      0%, 42%   { opacity: 0; transform: translateY(14px); }
+      50%, 88%  { opacity: 1; transform: translateY(0); }
+      96%, 100% { opacity: 0; transform: translateY(14px); }
+    }
+    .jb-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: .56rem; letter-spacing: .2em; text-transform: uppercase;
+      color: #f59e0b; margin-bottom: .3rem;
+    }
+    .jb-head {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem; font-weight: 500; color: var(--cream);
+      line-height: 1.1; margin-bottom: .85rem;
+    }
+    /* the three post-it journeys */
+    .jb-notes { display: flex; gap: .6rem; }
+    .jb-note {
+      flex: 1; min-width: 0;
+      border-radius: 3px; padding: .5rem .55rem .6rem;
+      border-top: 4px solid var(--st);
+      background: var(--nb);
+      box-shadow: 0 6px 16px rgba(0,0,0,.4);
+      transform: rotate(var(--tilt));
+      animation: jbNote 13s var(--ease) infinite;
+    }
+    .jb-note .k {
+      font-family: 'DM Mono', monospace;
+      font-size: .5rem; letter-spacing: .13em; text-transform: uppercase;
+      color: var(--st); display: block; margin-bottom: .22rem;
+    }
+    .jb-note .t {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: .93rem; font-weight: 600; color: var(--ni);
+      line-height: 1.15; display: block;
+    }
+    .jb-note .f {
+      display: block; margin-top: .35rem;
+      font-size: .58rem; color: rgba(28,32,48,.62); line-height: 1.35;
+    }
+    /* The middle note (the job search) is the one that gets picked. */
+    .jb-note-pick { animation-name: jbPick; }
+    @keyframes jbNote {
+      0%      { opacity: 0; transform: translateY(10px) rotate(var(--tilt)); }
+      12%, 40%{ opacity: 1; transform: translateY(0) rotate(var(--tilt)); }
+      100%    { opacity: 1; transform: translateY(0) rotate(var(--tilt)); }
+    }
+    @keyframes jbPick {
+      0%       { opacity: 0; transform: translateY(10px) rotate(var(--tilt)); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
+      12%      { opacity: 1; transform: translateY(0) rotate(var(--tilt)); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
+      28%, 40% { opacity: 1; transform: translateY(-7px) rotate(0deg) scale(1.05);
+                 box-shadow: 0 14px 28px rgba(0,0,0,.5), 0 0 0 2px var(--accent); }
+      100%     { opacity: 1; transform: translateY(0) rotate(var(--tilt)); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
+    }
+    /* the interview panel */
+    .jb-panel { display: flex; align-items: center; gap: .75rem; }
+    .jb-seat { text-align: center; width: 74px; flex-shrink: 0; }
+    .jb-face {
+      width: 42px; height: 42px; border-radius: 50%;
+      margin: 0 auto .34rem;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .04em;
+      color: #0a1226; background: var(--sc);
+      box-shadow: 0 0 0 0 var(--sc);
+      animation: jbSpeak 3.6s ease-out infinite;
+      animation-delay: var(--sd);
+    }
+    @keyframes jbSpeak {
+      0%, 22%  { box-shadow: 0 0 0 0 var(--sc); transform: scale(1); }
+      8%       { box-shadow: 0 0 0 7px rgba(255,255,255,0); transform: scale(1.09); }
+      100%     { box-shadow: 0 0 0 0 rgba(255,255,255,0); transform: scale(1); }
+    }
+    .jb-seat .r {
+      font-family: 'DM Mono', monospace;
+      font-size: .48rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(250,248,243,.55); line-height: 1.3;
+    }
+    .jb-cue {
+      flex: 1; min-width: 0;
+      border-radius: 3px; padding: .5rem .6rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(200,169,110,.22);
+      border-left: 2px solid var(--accent);
+    }
+    .jb-cue .q {
+      font-size: .63rem; color: rgba(250,248,243,.72); line-height: 1.5;
+      display: block;
+    }
+    .jb-cue .m {
+      display: flex; align-items: center; gap: .32rem;
+      margin-top: .4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: .5rem; letter-spacing: .13em; text-transform: uppercase;
+      color: #f59e0b;
+    }
+    .jb-live {
+      width: 5px; height: 5px; border-radius: 50%; background: #f59e0b;
+      animation: jbLive 1.4s ease-in-out infinite;
+    }
+    @keyframes jbLive { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
+    /* the four-step loop rail */
+    .jb-rail {
+      display: flex; gap: .3rem; margin-top: .7rem;
+    }
+    .jb-step {
+      flex: 1;
+      font-family: 'DM Mono', monospace;
+      font-size: .46rem; letter-spacing: .1em; text-transform: uppercase;
+      color: rgba(250,248,243,.4);
+      padding-top: .32rem;
+      border-top: 1.5px solid rgba(250,248,243,.14);
+      animation: jbStep 4.4s linear infinite;
+      animation-delay: var(--sd);
+    }
+    @keyframes jbStep {
+      0%, 3%   { color: var(--accent); border-top-color: var(--accent); }
+      25%,100% { color: rgba(250,248,243,.4); border-top-color: rgba(250,248,243,.14); }
+    }
+    @media(max-width:560px){
+      .jb-scene { padding: 0 1.1rem; }
+      .jb-head { font-size: 1.2rem; }
+      .jb-note .f { display: none; }
+      .jb-seat { width: 56px; }
+      .jb-face { width: 34px; height: 34px; font-size: .52rem; }
+      .jb-rail { display: none; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .kb-arms, .kb-ring,
+      .jb-a, .jb-b, .jb-note, .jb-note-pick, .jb-face, .jb-live, .jb-step {
+        animation: none;
+      }
+      /* Without the cross-fade, scene A would sit invisibly on top of B. */
+      .jb-a { opacity: 1; }
+      .jb-b { display: none; }
+      .kb-arms { transform: rotate(120deg); }
+    }
+
     .lab-modal-overlay {
       position: fixed; inset: 0;
       background: rgba(0,0,0,.84);
@@ -1557,7 +2024,7 @@
       <a href="#hero" class="nav-logo">Fernando Abreu</a>
     </div>
     <ul class="nav-links">
-      <li><a href="#lab">The Studio</a></li>
+      <li><a href="#The-Studio">The Studio</a></li>
       <li><a href="#applied-ai">Applied-AI</a></li>
       <li><a href="#voices">Voices</a></li>
       <li><a href="#beyond">Beyond</a></li>
@@ -1569,13 +2036,8 @@
     <div class="hero-orbs" aria-hidden="true"><span class="orb orb-blue"></span><span class="orb orb-gold"></span></div>
     <div class="hero-inner">
       <div class="hero-text">
-        <p class="hero-eyebrow">Principal Technical Program Manager · Richmond, VA</p>
+        <p class="hero-eyebrow">Technical Program Manager, Applied AI · Richmond, VA</p>
         <h1 class="hero-name">Fernando<br /><span>Abreu</span></h1>
-        <p class="hero-subtitle">Cloud &amp; Agentic AI · Microsoft Professional Services · Fortune 500</p>
-        <a class="hero-live" href="https://github.com/fefoabreu?tab=repositories&amp;sort=updated" target="_blank" rel="noopener" hidden>
-          <span class="live-dot"></span><span class="live-text"></span>
-        </a>
-
         <div class="cert-row">
           <span class="cert-tag">PMP</span>
           <span class="cert-tag">CSPO</span>
@@ -1584,10 +2046,14 @@
           <span class="cert-tag">CMMI</span>
           <span class="cert-tag">MBA</span>
         </div>
+        <p class="hero-subtitle">Cloud &amp; Agentic AI · CapTech · ex-Microsoft · Fortune 500</p>
+        <a class="hero-live" href="https://github.com/fefoabreu?tab=repositories&amp;sort=updated" target="_blank" rel="noopener" hidden>
+          <span class="live-dot"></span><span class="live-text"></span>
+        </a>
 
         <div class="metrics-row">
           <div class="metric">
-            <div class="metric-num" data-count="25" data-suffix="+">25+</div>
+            <div class="metric-num" data-count="26" data-suffix="+">26+</div>
             <div class="metric-label">Years in IT</div>
           </div>
           <div class="metric">
@@ -1642,10 +2108,100 @@
       <div class="hero-photo-col">
         <img src="assets/profile.jpg" alt="Fernando Abreu" class="hero-photo" />
         <div class="hero-intro">
-          <p>Hi, my name is Fernando Abreu, and I've spent the last 10 years at Microsoft as a Principal Tech PM. I began my career as a software engineer, then moved into consulting to help customers adopt Agile practices and apply SDLC/PMO/CMMI methodologies to run their programs more effectively. From there, I was invited to build a Modern Applications professional services practice from the ground up leading a group of 22 people at peak.</p>
-          <p>My time at Microsoft has been centered on delivery excellence in the Azure Cloud&amp;AI space. I drive Idea to Design with Applied-AI and program manage Code to Launch with Engineering/Product Teams in the FDE/HVE Frontier model. I also specialize in Go-to-Market and Deal shaping strategy, helping executives shepherd approval and delivery of Microsoft's largest and most intricate engagements, all while running global programs to strengthen and streamline tools and methods with a strong appetite for process automation and &ldquo;kaizen&rdquo; (continuous improvement).</p>
-          <p>And that's just my side hustle: my full&#8209;time job is being a proud girl dad, loving husband, and distinguished pet parent. I'm originally from Brazil, spent a chapter as a French Canadian, later naturalized American now living in beautiful, historic Richmond, Virginia.</p>
+          <p>Hi, my name is Fernando Abreu, and I'm a Tech PM for Applied-AI at CapTech with a 26-year IT career rooted in SW engineering. I lead complex engagements at Top Tier organizations, turning ambiguous business opportunities into scalable solutions with measurable outcomes.</p>
+          <p>My time at Microsoft was centered on delivery excellence in the Azure Cloud&amp;AI space, leading cross-functional teams of engineers, data scientists and architects. I drove Idea to Design with Applied-AI and program managed Code to Launch with Engineering and Product teams in the FDE/HVE Frontier model. I also specialized in solution shaping, Go-to-Market and technical pursuits, helping executives shepherd approval and delivery of Microsoft's largest and most intricate engagements, all while running global programs that turned hard-won delivery lessons into reusable IP, with a strong appetite for process automation and &ldquo;kaizen&rdquo; (continuous improvement).</p>
+          <p>And that's just my side hustle: my full&#8209;time job is being a proud girl dad, loving husband, and distinguished pet parent. I'm originally from Brazil, spent a chapter as a French Canadian, later naturalized American, now living in beautiful, historic Richmond, Virginia.</p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPTECH -->
+  <section id="captech">
+    <div class="section-inner">
+      <p class="chapter-label reveal">CapTech</p>
+      <h2 class="section-title reveal reveal-d1">Next chapter, <em>Applied AI.</em></h2>
+      <div class="section-rule reveal reveal-d2"></div>
+      <p class="section-lead reveal reveal-d3">
+        Forward-deployed Technical Program Manager, Applied AI consulting engagements.
+      </p>
+
+      <div class="ct-role reveal reveal-d3">
+        <div class="ct-role-head">
+          <div>
+            <p class="ct-role-title">Sr. Technical Program Manager, Applied AI</p>
+            <p class="ct-role-meta">July 2026 to present</p>
+          </div>
+          <span class="ct-flag" aria-hidden="true">&#x1F535;&#x1F7E1;</span>
+        </div>
+        <p class="ct-teaser">Let's do next together.</p>
+        <p class="ct-body">First assignment: Financial Services. Leading AI strategy and approved platforms rollout through evaluation and observability tooling (Galileo, LangSmith, Orchestra). Roadmap and implementation for enterprise-wide adoption, evals, guardrails, model libraries and human-in-the-loop&nbsp;verification&nbsp;as&nbsp;release&nbsp;gates.</p>
+      </div>
+
+      <div style="margin-top:2.5rem;" class="reveal">
+        <p class="ct-inter-label">Client Portfolio</p>
+        <div class="client-cloud">
+          <span class="client-tag">Bank of America</span>
+        </div>
+      </div>
+
+      <div class="interlude reveal reveal-d1">
+        <div class="interlude-grain" aria-hidden="true"></div>
+
+        <div class="interlude-head">
+          <p class="interlude-kicker">The in-between &middot; March to July 2026</p>
+          <h3 class="interlude-title">The summer of <em>#AIforGood.</em></h3>
+          <p class="interlude-lead">Four months between Microsoft and CapTech. Four platforms shipped worldwide, each one built because I could not put the problem down.</p>
+        </div>
+
+        <div class="interlude-grid">
+
+          <a class="ild" href="https://jornada.careers" target="_blank" rel="noopener">
+            <span class="ild-mark" aria-hidden="true"><img src="assets/app-icons/jornada.svg" alt="" /></span>
+            <span class="ild-body">
+              <span class="ild-name">Jornada.careers</span>
+              <span class="ild-what">Job match, r&eacute;sum&eacute; scoring and interview preparation.</span>
+              <span class="ild-why">I built it during my own search. It stays free for everyone still on theirs.</span>
+            </span>
+          </a>
+
+          <a class="ild" href="https://testflight.apple.com/join/rX8vWttz" target="_blank" rel="noopener">
+            <span class="ild-mark" aria-hidden="true"><img src="assets/app-icons/watchuwatchin-plus.png" alt="" /></span>
+            <span class="ild-body">
+              <span class="ild-name">WatchUWatchin+</span>
+              <span class="ild-what">Sharing what you watch, across iPhone, Watch and Apple TV.</span>
+              <span class="ild-why">The people I watch with live in other countries. This keeps us in one conversation.</span>
+            </span>
+          </a>
+
+          <a class="ild" href="https://katraca.app" target="_blank" rel="noopener">
+            <span class="ild-mark" aria-hidden="true">
+              <svg viewBox="0 0 96 96"><rect width="96" height="96" rx="21" fill="#0E1319"/><g transform="translate(2.5 4.8) scale(.9)"><rect x="14" y="8" width="13" height="80" rx="6.5" fill="#97A1AC"/><g fill="none" stroke="#34E27A" stroke-width="13" stroke-linecap="round"><line x1="63.1" y1="37.6" x2="74" y2="19"/><line x1="63.1" y1="58.4" x2="74" y2="77"/><line x1="45" y1="48" x2="24" y2="48"/></g><path fill-rule="evenodd" fill="#34E27A" d="M46 48a11 11 0 1 0 22 0a11 11 0 1 0 -22 0M52.6 48a4.4 4.4 0 1 1 8.8 0a4.4 4.4 0 1 1 -8.8 0"/></g></svg>
+            </span>
+            <span class="ild-body">
+              <span class="ild-name">Katraca</span>
+              <span class="ild-what">Every live event you showed up for, kept as a collectible ticket.</span>
+              <span class="ild-why">Don&rsquo;t leave it all on the field. And never a paywall between you and your own memories.</span>
+            </span>
+          </a>
+
+          <a class="ild" href="https://fefoabreu.me/PoMme48/" target="_blank" rel="noopener">
+            <span class="ild-mark" aria-hidden="true">
+              <svg viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#F6EFE6"/><text x="28" y="44" text-anchor="middle" font-family="Georgia, serif" font-weight="700" font-size="29" fill="#D9573F">48</text><circle cx="51" cy="21" r="4" fill="none" stroke="#D9573F" stroke-width="3.2"/></svg>
+            </span>
+            <span class="ild-body">
+              <span class="ild-name">PoMme 48&deg;</span>
+              <span class="ild-what">Agentic AI localization, 48 languages and 150+ markets.</span>
+              <span class="ild-why">Software should meet people in their own language. All forty-eight of them.</span>
+            </span>
+          </a>
+
+        </div>
+
+        <p class="interlude-foot">
+          Each one is torn down to its architecture in <a href="#The-Studio">The Studio</a>, further down the page. <span aria-hidden="true">&darr;</span>
+        </p>
+      </div>
       </div>
     </div>
   </section>
@@ -1654,15 +2210,15 @@
   <section id="microsoft">
     <div class="section-inner">
       <p class="chapter-label reveal">Microsoft</p>
-      <h2 class="section-title reveal reveal-d1">Ten years at<br /><em>the top.</em></h2>
+      <h2 class="section-title reveal reveal-d1">Ten years at <em>the top.</em></h2>
       <div class="section-rule reveal reveal-d2"></div>
       <p class="section-lead reveal reveal-d3">
-        July 2016 — Present. Principal Tech PM leading Cloud and AI, M365 and Dynamics implementation programs for Fortune 500 clients across Microsoft's Professional Services portfolio.
+        Summer 2016 through 2026. Principal Tech PM leading Cloud and AI, M365 and Dynamics implementation programs for Fortune 500 clients across Microsoft's Professional Services portfolio.
       </p>
 
       <div class="ms-highlight reveal reveal-d3">
         <p>
-          Technical Program Manager rooted in a software‑engineering background, leading end‑to‑end delivery and pre‑sales of cloud implementations and AI initiatives across the Fortune 500 (Azure OpenAI, Copilot Studio, Claude Code, GitHub, ADO). Thrives on Idea to Design — technically savvy to drive Code to Launch. Coordinates cross‑functional teams of engineers, data scientists, architects, and the partner/vendor network, translating complex technical programs into clear executive outcomes as an expert in Agile, SAFe, and hybrid delivery methodologies.
+          Technical Program Manager rooted in a software‑engineering background, who led end‑to‑end delivery and pre‑sales of cloud implementations and AI initiatives across the Fortune 500 (Azure OpenAI, Copilot Studio, Claude Code, GitHub, ADO). Thrived on Idea to Design, technically savvy to drive Code to Launch. Coordinated cross‑functional teams of engineers, data scientists, architects, and the partner/vendor network, translating complex technical programs into clear executive outcomes as an expert in Agile, SAFe, and hybrid delivery methodologies.
         </p>
       </div>
 
@@ -1816,28 +2372,11 @@
 
 
   <!-- THE STUDIO -->
-  <section id="lab">
+  <section id="The-Studio">
     <div class="section-inner">
       <p class="chapter-label reveal">Envisioned &middot; Built &middot; Published</p>
       <h2 class="section-title reveal reveal-d1">The <em>Studio.</em></h2>
       <div class="section-rule reveal reveal-d2"></div>
-      <p class="section-lead reveal reveal-d3">
-        Every one of these started the same way: a problem I could not stop turning over. Some come from the day job — delivery risk, localization at scale, agentic tooling. Some come from the rest of life — the job hunt, live events, what we watch, where we gather. I envision them, build them, and publish them. Then I use them myself, which is the part that keeps them honest.
-      </p>
-
-      <div class="studio-rail reveal reveal-d3" role="group" aria-label="Filter projects by problem">
-        <span class="studio-rail-label">The problems</span>
-        <div class="studio-chips" id="studioChips">
-          <button type="button" class="studio-chip is-on" data-domain="all" aria-pressed="true">Everything</button>
-          <button type="button" class="studio-chip" data-domain="ai" aria-pressed="false">Applied AI</button>
-          <button type="button" class="studio-chip" data-domain="apple" aria-pressed="false">Apple platforms</button>
-          <button type="button" class="studio-chip" data-domain="events" aria-pressed="false">Live events</button>
-          <button type="button" class="studio-chip" data-domain="global" aria-pressed="false">Globalization</button>
-          <button type="button" class="studio-chip" data-domain="learning" aria-pressed="false">Learning</button>
-          <button type="button" class="studio-chip" data-domain="hospitality" aria-pressed="false">Hospitality</button>
-        </div>
-        <p class="studio-rail-note" id="studioNote" role="status" aria-live="polite">Nine platforms. Pick a problem to see which ones answer it.</p>
-      </div>
     </div>
 
     <div class="lab-row-outer reveal">
@@ -1849,23 +2388,23 @@
         <div class="lab-track" id="labTrack">
         <div class="lab-row" id="labRow">
 
-          <!-- Career Coach -->
-          <div class="lab-card" data-project="career-coach" data-domains="ai,learning">
-            <img class="lab-card-img" src="assets/lab-career-coach.jpg" alt="Career Coach" />
+          <!-- Jornada.careers -->
+          <div class="lab-card" data-project="jornada">
+            <img class="lab-card-img" src="assets/lab-jornada.jpg" alt="Jornada.careers — Choose your journey" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
             </div>
             <div class="lab-card-overlay">
-              <span class="lab-card-tag">AI &middot; Productivity</span>
-              <div class="lab-card-title">Career Coach</div>
+              <span class="lab-card-tag">AI &middot; Career Journey</span>
+              <div class="lab-card-title">Jornada.careers</div>
               <div class="lab-card-year">2026</div>
             </div>
           </div>
 
           <!-- WatchUWatchin+ -->
-          <div class="lab-card" data-project="watchuwatchin" data-domains="apple,global">
-            <img class="lab-card-img" src="assets/lab-watchuwatchin.jpg" alt="WatchUWatchin+" />
+          <div class="lab-card" data-project="watchuwatchin">
+            <img class="lab-card-img" src="assets/lab-watchuwatchin-boxoffice.jpg" alt="WatchUWatchin+ — Box Office" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
               <svg viewBox="0 0 24 24" width="20" height="20" fill="#0f1e3c"><path d="M8 5v14l11-7z"/></svg>
@@ -1878,7 +2417,7 @@
           </div>
 
           <!-- Katraca -->
-          <div class="lab-card" data-project="katraca" data-domains="apple,events">
+          <div class="lab-card" data-project="katraca">
             <img class="lab-card-img" src="assets/lab-katraca.jpg" alt="Katraca" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1892,7 +2431,7 @@
           </div>
 
           <!-- PoMme 48 -->
-          <div class="lab-card" data-project="pomme48" data-domains="ai,global">
+          <div class="lab-card" data-project="pomme48">
             <img class="lab-card-img" src="assets/lab-pomme48.jpg" alt="PoMme 48&deg;" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1906,7 +2445,7 @@
           </div>
 
           <!-- Fan Engagement -->
-          <div class="lab-card" data-project="nba-fan-engagement" data-domains="ai,events">
+          <div class="lab-card" data-project="nba-fan-engagement">
             <img class="lab-card-img" src="assets/lab-nba-fan-engagement.jpg" alt="Fan Engagement" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1920,7 +2459,7 @@
           </div>
 
           <!-- Oneway Intercâmbio -->
-          <div class="lab-card" data-project="oneway-intercambio" data-domains="ai,learning">
+          <div class="lab-card" data-project="oneway-intercambio">
             <img class="lab-card-img" src="assets/lab-oneway-intercambio.jpg" alt="Oneway Intercâmbio" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1934,7 +2473,7 @@
           </div>
 
           <!-- Delivery Excellence -->
-          <div class="lab-card" data-project="delivery-excellence" data-domains="ai">
+          <div class="lab-card" data-project="delivery-excellence">
             <img class="lab-card-img" src="assets/lab-delivery-excellence.jpg" alt="Delivery Excellence" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1948,7 +2487,7 @@
           </div>
 
           <!-- The Gathering Silveira -->
-          <div class="lab-card" data-project="the-gathering" data-domains="hospitality">
+          <div class="lab-card" data-project="the-gathering">
             <img class="lab-card-img" src="assets/lab-the-gathering.jpg" alt="The Gathering Silveira" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1962,7 +2501,7 @@
           </div>
 
           <!-- Bella Bite -->
-          <div class="lab-card" data-project="bella-bite" data-domains="hospitality">
+          <div class="lab-card" data-project="bella-bite">
             <img class="lab-card-img" src="assets/lab-bella-bite.jpg" alt="Bella Bite" />
             <div class="lab-card-noise"></div>
             <div class="lab-card-play">
@@ -1992,7 +2531,7 @@
       <h2 class="section-title reveal reveal-d1">Applied <em>AI.</em></h2>
       <div class="section-rule reveal reveal-d2"></div>
       <p class="section-lead reveal reveal-d3">
-        Patterns I reach for when turning a model into a real product &mdash; charted as one connected map. Everything here is load-bearing in something shipped: agent graphs and golden-dataset RAG in <strong>PoMme 48&deg;</strong>, multi-provider orchestration in <strong>Career Coach</strong>, on-device localization and voice in <strong>WatchUWatchin+</strong>. Hover any capability or tool to trace how the pieces link up.
+        Fighting the AI slop, one token at a time. These are the patterns I reach for when turning a model into a real product, charted as one connected map. Hover any capability or tool to trace how the pieces link up.
       </p>
 
       <div class="aai-map-wrap reveal">
@@ -2016,9 +2555,10 @@
   <!-- LAB MODAL -->
   <div class="lab-modal-overlay" id="labModalOverlay">
     <div class="lab-modal">
-      <div class="lab-modal-header">
+      <div class="lab-modal-header" id="labModalHeader">
         <video class="lab-modal-video" id="labModalVideo" autoplay muted loop playsinline></video>
         <img class="lab-modal-poster" id="labModalPoster" alt="" />
+        <div class="lab-modal-banner" id="labModalBanner" aria-hidden="true"></div>
         <div class="lab-modal-voverlay"></div>
         <button class="lab-modal-close" id="labModalClose">&#x2715;</button>
       </div>
@@ -2309,10 +2849,10 @@
 
           <div class="journey-path reveal reveal-d1">
             <div class="path-step"><span class="path-flag">🇧🇷</span><span>Porto Alegre, Brazil</span></div>
-            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag">🇨🇦</span><span>Montréal, Québec</span></div>
+            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag qc-flag" role="img" aria-label="Québec"><svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#095797"/><rect x="12.75" width="4.5" height="20" fill="#fff"/><rect y="7.75" width="30" height="4.5" fill="#fff"/><g fill="#fff"><path d="M6.4 3.2l.8 1.45h1.2l-.85 1.3.9 1.45H7.15L6.4 8.55l-.75-1.15H4.3l.9-1.45-.85-1.3h1.2z"/><path d="M23.6 3.2l.8 1.45h1.2l-.85 1.3.9 1.45h-1.3l-.75 1.15-.75-1.15h-1.35l.9-1.45-.85-1.3h1.2z"/><path d="M6.4 12.2l.8 1.45h1.2l-.85 1.3.9 1.45H7.15l-.75 1.15-.75-1.15H4.3l.9-1.45-.85-1.3h1.2z"/><path d="M23.6 12.2l.8 1.45h1.2l-.85 1.3.9 1.45h-1.3l-.75 1.15-.75-1.15h-1.35l.9-1.45-.85-1.3h1.2z"/></g></svg></span><span>Montréal, Québec</span></div>
             <div class="path-step"><span class="path-arrow">→</span><span class="path-flag">🇺🇸</span><span>Houston, TX</span></div>
-            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag">🇺🇸</span><span>Washington, D.C. Metro</span></div>
-            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag">🇺🇸</span><span>Richmond, VA (home)</span></div>
+            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag">📍</span><span>Washington, D.C. Metro</span></div>
+            <div class="path-step"><span class="path-arrow">→</span><span class="path-flag">📍</span><span>Richmond, VA (home)</span></div>
           </div>
 
           <div class="beyond-quote reveal reveal-d2">
@@ -2323,7 +2863,7 @@
 
         <div>
           <ul class="beyond-list reveal reveal-d1">
-            <li><span class="beyond-icon">👧</span><span><strong>"The Book of Alessia Faye"</strong> — Girl Dad</span></li>
+            <li><span class="beyond-icon">🎀</span><span><strong>"The Book of Alessia Faye"</strong> — Girl Dad</span></li>
             <li><span class="beyond-icon">📸</span><span><strong>"That One Picture"</strong> — amateur photography</span></li>
             <li><span class="beyond-icon">🌍</span><span><strong>"Project Footprint"</strong> — 30+ countries visited</span></li>
             <li><span class="beyond-icon">🏄</span><span><strong>Water Sports, Skiing, 10k Running, HIIT</strong></span></li>
@@ -2333,15 +2873,17 @@
           <div class="reveal reveal-d2" style="margin-top:2.2rem;">
             <p style="font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;">Published Platforms</p>
             <ul class="beyond-list">
-              <li><span class="beyond-icon">📱</span><span><a href="https://testflight.apple.com/join/rX8vWttz" target="_blank" rel="noopener"><strong>WatchUWatchin+</strong></a> &mdash; <span style="color:var(--accent);">public beta on TestFlight</span>, iPhone &middot; Watch &middot; Apple TV</span></li>
-              <li><span class="beyond-icon">🎯</span><span><a href="https://fefoabreu.me/career-coach/" target="_blank" rel="noopener"><strong>Career Coach</strong></a> &mdash; <span style="color:var(--accent);">live on the web</span>, free AI job-application coaching</span></li>
+              <li><span class="beyond-icon">🍿</span><span><a href="https://testflight.apple.com/join/rX8vWttz" target="_blank" rel="noopener"><strong>WatchUWatchin+</strong></a> &mdash; <span style="color:var(--accent);">public beta on TestFlight</span>, iPhone &middot; Watch &middot; Apple TV</span></li>
+              <li><span class="beyond-icon">✨</span><span><a href="https://jornada.careers" target="_blank" rel="noopener"><strong>Jornada.careers</strong></a> &mdash; <span style="color:var(--accent);">live on the web</span>, free AI job match and interview preparation</span></li>
+              <li><span class="beyond-icon">🎟️</span><span><a href="https://katraca.app" target="_blank" rel="noopener"><strong>Katraca</strong></a> &mdash; <span style="color:var(--accent);">site live, apps in build</span>, live-event memory in English and Portuguese</span></li>
+              <li><span class="beyond-icon">🌐</span><span><a href="https://fefoabreu.me/PoMme48/" target="_blank" rel="noopener"><strong>PoMme 48&deg;</strong></a> &mdash; <span style="color:var(--accent);">live prototype</span>, agentic AI GILT localization platform</span></li>
             </ul>
           </div>
 
           <div class="reveal reveal-d2" style="margin-top:2.2rem;">
             <p style="font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin-bottom:.8rem;">Philanthropy &amp; Volunteering</p>
             <ul class="beyond-list">
-              <li><span class="beyond-icon">🤝</span><span><a href="https://fefoabreu.me/career-coach/" target="_blank" rel="noopener"><strong>Career Coach</strong></a> — <span style="color:var(--accent);">#AIforGood</span>, free AI job-application coaching</span></li>
+              <li><span class="beyond-icon">🤝</span><span><a href="https://jornada.careers" target="_blank" rel="noopener"><strong>Jornada.careers</strong></a> — <span style="color:var(--accent);">#AIforGood</span>, free AI job-application coaching</span></li>
               <li><span class="beyond-icon">🐢</span><span><strong>Turtle Sanctuary Project</strong> — Surf City, NC</span></li>
               <li><span class="beyond-icon">🎓</span><span><strong>PMP Exam Instructor</strong> — PMIRS Chapter, Risk Management</span></li>
             </ul>
@@ -2398,14 +2940,14 @@
   </footer>
 
   <!-- FLOATING CTA -->
-  <a href="https://fefoabreu.me/career-coach/" target="_blank" rel="noopener"
-     class="cta-float" id="ctaFloat" aria-label="Build your own at Career Coach">
+  <a href="https://jornada.careers" target="_blank" rel="noopener"
+     class="cta-float" id="ctaFloat" aria-label="Build your own at Jornada.careers">
     <span class="cta-float-icon" aria-hidden="true">
       <svg viewBox="0 0 24 24" width="15" height="15" style="fill:currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z"/></svg>
     </span>
     <span class="cta-float-label">
       <span class="t">Like what you see?</span>
-      <span class="t alt">Build your own with CareerCoach</span>
+      <span class="t alt">Build your own with Jornada</span>
     </span>
   </a>
 
@@ -2589,45 +3131,57 @@
           note: 'A bilingual <b>React + TypeScript</b> platform carries each student from lead capture to enrollment across four journey modules, with the <b>Claude API</b> driving readiness scoring and destination matching.'
         }
       },
-      'career-coach': {
-        title: 'Career Coach',
-        tag: 'AI · Productivity · 2026',
-        desc: 'AI career platform with bring-your-own-model support across Claude, GPT, Gemini and Perplexity — instant JD-vs-résumé match scoring, skill-gap analysis, a résumé & one-page website builder, a voice-driven live mock interview, and a B2B Recruiter Mode that ranks candidate pipelines against a role. Accounts, cross-device sync and a free trial run on Supabase, with API keys stored zero-knowledge and lifecycle ops handled by scheduled AI agent loops.',
-        stack: ['React', 'Vite', 'Tailwind', 'Supabase', 'FastAPI', 'Multi-Provider AI', 'MCP'],
-        video: 'assets/lab-career-coach.webm',
-        live:  'https://fefoabreu.me/career-coach/',
-        github:'https://github.com/fefoabreu/career-coach',
+      'jornada': {
+        title: 'Jornada.careers',
+        tag: 'AI · Career Journey · 2026',
+        desc: 'A free AI career platform that opens on one question: choose your journey. Three personas route the whole product, the Comeback (just laid off), the Job Search (actively applying), and the Recruiter (placing candidates). Candidates get instant JD-vs-resume match scoring and skill-gap analysis, a resume and one-page website builder, and the interview loop that is the heart of it: question cue cards, a live spoken mock interview against a three-person panel, a Special Delivery prep dossier, and a rolodex that tracks every interview after it. Bring your own model across Claude, GPT, Gemini and Perplexity, or run on the shared Engine Room. Every candidate tool is free, funded pay-it-forward by people who landed the job. #AIforGood.',
+        stack: ['React', 'Vite', 'Tailwind', 'Supabase', 'FastAPI', 'Cloudflare Pages', 'Multi-Provider AI', 'MCP', 'i18n · EN/PT/FR'],
+        banner: 'jornada',
+        live:  'https://jornada.careers',
+        github:'https://github.com/fefoabreu/Jornada.careers',
         arch: {
-          kicker: 'Career Coach · Reference Architecture',
-          title: 'Multi-Provider AI Career Platform — Layered Architecture',
+          kicker: 'Jornada.careers · Reference Architecture',
+          title: 'Choose Your Journey — Multi-Provider AI Career Platform',
           tiers: [
             { lbl: 'Tier 0 · Client', color: 'client', boxes: [
               { nm: 'Browser SPA', ty: 'web app', sub: 'on-device encrypted key vault' } ] },
-            { lbl: 'Tier 1 · Presentation', color: 'edge', flow: 'HTTPS', boxes: [
+            { lbl: 'Tier 1 · Presentation', color: 'edge', flow: 'HTTPS · Cloudflare Pages', boxes: [
               { nm: 'React 18', ty: 'ui' },
               { nm: 'Vite', ty: 'build · dev server' },
-              { nm: 'Tailwind CSS', ty: 'design system' } ] },
-            { lbl: 'Tier 2 · Feature Surfaces', color: 'edge', flow: 'six product surfaces', boxes: [
-              { nm: 'Match + Skill Gap', ty: 'analysis', sub: 'JD ↔ résumé fit' },
-              { nm: 'Recruiter Mode', ty: 'B2B', sub: 'rank pipelines vs a role' },
-              { nm: 'Résumé / Website Builder', ty: 'generation' },
-              { nm: 'Live Interview', ty: 'voice · realtime', sub: 'Web Speech API' },
-              { nm: 'Interview Tracker', ty: 'pipeline' } ] },
-            { lbl: 'Tier 3 · Model Router', color: 'app', flow: 'one call → three routes', center: true, boxes: [
-              { hub: true, nm: 'api.js — Model Router', ty: 'client-side · the hub', sub: 'routes every call: local · direct · trial' } ] },
-            { lbl: 'Tier 4 · Intelligence', color: 'ai', flow: 'BYO key · direct from browser', arrows: '▲ ▼', boxes: [
-              { nm: 'Anthropic Claude', ty: 'default', sub: 'sonnet-4-6 / opus-4-8' },
+              { nm: 'Tailwind CSS', ty: 'design system' },
+              { nm: 'i18n', ty: 'EN · PT-BR · FR preview' } ] },
+            { lbl: 'Tier 2 · Journey Router', color: 'edge', flow: 'the entry point', center: true, boxes: [
+              { hub: true, nm: 'Choose Your Journey', ty: 'persona routing · the front door', sub: 'Comeback · Job Search → candidate app  ·  Recruiter → workspace' } ] },
+            { lbl: 'Tier 3 · Candidate Surfaces', color: 'app', flow: 'the candidate track', boxes: [
+              { nm: 'Match + Skill Gap', ty: 'analysis', sub: 'JD ↔ resume fit, real math' },
+              { nm: 'Resume / Website Builder', ty: 'generation', sub: 'ATS-ready PDF + one-pager' },
+              { nm: 'Upskilling', ty: 'close the gap' },
+              { nm: 'Pay It Forward', ty: '#AIforGood', sub: 'land the job, fund the next person' } ] },
+            { lbl: 'Tier 4 · The Interview Loop', color: 'app', flow: 'cue cards → mock → dossier → tracker', boxes: [
+              { nm: 'Cue Cards + Hot Seat', ty: 'anticipated questions' },
+              { nm: 'Live Mock Interview', ty: 'voice · realtime', sub: 'three-person panel, Web Speech API' },
+              { nm: 'Special Delivery Prep', ty: 'dossier', sub: 'company, panel, home court' },
+              { nm: 'Interview Rolodex', ty: 'tracker', sub: 'transcripts, timing, thank-you letters' } ] },
+            { lbl: 'Tier 5 · Recruiter Track', color: 'app', flow: 'the B2B side', boxes: [
+              { nm: 'Recruiter Workspace', ty: 'roles across clients' },
+              { nm: 'Candidate Ranking', ty: 'pool vs any JD' },
+              { nm: 'Dossier + Send', ty: 'interview kits at scale' } ] },
+            { lbl: 'Tier 6 · Model Router', color: 'ai', flow: 'one call → three routes', center: true, boxes: [
+              { hub: true, nm: 'api.js — Model Router', ty: 'client-side · the hub', sub: 'routes every call: local · direct · Engine Room' } ] },
+            { lbl: 'Tier 7 · Intelligence', color: 'ai', flow: 'BYO key · direct from browser', arrows: '▲ ▼', boxes: [
+              { nm: 'Anthropic Claude', ty: 'default', sub: 'sonnet-5 / opus-5' },
               { nm: 'OpenAI', ty: 'gpt' },
               { nm: 'Google Gemini', ty: 'multimodal' },
               { nm: 'Perplexity', ty: 'search-grounded' } ] },
-            { lbl: 'Tier 5 · Backend Services', color: 'app', flow: 'auth · billing · trial · tools', boxes: [
+            { lbl: 'Tier 8 · Backend Services', color: 'app', flow: 'auth · engine room · tools', boxes: [
               { nm: 'FastAPI', ty: 'local dev', sub: 'Claude Code OAuth' },
-              { nm: 'Edge Functions', ty: 'Deno · Supabase', sub: 'free trial 3/day · Stripe · PayPal' },
+              { nm: 'Edge Functions', ty: 'Deno · Supabase', sub: 'Engine Room quota, origin allowlist, daily cap' },
               { nm: 'MCP Server', ty: 'Claude Desktop', sub: 'compute_match_score + tools' } ] },
-            { lbl: 'Tier 6 · Data & Identity', color: 'data', flow: 'RLS-scoped', arrows: '▲ ▼', boxes: [
+            { lbl: 'Tier 9 · Data & Identity', color: 'data', flow: 'RLS-scoped', arrows: '▲ ▼', boxes: [
               { nm: 'Supabase Postgres', ty: 'auth + db', sub: 'row-level security' },
               { nm: 'user_secrets', ty: 'zero-knowledge', sub: 'ciphertext only · no recovery' },
-              { nm: 'analyses · interviews · pro', ty: 'cross-device sync' },
+              { nm: 'analyses · interviews', ty: 'cross-device sync' },
+              { nm: 'engine_totals', ty: 'lifetime counters' },
               { nm: 'agent_runs', ty: 'audit log' } ] }
           ],
           rail: {
@@ -2635,11 +3189,11 @@
             items: [
               { nm: 'Orchestrator', ty: 'daily · CEO loop' },
               { nm: 'Onboarding / Activation', ty: 'live · day 1/3/7' },
-              { nm: 'Inbound SDR', ty: 'planned' },
+              { nm: 'Feedback Triage', ty: 'screenshot → drafted reply' },
               { nm: 'Billing / Dunning', ty: 'planned' } ],
             span: 'every run audited via agent_runs'
           },
-          note: 'A <b>React + Vite</b> SPA fans every model call through a client-side <b>Model Router</b> that picks one of three paths — local <b>FastAPI</b> (Claude Code OAuth), <b>direct browser</b> calls to the user&rsquo;s own provider (Anthropic, OpenAI, Gemini or Perplexity), or a <b>Supabase Edge Function</b> free trial. <b>Supabase Postgres</b> with row-level security holds accounts, cross-device analyses and interviews, while API keys are stored <b>zero-knowledge</b> (ciphertext only, encrypted in the browser). An <b>MCP server</b> exposes the real-math scoring tools to Claude Desktop, and scheduled <b>agent loops</b> run lifecycle ops — all audited through <code>agent_runs</code>.'
+          note: 'A <b>React + Vite</b> SPA on <b>Cloudflare Pages</b> that opens on <b>Choose Your Journey</b>, a persona router sending candidates into the analysis and interview tracks and recruiters into their own workspace. The <b>interview loop</b> is the spine: cue cards, a live spoken mock against a three-person panel, a Special Delivery prep dossier, then a rolodex that keeps every transcript. Every model call fans through a client-side <b>Model Router</b> picking one of three paths: local <b>FastAPI</b> (Claude Code OAuth), a <b>direct browser</b> call on the user&rsquo;s own key (Anthropic, OpenAI, Gemini or Perplexity), or the shared <b>Engine Room</b> on a <b>Supabase Edge Function</b> behind an origin allowlist and an enforced daily cap. <b>Supabase Postgres</b> with row-level security holds accounts and cross-device history, and API keys are stored <b>zero-knowledge</b> (ciphertext only, encrypted in the browser). An <b>MCP server</b> exposes the real-math scoring tools to Claude Desktop, and scheduled <b>agent loops</b> run lifecycle ops, all audited through <code>agent_runs</code>. Every candidate tool is free, funded pay-it-forward.'
         }
       },
       'nba-fan-engagement': {
@@ -2696,48 +3250,65 @@
       'watchuwatchin': {
         title: 'WatchUWatchin+',
         tag: 'Social · Apple · 2026',
-        desc: 'A native SwiftUI social app for sharing what you watch — built around the Shared → Watching → Reacted LoopRing. Multiplatform across iPhone, Apple Watch, an Apple TV companion and a Home Screen widget, with Siri voice capture, friend circles and a “taste calibration” engine, all styled by a custom OKLCH color system. A full globalization layer — String Catalogs, locale-aware formatting and RTL-ready layouts — ships it in multiple languages. Now in beta on TestFlight.',
-        stack: ['Swift', 'SwiftUI', 'iOS', 'watchOS', 'tvOS', 'WidgetKit', 'App Intents', 'String Catalogs', 'i18n / l10n'],
+        desc: 'A native SwiftUI social app for sharing what you watch, built around the Shared → Watching → Reacted LoopRing. It now spans five Apple surfaces: iPhone, Apple Watch (with complications), an Apple TV companion, a Home Screen widget and an App Clip, plus Lock Screen Live Activities that stay open while you wait on a friend’s take. Grab the Remote turns search into a conversation with on-device speech; a local MoodEngine curates the mood grid from what you actually reach for; the Spinning Wheel and Box Office surface what is hot per service. Firebase carries auth, the Binger graph, recommendations and push, while TMDB and TVDB metadata is proxied through Cloud Functions so no key ever ships in the app. A full globalization layer runs it in four locales. In beta on TestFlight.',
+        stack: ['Swift', 'SwiftUI', 'iOS', 'watchOS', 'tvOS', 'WidgetKit', 'App Clip', 'App Intents', 'ActivityKit', 'Speech', 'Firebase', 'TMDB · TVDB', 'String Catalogs'],
         video: 'assets/lab-watchuwatchin.webm',
         poster: 'assets/lab-watchuwatchin-demo.jpg',
         live:  'https://testflight.apple.com/join/rX8vWttz',
         github:'https://github.com/fefoabreu/WatchUWatchin',
         arch: {
           kicker: 'WatchUWatchin+ · Reference Architecture',
-          title: 'Social Watch Loop — Multiplatform Architecture',
+          title: 'The Loop — Five Surfaces, One Shared Core',
           tiers: [
             { lbl: 'Tier 0 · Surfaces', color: 'client', boxes: [
-              { nm: 'iPhone App', ty: 'SwiftUI · iOS' },
-              { nm: 'Apple Watch', ty: 'watchOS companion' },
-              { nm: 'Apple TV', ty: 'tvOS · living-room', sub: 'big-screen circle + watch loop' },
-              { nm: 'Home Screen Widget', ty: 'WidgetKit · glanceable' } ] },
+              { nm: 'iPhone App', ty: 'SwiftUI · iOS', sub: 'native tab bar, mic as search role' },
+              { nm: 'Apple Watch', ty: 'watchOS + complications', sub: 'wrist capture' },
+              { nm: 'Apple TV', ty: 'tvOS · living room', sub: 'full Box Office mirror' },
+              { nm: 'Home Screen Widget', ty: 'WidgetKit · glanceable' },
+              { nm: 'App Clip', ty: 'invite without install' } ] },
             { lbl: 'Tier 1 · Presentation', color: 'edge', flow: 'declarative UI', boxes: [
-              { nm: 'SwiftUI Views', ty: 'feed · detail · circle' },
+              { nm: 'SwiftUI Views', ty: 'feed · detail · Bingers' },
+              { nm: 'LoopRing', ty: 'the signature ring', sub: 'Shared → Watching → Reacted' },
               { nm: 'OKLCH Color Engine', ty: 'design system', sub: 'perceptual accent palette' } ] },
             { lbl: 'Tier 2 · App Core', color: 'app', flow: 'shared module', center: true, boxes: [
-              { hub: true, nm: 'Shared Swift Package', ty: 'observable state · the hub', sub: 'drives the LoopRing across every surface' } ] },
+              { hub: true, nm: 'Shared Package + WUWStore', ty: '@Observable state machine · the hub', sub: 'one core compiled into every surface' } ] },
             { lbl: 'Tier 3 · Features', color: 'app', flow: 'the watch loop', boxes: [
-              { nm: 'LoopRing Feed', ty: 'Shared → Watching → Reacted' },
-              { nm: 'Title Detail', ty: 'reactions' },
-              { nm: 'Your Circle', ty: 'friends · taste calibration' },
-              { nm: 'Voice Add', ty: 'Siri · App Intents' } ] },
-            { lbl: 'Tier 4 · System Integrations', color: 'ai', flow: 'platform services', arrows: '▲ ▼', boxes: [
-              { nm: 'App Intents / SiriKit', ty: 'voice capture' },
-              { nm: 'WidgetKit Timelines', ty: 'home-screen sync' } ] },
-            { lbl: 'Tier 5 · Data', color: 'data', flow: 'persistence', arrows: '▲ ▼', boxes: [
-              { nm: 'Local Watch Store', ty: 'on-device' },
-              { nm: 'Friend Graph', ty: 'circle + shared history' } ] }
+              { nm: 'Grab the Remote', ty: 'search · live dictation' },
+              { nm: 'Spinning Wheel + Box Office', ty: 'what is hot per service' },
+              { nm: 'Bingers + Watch Party', ty: 'your circle · taste calibration' },
+              { nm: 'Smart Lists + Seasons', ty: 'watchlist · episode tracking' },
+              { nm: 'Reactions + Awards', ty: 'the payoff' } ] },
+            { lbl: 'Tier 4 · On-Device Engines', color: 'ai', flow: 'local, instant, offline', arrows: '▲ ▼', boxes: [
+              { nm: 'MoodEngine', ty: 'curates the mood grid', sub: 'your taps · season · library · services' },
+              { nm: 'Speech + AVAudioEngine', ty: 'on-device dictation' },
+              { nm: 'ReactionEngine · SeasonEngine', ty: 'derived state' },
+              { nm: 'Haptics', ty: 'Core Haptics' } ] },
+            { lbl: 'Tier 5 · System Integrations', color: 'edge', flow: 'platform services', boxes: [
+              { nm: 'App Intents / SiriKit', ty: 'Add to WUW+ by voice' },
+              { nm: 'ActivityKit', ty: 'Lock Screen Live Activity', sub: 'open until they react' },
+              { nm: 'WidgetKit Timelines', ty: 'home-screen sync' },
+              { nm: 'WatchConnectivity', ty: 'phone ↔ watch relay' } ] },
+            { lbl: 'Tier 6 · Backend', color: 'app', flow: 'Firebase', arrows: '▲ ▼', boxes: [
+              { nm: 'Firebase Auth', ty: 'Sign in with Apple · Google' },
+              { nm: 'Cloud Functions', ty: 'triggers + HTTPS', sub: 'invites, intros, recs, nudges, reactions' },
+              { nm: 'Metadata Proxy', ty: 'TMDB + TVDB', sub: 'keys held server-side as secrets' },
+              { nm: 'FCM Push', ty: 'someone started watching' } ] },
+            { lbl: 'Tier 7 · Data & Observability', color: 'data', flow: 'rules-scoped', arrows: '▲ ▼', boxes: [
+              { nm: 'Cloud Firestore', ty: 'the Binger graph', sub: 'users · friendships · recommendations' },
+              { nm: 'watching · reactions · favorites', ty: 'the loop, persisted' },
+              { nm: 'Security Rules', ty: 'default deny' },
+              { nm: 'Crashlytics + Analytics', ty: 'one telemetry seam', sub: 'no-ops in DEBUG and in mock' } ] }
           ],
           rail: {
-            lbl: 'Cross-cutting · Globalization & Localization',
+            lbl: 'Cross-cutting · Globalization & Quality',
             items: [
               { nm: 'String Catalogs', ty: '.xcstrings · typed keys' },
+              { nm: 'Four Locales', ty: 'en · pt-BR · fr-CA · fr-FR' },
               { nm: 'Locale Formatting', ty: 'dates · numbers · units' },
-              { nm: 'RTL & Pseudo-loc', ty: 'mirrored layouts' },
-              { nm: 'Localized Voice', ty: 'per-locale Siri phrases' } ],
+              { nm: 'UI Test Sweep', ty: 'every language, mock mode', sub: 'screenshots + label dumps per run' } ],
             span: 'every surface speaks the user’s language'
           },
-          note: 'A native <b>SwiftUI</b> app whose shared Swift package drives the <b>Shared → Watching → Reacted</b> LoopRing across iPhone, <b>Apple Watch</b>, an <b>Apple TV</b> (tvOS) living-room companion and a <b>WidgetKit</b> home-screen widget. <b>App Intents / SiriKit</b> power voice capture, a custom <b>OKLCH</b> color engine handles the palette, and a friend graph backs the “taste calibration” circle. A full <b>globalization layer</b> — <b>String Catalogs</b> (.xcstrings), locale-aware date/number formatting, RTL-ready mirrored layouts and per-locale Siri phrases — makes every surface speak the user’s language. Now in beta on <b>TestFlight</b>.'
+          note: 'A native <b>SwiftUI</b> app whose shared package and <code>WUWStore</code> state machine drive the <b>Shared → Watching → Reacted</b> LoopRing across five surfaces: iPhone, <b>Apple Watch</b> (with complications), an <b>Apple TV</b> companion, a <b>WidgetKit</b> widget and an <b>App Clip</b>. The interesting work is local: a <b>MoodEngine</b> curates the mood grid from what you actually reach for rather than from genre data, on-device <b>Speech</b> streams live dictation into Grab the Remote, and <b>ActivityKit</b> keeps a Lock Screen Live Activity open while you wait on a friend&rsquo;s take. <b>Firebase</b> carries the rest: Auth (Sign in with Apple and Google), a Firestore Binger graph behind default-deny rules, and Cloud Functions that fan out recommendations, nudges and reactions while proxying <b>TMDB and TVDB</b> so no API key ever ships inside the app. Telemetry runs through a single seam that no-ops in DEBUG and in mock mode. <b>String Catalogs</b> ship it in four locales, and a UI test sweep walks the whole app in every one of them. In beta on <b>TestFlight</b>.'
         }
       },
 
@@ -2746,6 +3317,7 @@
         tag: 'Live Events · Apple · 2026',
         desc: 'Every event you pushed through a turnstile to reach becomes a Punch: a collectible, big-league ticket that lives in your Memory Lane. Nothing logs without the ritual — you rotate the catraca, a 120° turnstile drag that answers with a haptic click, and on Apple Watch the Digital Crown is the catraca. Honor system: no ticket to scan, nothing to verify. Native on both platforms and offline-first. The site is live at katraca.app in English and Portuguese; the apps are in build.',
         stack: ['SwiftUI', 'watchOS', 'Kotlin · Compose', 'Offline-first', 'GRDB / Room', 'i18n · pt-BR', 'MCP'],
+        banner: 'katraca',
         poster: 'assets/lab-katraca-demo.jpg',
         live:  'https://katraca.app',
         arch: {
@@ -2838,6 +3410,88 @@
     const labClose    = document.getElementById('labModalClose');
     const labModalVid = document.getElementById('labModalVideo');
     const labModalPoster = document.getElementById('labModalPoster');
+    const labModalBanner = document.getElementById('labModalBanner');
+    const labModalHeader = document.getElementById('labModalHeader');
+
+    /* Live banners — for projects whose story is a motion spec, not a screen
+       recording. Each is self-contained CSS/SVG lifted from the product itself. */
+    const labBanners = {
+      /* katraca.app's locked idle brand tick: the arms turn 120 degrees,
+         overshoot to 127, settle, and the gate flashes on the click. */
+      katraca: `
+        <div class="kb">
+          <div class="kb-grid"></div>
+          <div class="kb-rotor">
+            <span class="kb-ring"></span>
+            <svg class="kb-svg" viewBox="0 0 96 96">
+              <circle class="kb-guide" cx="57" cy="48" r="43" fill="none" stroke-width="1.4" stroke-dasharray="2 6"></circle>
+              <rect x="14" y="8" width="13" height="80" rx="6.5" fill="#97A1AC"></rect>
+              <g class="kb-arms">
+                <line x1="63.1" y1="37.6" x2="74" y2="19" stroke="currentColor" stroke-width="13" stroke-linecap="round"></line>
+                <line x1="63.1" y1="58.4" x2="74" y2="77" stroke="currentColor" stroke-width="13" stroke-linecap="round"></line>
+                <line x1="45" y1="48" x2="24" y2="48" stroke="currentColor" stroke-width="13" stroke-linecap="round"></line>
+              </g>
+              <path fill-rule="evenodd" fill="currentColor" d="M46 48a11 11 0 1 0 22 0a11 11 0 1 0 -22 0M52.6 48a4.4 4.4 0 1 1 8.8 0a4.4 4.4 0 1 1 -8.8 0"></path>
+            </svg>
+          </div>
+          <div class="kb-copy">
+            <div class="kb-word"><span class="kb-k">K</span>ATRACA</div>
+            <div class="kb-slogan">DON&rsquo;T LEAVE IT ALL ON THE FIELD</div>
+            <div class="kb-meta">ROTATE THE CATRACA &middot; 120&deg; &middot; ONE TURN, ONE MEMORY</div>
+          </div>
+        </div>`,
+
+      /* Jornada.careers: the two surfaces that sell it — the persona picker
+         you land on, and the live mock interview it walks you into. */
+      jornada: `
+        <div class="jb">
+          <div class="jb-scene jb-a">
+            <div class="jb-eyebrow">jornada.careers</div>
+            <div class="jb-head">Choose your journey.</div>
+            <div class="jb-notes">
+              <div class="jb-note" style="--st:#fbbf24;--nb:#fefce8;--ni:#78350f;--tilt:-2.4deg">
+                <span class="k">The Comeback</span><span class="t">I was just laid off</span>
+                <span class="f">Fit-gap on any job &middot; ATS-ready r&eacute;sum&eacute;</span>
+              </div>
+              <div class="jb-note jb-note-pick" style="--st:#60a5fa;--nb:#eff6ff;--ni:#1e40af;--tilt:1.4deg">
+                <span class="k">The Job Search</span><span class="t">I&rsquo;m actively applying</span>
+                <span class="f">Cue cards &middot; live mock &middot; prep package</span>
+              </div>
+              <div class="jb-note" style="--st:#c084fc;--nb:#fdf4ff;--ni:#581c87;--tilt:2.8deg">
+                <span class="k">The Recruiter</span><span class="t">I place candidates</span>
+                <span class="f">Rank a pipeline against any JD</span>
+              </div>
+            </div>
+          </div>
+          <div class="jb-scene jb-b">
+            <div class="jb-eyebrow">The interview loop</div>
+            <div class="jb-panel">
+              <div class="jb-seat">
+                <div class="jb-face" style="--sc:#818cf8;--sd:0s">AF</div>
+                <div class="r">Hiring<br>Manager</div>
+              </div>
+              <div class="jb-seat">
+                <div class="jb-face" style="--sc:#38bdf8;--sd:1.2s">KM</div>
+                <div class="r">Team<br>Lead</div>
+              </div>
+              <div class="jb-seat">
+                <div class="jb-face" style="--sc:#34d399;--sd:2.4s">TA</div>
+                <div class="r">Panel<br>Interviewer</div>
+              </div>
+              <div class="jb-cue">
+                <span class="q">&ldquo;Walk me through a program where the requirements moved under you. What did you cut, and how did you tell the sponsor?&rdquo;</span>
+                <span class="m"><span class="jb-live"></span>Live mock &middot; listening</span>
+              </div>
+            </div>
+            <div class="jb-rail">
+              <div class="jb-step" style="--sd:0s">Cue cards</div>
+              <div class="jb-step" style="--sd:1.1s">Live mock</div>
+              <div class="jb-step" style="--sd:2.2s">Prep package</div>
+              <div class="jb-step" style="--sd:3.3s">Rolodex</div>
+            </div>
+          </div>
+        </div>`
+    };
 
     document.querySelectorAll('.lab-card').forEach(card => {
       card.addEventListener('click', () => {
@@ -2876,8 +3530,22 @@
             View on GitHub
           </a>` : ''}`;
 
-        if (p.video) {
+        if (p.banner && labBanners[p.banner]) {
+          // A live CSS/SVG banner built from the product's own motion spec.
+          labModalVid.pause();
+          labModalVid.removeAttribute('src');
+          labModalVid.load();
+          labModalVid.style.display = 'none';
+          labModalPoster.classList.remove('show');
+          labModalPoster.removeAttribute('src');
+          labModalBanner.innerHTML = labBanners[p.banner];
+          labModalBanner.classList.add('show');
+          labModalHeader.classList.add('has-banner');
+        } else if (p.video) {
           // Looping screen-recording demo.
+          labModalBanner.classList.remove('show');
+          labModalBanner.innerHTML = '';
+          labModalHeader.classList.remove('has-banner');
           labModalPoster.classList.remove('show');
           labModalPoster.removeAttribute('src');
           labModalVid.style.display = '';
@@ -2886,6 +3554,9 @@
           labModalVid.play().catch(() => {});
         } else {
           // No demo video — show an animated still (Ken Burns) instead of a blank header.
+          labModalBanner.classList.remove('show');
+          labModalBanner.innerHTML = '';
+          labModalHeader.classList.remove('has-banner');
           labModalVid.pause();
           labModalVid.removeAttribute('src');
           labModalVid.load();
@@ -2905,6 +3576,10 @@
       labModalVid.removeAttribute('src');
       labModalPoster.classList.remove('show');
       labModalPoster.removeAttribute('src');
+      // Drop the banner so its animations stop running behind a closed modal.
+      labModalBanner.classList.remove('show');
+      labModalBanner.innerHTML = '';
+      labModalHeader.classList.remove('has-banner');
     }
     labClose.addEventListener('click', closeLabModal);
     labOverlay.addEventListener('click', e => { if (e.target === labOverlay) closeLabModal(); });
@@ -2984,42 +3659,6 @@
     function labScroll(dir) {
       document.getElementById('labTrack').scrollBy({ left: dir * 260, behavior: 'smooth' });
     }
-
-    /* ─── STUDIO · filter the carousel by problem ─────────
-       Cards dim instead of unmounting, so the size and shape
-       of the whole body of work stays legible while filtered. */
-    (function () {
-      const chipBar = document.getElementById('studioChips');
-      if (!chipBar) return;
-      const note  = document.getElementById('studioNote');
-      const cards = Array.from(document.querySelectorAll('.lab-card'));
-      const chips = Array.from(chipBar.querySelectorAll('.studio-chip'));
-      const track = document.getElementById('labTrack');
-
-      function apply(domain, label) {
-        let hits = 0;
-        cards.forEach(card => {
-          const list = (card.dataset.domains || '').split(',');
-          const on = domain === 'all' || list.includes(domain);
-          card.classList.toggle('is-muted', !on);
-          if (on) hits++;
-        });
-        chips.forEach(c => {
-          const on = c.dataset.domain === domain;
-          c.classList.toggle('is-on', on);
-          c.setAttribute('aria-pressed', on ? 'true' : 'false');
-        });
-        note.textContent = domain === 'all'
-          ? 'Nine platforms. Pick a problem to see which ones answer it.'
-          : `${label}: ${hits} of ${cards.length} platforms.`;
-        if (track) track.scrollTo({ left: 0, behavior: 'smooth' });
-      }
-
-      chipBar.addEventListener('click', e => {
-        const chip = e.target.closest('.studio-chip');
-        if (chip) apply(chip.dataset.domain, chip.textContent.trim());
-      });
-    })();
 
     // ─── APPLIED AI · connected knowledge map ───────────
     (function () {
