@@ -60,7 +60,7 @@
     .ms-card h4, .metric-label, .foundation-sub-title,
     .lab-modal-mtitle, .lab-card-title, .tl-company,
     .beyond-quote p, .arch-h1, .toolkit-card h4,
-    .interlude-title, .ild-name, .ild-what, .ild-why {
+    .interlude-title, .ild-name, .ild-what {
       /* Headings and label-length text only. `balance` evens every line, which
          on a running paragraph means it stops short of the available width —
          so paragraphs stay on `pretty`, which fills the measure and only
@@ -699,14 +699,6 @@
       display: block; margin-top: .3rem;
       font-size: .84rem; line-height: 1.6;
       color: rgba(250,248,243,.5);
-    }
-    .ild-why {
-      display: block; margin-top: .6rem;
-      padding-top: .6rem;
-      border-top: 1px solid rgba(200,169,110,.16);
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 1rem; line-height: 1.5;
-      color: rgba(200,169,110,.92);
     }
     .interlude-foot {
       position: relative;
@@ -1415,163 +1407,116 @@
       .kb-meta { display: none; }
     }
 
-    /* ── Jornada.careers · choose your journey → the interview loop ──
-       Two staged scenes on one 13s loop: the persona picker that opens
-       the product, then the live mock-interview panel it leads to. */
-    .jb {
+    /* ── Device reel ──
+       Real screens from the shipped product, in phone frames that rise from
+       the bottom of the header. The only invention is the motion: a slow
+       staggered float, a highlight that walks the row, and a caption naming
+       the step it is on. Everything inside the glass is a real capture. */
+    .reel {
       position: absolute; inset: 0;
-      background:
-        radial-gradient(120% 100% at 12% 0%, #1b2b4d 0%, #0d1730 55%, #0a1226 100%);
+      display: flex; align-items: flex-end; gap: 1.5rem;
+      padding: 0 1.7rem;
       overflow: hidden;
     }
-    .jb-scene {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 0 1.9rem;
-      opacity: 0;
+    .reel-phones { display: flex; align-items: flex-end; gap: .55rem; flex-shrink: 0; }
+    .reel-phone {
+      position: relative;
+      width: 96px; height: 176px;
+      border-radius: 15px 15px 0 0;
+      padding: 4px 4px 0;
+      background: #14181f;
+      box-shadow: 0 -2px 0 0 rgba(255,255,255,.09) inset,
+                  0 14px 34px rgba(0,0,0,.55);
+      animation: reelFloat 6s ease-in-out infinite;
+      animation-delay: var(--d, 0s);
     }
-    .jb-a { animation: jbA 13s var(--ease) infinite; }
-    .jb-b { animation: jbB 13s var(--ease) infinite; }
-    @keyframes jbA {
-      0%, 40%  { opacity: 1; transform: translateY(0); }
-      48%, 92% { opacity: 0; transform: translateY(-14px); }
-      100%     { opacity: 1; transform: translateY(0); }
+    .reel-phone::after {
+      content: ''; position: absolute; left: 50%; top: 7px;
+      transform: translateX(-50%);
+      width: 34px; height: 5px; border-radius: 3px;
+      background: #05070a; z-index: 2;
     }
-    @keyframes jbB {
-      0%, 42%   { opacity: 0; transform: translateY(14px); }
-      50%, 88%  { opacity: 1; transform: translateY(0); }
-      96%, 100% { opacity: 0; transform: translateY(14px); }
+    .reel-screen {
+      display: block; width: 100%; height: 100%;
+      border-radius: 12px 12px 0 0; overflow: hidden;
+      background: #0b0b0d;
     }
-    .jb-eyebrow {
+    .reel-screen img {
+      width: 100%; height: auto; display: block;
+    }
+    /* The lit phone walks the row, in step with the caption. */
+    .reel-phone::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 15px 15px 0 0;
+      box-shadow: 0 0 0 1.5px var(--accent), 0 0 26px rgba(200,169,110,.4);
+      opacity: 0; z-index: 3; pointer-events: none;
+      animation: reelLit 10.5s ease-in-out infinite;
+      animation-delay: var(--d2, 0s);
+    }
+    @keyframes reelFloat {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-7px); }
+    }
+    @keyframes reelLit {
+      0%       { opacity: 0; }
+      2%, 33%  { opacity: 1; }
+      36%,100% { opacity: 0; }
+    }
+    /* One tall screen, panned slowly — the app as you actually scroll it. */
+    .reel-phone.is-panning img { animation: reelPan 14s ease-in-out infinite alternate; }
+    @keyframes reelPan {
+      from { transform: translateY(0); }
+      to   { transform: translateY(calc(-100% + 172px)); }
+    }
+    .reel-copy { position: relative; min-width: 0; padding-bottom: 1.6rem; }
+    .reel-eyebrow {
       font-family: 'DM Mono', monospace;
       font-size: .56rem; letter-spacing: .2em; text-transform: uppercase;
-      color: #f59e0b; margin-bottom: .3rem;
+      color: var(--accent); margin-bottom: .35rem;
     }
-    .jb-head {
+    .reel-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 1.5rem; font-weight: 500; color: var(--cream);
-      line-height: 1.1; margin-bottom: .85rem;
+      font-size: 1.42rem; font-weight: 500; color: var(--cream);
+      line-height: 1.12;
     }
-    /* the three post-it journeys */
-    .jb-notes { display: flex; gap: .6rem; }
-    .jb-note {
-      flex: 1; min-width: 0;
-      border-radius: 3px; padding: .5rem .55rem .6rem;
-      border-top: 4px solid var(--st);
-      background: var(--nb);
-      box-shadow: 0 6px 16px rgba(0,0,0,.4);
-      transform: rotate(var(--tilt));
-      animation: jbNote 13s var(--ease) infinite;
-    }
-    .jb-note .k {
+    .reel-steps { position: relative; height: 2.4rem; margin-top: .5rem; }
+    .reel-step {
+      position: absolute; inset: 0;
       font-family: 'DM Mono', monospace;
-      font-size: .5rem; letter-spacing: .13em; text-transform: uppercase;
-      color: var(--st); display: block; margin-bottom: .22rem;
+      font-size: .62rem; letter-spacing: .08em; line-height: 1.55;
+      color: rgba(250,248,243,.62);
+      opacity: 0;
+      animation: reelStep 10.5s ease-in-out infinite;
+      animation-delay: var(--d2, 0s);
     }
-    .jb-note .t {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: .93rem; font-weight: 600; color: var(--ni);
-      line-height: 1.15; display: block;
+    @keyframes reelStep {
+      0%       { opacity: 0; transform: translateY(4px); }
+      2%, 33%  { opacity: 1; transform: translateY(0); }
+      36%,100% { opacity: 0; transform: translateY(-4px); }
     }
-    .jb-note .f {
-      display: block; margin-top: .35rem;
-      font-size: .58rem; color: rgba(28,32,48,.62); line-height: 1.35;
+    .reel-live {
+      display: inline-block; width: 5px; height: 5px; border-radius: 50%;
+      background: #57d38a; margin-right: .45rem; vertical-align: middle;
+      animation: reelLive 1.6s ease-in-out infinite;
     }
-    /* The middle note (the job search) is the one that gets picked. */
-    .jb-note-pick { animation-name: jbPick; }
-    @keyframes jbNote {
-      0%      { opacity: 0; transform: translateY(10px) rotate(var(--tilt)); }
-      12%, 40%{ opacity: 1; transform: translateY(0) rotate(var(--tilt)); }
-      100%    { opacity: 1; transform: translateY(0) rotate(var(--tilt)); }
-    }
-    @keyframes jbPick {
-      0%       { opacity: 0; transform: translateY(10px) rotate(var(--tilt)); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
-      12%      { opacity: 1; transform: translateY(0) rotate(var(--tilt)); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
-      28%, 40% { opacity: 1; transform: translateY(-7px) rotate(0deg) scale(1.05);
-                 box-shadow: 0 14px 28px rgba(0,0,0,.5), 0 0 0 2px var(--accent); }
-      100%     { opacity: 1; transform: translateY(0) rotate(var(--tilt)); box-shadow: 0 6px 16px rgba(0,0,0,.4); }
-    }
-    /* the interview panel */
-    .jb-panel { display: flex; align-items: center; gap: .75rem; }
-    .jb-seat { text-align: center; width: 74px; flex-shrink: 0; }
-    .jb-face {
-      width: 42px; height: 42px; border-radius: 50%;
-      margin: 0 auto .34rem;
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'DM Mono', monospace; font-size: .6rem; letter-spacing: .04em;
-      color: #0a1226; background: var(--sc);
-      box-shadow: 0 0 0 0 var(--sc);
-      animation: jbSpeak 3.6s ease-out infinite;
-      animation-delay: var(--sd);
-    }
-    @keyframes jbSpeak {
-      0%, 22%  { box-shadow: 0 0 0 0 var(--sc); transform: scale(1); }
-      8%       { box-shadow: 0 0 0 7px rgba(255,255,255,0); transform: scale(1.09); }
-      100%     { box-shadow: 0 0 0 0 rgba(255,255,255,0); transform: scale(1); }
-    }
-    .jb-seat .r {
-      font-family: 'DM Mono', monospace;
-      font-size: .48rem; letter-spacing: .1em; text-transform: uppercase;
-      color: rgba(250,248,243,.55); line-height: 1.3;
-    }
-    .jb-cue {
-      flex: 1; min-width: 0;
-      border-radius: 3px; padding: .5rem .6rem;
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(200,169,110,.22);
-      border-left: 2px solid var(--accent);
-    }
-    .jb-cue .q {
-      font-size: .63rem; color: rgba(250,248,243,.72); line-height: 1.5;
-      display: block;
-    }
-    .jb-cue .m {
-      display: flex; align-items: center; gap: .32rem;
-      margin-top: .4rem;
-      font-family: 'DM Mono', monospace;
-      font-size: .5rem; letter-spacing: .13em; text-transform: uppercase;
-      color: #f59e0b;
-    }
-    .jb-live {
-      width: 5px; height: 5px; border-radius: 50%; background: #f59e0b;
-      animation: jbLive 1.4s ease-in-out infinite;
-    }
-    @keyframes jbLive { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
-    /* the four-step loop rail */
-    .jb-rail {
-      display: flex; gap: .3rem; margin-top: .7rem;
-    }
-    .jb-step {
-      flex: 1;
-      font-family: 'DM Mono', monospace;
-      font-size: .46rem; letter-spacing: .1em; text-transform: uppercase;
-      color: rgba(250,248,243,.4);
-      padding-top: .32rem;
-      border-top: 1.5px solid rgba(250,248,243,.14);
-      animation: jbStep 4.4s linear infinite;
-      animation-delay: var(--sd);
-    }
-    @keyframes jbStep {
-      0%, 3%   { color: var(--accent); border-top-color: var(--accent); }
-      25%,100% { color: rgba(250,248,243,.4); border-top-color: rgba(250,248,243,.14); }
-    }
+    @keyframes reelLive { 0%,100% { opacity: 1; } 50% { opacity: .25; } }
     @media(max-width:560px){
-      .jb-scene { padding: 0 1.1rem; }
-      .jb-head { font-size: 1.2rem; }
-      .jb-note .f { display: none; }
-      .jb-seat { width: 56px; }
-      .jb-face { width: 34px; height: 34px; font-size: .52rem; }
-      .jb-rail { display: none; }
+      .reel { gap: .9rem; padding: 0 1rem; }
+      .reel-phone { width: 78px; height: 150px; }
+      .reel-phone:nth-child(3) { display: none; }
+      .reel-title { font-size: 1.12rem; }
+      .reel-steps { display: none; }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .kb-arms, .kb-ring,
-      .jb-a, .jb-b, .jb-note, .jb-note-pick, .jb-face, .jb-live, .jb-step {
+      .reel-phone, .reel-phone::before, .reel-phone.is-panning img, .reel-live {
         animation: none;
       }
-      /* Without the cross-fade, scene A would sit invisibly on top of B. */
-      .jb-a { opacity: 1; }
-      .jb-b { display: none; }
+      /* Stepped captions stack invisibly without their cycle — show the first. */
+      .reel-step { animation: none; opacity: 0; }
+      .reel-step:first-child { opacity: 1; }
+      .reel-phone::before { opacity: 0; }
       .kb-arms { transform: rotate(120deg); }
     }
 
@@ -2161,7 +2106,6 @@
             <span class="ild-body">
               <span class="ild-name">Jornada.careers</span>
               <span class="ild-what">Job match, r&eacute;sum&eacute; scoring and interview preparation.</span>
-              <span class="ild-why">I built it during my own search. It stays free for everyone still on theirs.</span>
             </span>
           </a>
 
@@ -2170,7 +2114,6 @@
             <span class="ild-body">
               <span class="ild-name">WatchUWatchin+</span>
               <span class="ild-what">Sharing what you watch, across iPhone, Watch and Apple TV.</span>
-              <span class="ild-why">The people I watch with live in other countries. This keeps us in one conversation.</span>
             </span>
           </a>
 
@@ -2181,7 +2124,6 @@
             <span class="ild-body">
               <span class="ild-name">Katraca</span>
               <span class="ild-what">Every live event you showed up for, kept as a collectible ticket.</span>
-              <span class="ild-why">Don&rsquo;t leave it all on the field. And never a paywall between you and your own memories.</span>
             </span>
           </a>
 
@@ -2192,7 +2134,6 @@
             <span class="ild-body">
               <span class="ild-name">PoMme 48&deg;</span>
               <span class="ild-what">Agentic AI localization, 48 languages and 150+ markets.</span>
-              <span class="ild-why">Software should meet people in their own language. All forty-eight of them.</span>
             </span>
           </a>
 
@@ -3252,7 +3193,7 @@
         tag: 'Social · Apple · 2026',
         desc: 'A native SwiftUI social app for sharing what you watch, built around the Shared → Watching → Reacted LoopRing. It now spans five Apple surfaces: iPhone, Apple Watch (with complications), an Apple TV companion, a Home Screen widget and an App Clip, plus Lock Screen Live Activities that stay open while you wait on a friend’s take. Grab the Remote turns search into a conversation with on-device speech; a local MoodEngine curates the mood grid from what you actually reach for; the Spinning Wheel and Box Office surface what is hot per service. Firebase carries auth, the Binger graph, recommendations and push, while TMDB and TVDB metadata is proxied through Cloud Functions so no key ever ships in the app. A full globalization layer runs it in four locales. In beta on TestFlight.',
         stack: ['Swift', 'SwiftUI', 'iOS', 'watchOS', 'tvOS', 'WidgetKit', 'App Clip', 'App Intents', 'ActivityKit', 'Speech', 'Firebase', 'TMDB · TVDB', 'String Catalogs'],
-        video: 'assets/lab-watchuwatchin.webm',
+        banner: 'watchuwatchin',
         poster: 'assets/lab-watchuwatchin-demo.jpg',
         live:  'https://testflight.apple.com/join/rX8vWttz',
         github:'https://github.com/fefoabreu/WatchUWatchin',
@@ -3441,53 +3382,49 @@
           </div>
         </div>`,
 
-      /* Jornada.careers: the two surfaces that sell it — the persona picker
-         you land on, and the live mock interview it walks you into. */
+      /* Jornada.careers: three real screens captured from the live product —
+         the persona picker you land on, the match it scores, the interview
+         prep it walks you into. */
       jornada: `
-        <div class="jb">
-          <div class="jb-scene jb-a">
-            <div class="jb-eyebrow">jornada.careers</div>
-            <div class="jb-head">Choose your journey.</div>
-            <div class="jb-notes">
-              <div class="jb-note" style="--st:#fbbf24;--nb:#fefce8;--ni:#78350f;--tilt:-2.4deg">
-                <span class="k">The Comeback</span><span class="t">I was just laid off</span>
-                <span class="f">Fit-gap on any job &middot; ATS-ready r&eacute;sum&eacute;</span>
-              </div>
-              <div class="jb-note jb-note-pick" style="--st:#60a5fa;--nb:#eff6ff;--ni:#1e40af;--tilt:1.4deg">
-                <span class="k">The Job Search</span><span class="t">I&rsquo;m actively applying</span>
-                <span class="f">Cue cards &middot; live mock &middot; prep package</span>
-              </div>
-              <div class="jb-note" style="--st:#c084fc;--nb:#fdf4ff;--ni:#581c87;--tilt:2.8deg">
-                <span class="k">The Recruiter</span><span class="t">I place candidates</span>
-                <span class="f">Rank a pipeline against any JD</span>
-              </div>
+        <div class="reel" style="background:radial-gradient(120% 100% at 14% 0%, #241708 0%, #150d05 60%, #0d0803 100%)">
+          <div class="reel-phones">
+            <div class="reel-phone" style="--d:0s;--d2:0s">
+              <span class="reel-screen"><img src="assets/screens/jornada-1-journey.jpg" alt="" loading="lazy"></span>
+            </div>
+            <div class="reel-phone" style="--d:.7s;--d2:3.5s">
+              <span class="reel-screen"><img src="assets/screens/jornada-2-match.jpg" alt="" loading="lazy"></span>
+            </div>
+            <div class="reel-phone" style="--d:1.4s;--d2:7s">
+              <span class="reel-screen"><img src="assets/screens/jornada-3-prep.jpg" alt="" loading="lazy"></span>
             </div>
           </div>
-          <div class="jb-scene jb-b">
-            <div class="jb-eyebrow">The interview loop</div>
-            <div class="jb-panel">
-              <div class="jb-seat">
-                <div class="jb-face" style="--sc:#818cf8;--sd:0s">AF</div>
-                <div class="r">Hiring<br>Manager</div>
-              </div>
-              <div class="jb-seat">
-                <div class="jb-face" style="--sc:#38bdf8;--sd:1.2s">KM</div>
-                <div class="r">Team<br>Lead</div>
-              </div>
-              <div class="jb-seat">
-                <div class="jb-face" style="--sc:#34d399;--sd:2.4s">TA</div>
-                <div class="r">Panel<br>Interviewer</div>
-              </div>
-              <div class="jb-cue">
-                <span class="q">&ldquo;Walk me through a program where the requirements moved under you. What did you cut, and how did you tell the sponsor?&rdquo;</span>
-                <span class="m"><span class="jb-live"></span>Live mock &middot; listening</span>
-              </div>
+          <div class="reel-copy">
+            <div class="reel-eyebrow"><span class="reel-live"></span>Live at jornada.careers</div>
+            <div class="reel-title">Choose your journey.</div>
+            <div class="reel-steps">
+              <div class="reel-step" style="--d2:0s">01 &nbsp;Pick the journey you&rsquo;re on</div>
+              <div class="reel-step" style="--d2:3.5s">02 &nbsp;Score the r&eacute;sum&eacute; vs the role</div>
+              <div class="reel-step" style="--d2:7s">03 &nbsp;Walk in prepared</div>
             </div>
-            <div class="jb-rail">
-              <div class="jb-step" style="--sd:0s">Cue cards</div>
-              <div class="jb-step" style="--sd:1.1s">Live mock</div>
-              <div class="jb-step" style="--sd:2.2s">Prep package</div>
-              <div class="jb-step" style="--sd:3.3s">Rolodex</div>
+          </div>
+        </div>`,
+
+      /* WatchUWatchin+: the shipped Box Office screen, panned the way you
+         actually scroll it on the phone. */
+      watchuwatchin: `
+        <div class="reel" style="background:radial-gradient(120% 100% at 16% 0%, #241a12 0%, #150f0a 60%, #0c0806 100%)">
+          <div class="reel-phones">
+            <div class="reel-phone is-panning" style="--d:0s;--d2:0s">
+              <span class="reel-screen"><img src="assets/screens/wuw-boxoffice.jpg" alt="" loading="lazy"></span>
+            </div>
+          </div>
+          <div class="reel-copy">
+            <div class="reel-eyebrow"><span class="reel-live"></span>Beta on TestFlight</div>
+            <div class="reel-title">Box Office, on the phone it shipped on.</div>
+            <div class="reel-steps">
+              <div class="reel-step" style="--d2:0s">Up Next, across every service</div>
+              <div class="reel-step" style="--d2:3.5s">Recommended by your circle</div>
+              <div class="reel-step" style="--d2:7s">Shared &rarr; Watching &rarr; Reacted</div>
             </div>
           </div>
         </div>`
