@@ -3088,56 +3088,62 @@
             { lbl: 'Tier 0 · Client', color: 'client', boxes: [
               { nm: 'Browser SPA', ty: 'web app', sub: 'on-device encrypted key vault' } ] },
             { lbl: 'Tier 1 · Presentation', color: 'edge', flow: 'HTTPS · Cloudflare Pages', boxes: [
-              { nm: 'React 18', ty: 'ui' },
-              { nm: 'Vite', ty: 'build · dev server' },
+              { nm: 'React 18 + Vite', ty: 'ui · build' },
               { nm: 'Tailwind CSS', ty: 'design system' },
+              { nm: 'Mobile Shell', ty: 'tab bar · sheets · swipe' },
               { nm: 'i18n', ty: 'EN · PT-BR · FR preview' } ] },
-            { lbl: 'Tier 2 · Journey Router', color: 'edge', flow: 'the entry point', center: true, boxes: [
-              { hub: true, nm: 'Choose Your Journey', ty: 'persona routing · the front door', sub: 'Comeback · Job Search → candidate app  ·  Recruiter → workspace' } ] },
-            { lbl: 'Tier 3 · Candidate Surfaces', color: 'app', flow: 'the candidate track', boxes: [
-              { nm: 'Match + Skill Gap', ty: 'analysis', sub: 'JD ↔ resume fit, real math' },
-              { nm: 'Resume / Website Builder', ty: 'generation', sub: 'ATS-ready PDF + one-pager' },
-              { nm: 'Upskilling', ty: 'close the gap' },
-              { nm: 'Pay It Forward', ty: '#AIforGood', sub: 'land the job, fund the next person' } ] },
-            { lbl: 'Tier 4 · The Interview Loop', color: 'app', flow: 'cue cards → mock → dossier → tracker', boxes: [
-              { nm: 'Cue Cards + Hot Seat', ty: 'anticipated questions' },
-              { nm: 'Live Mock Interview', ty: 'voice · realtime', sub: 'three-person panel, Web Speech API' },
-              { nm: 'Special Delivery Prep', ty: 'dossier', sub: 'company, panel, home court' },
-              { nm: 'Interview Rolodex', ty: 'tracker', sub: 'transcripts, timing, thank-you letters' } ] },
+            { lbl: 'Tier 2 · Journey Router', color: 'edge', flow: 'the front door', center: true, boxes: [
+              { hub: true, nm: 'Choose Your Journey', ty: 'persona routing · the hub', sub: 'Comeback · Job Search → candidate app  ·  Recruiter → workspace' } ] },
+            { lbl: 'Tier 3 · Analyse & Build', color: 'app', flow: 'the candidate track', boxes: [
+              { nm: 'Match + Skill Gap', ty: 'analysis', sub: 'JD ↔ résumé, real math' },
+              { nm: 'Résumé Builder', ty: 'PDF + DOCX', sub: 'ATS-clean templates' },
+              { nm: 'Website Builder', ty: 'one-page site' },
+              { nm: 'Cover Letter', ty: 'applying, not interviewing' },
+              { nm: 'Upskilling', ty: 'close the gap' } ] },
+            { lbl: 'Tier 4 · The Interview Loop', color: 'app', flow: '01 Before → 02 During → 03 After', boxes: [
+              { nm: 'Before', ty: 'cue cards · Hot Seat', sub: 'Prep Package · Live Interview Mode' },
+              { nm: 'During', ty: 'Home Court', sub: 'the sidekick you screen-share' },
+              { nm: 'After', ty: 'thank-you letters', sub: 'Rolodex keeps every transcript' } ] },
             { lbl: 'Tier 5 · Recruiter Track', color: 'app', flow: 'the B2B side', boxes: [
               { nm: 'Recruiter Workspace', ty: 'roles across clients' },
               { nm: 'Candidate Ranking', ty: 'pool vs any JD' },
-              { nm: 'Dossier + Send', ty: 'interview kits at scale' } ] },
+              { nm: 'Dossier + Send', ty: 'interview kits at scale' },
+              { nm: 'Discoverable Sourcing', ty: 'two-sided consent', sub: 'blind card → interest → share or decline' } ] },
             { lbl: 'Tier 6 · Model Router', color: 'ai', flow: 'one call → three routes', center: true, boxes: [
               { hub: true, nm: 'api.js — Model Router', ty: 'client-side · the hub', sub: 'routes every call: local · direct · Engine Room' } ] },
             { lbl: 'Tier 7 · Intelligence', color: 'ai', flow: 'BYO key · direct from browser', arrows: '▲ ▼', boxes: [
-              { nm: 'Anthropic Claude', ty: 'default', sub: 'sonnet-5 / opus-5' },
-              { nm: 'OpenAI', ty: 'gpt' },
-              { nm: 'Google Gemini', ty: 'multimodal' },
-              { nm: 'Perplexity', ty: 'search-grounded' } ] },
-            { lbl: 'Tier 8 · Backend Services', color: 'app', flow: 'auth · engine room · tools', boxes: [
-              { nm: 'FastAPI', ty: 'local dev', sub: 'Claude Code OAuth' },
-              { nm: 'Edge Functions', ty: 'Deno · Supabase', sub: 'Engine Room quota, origin allowlist, daily cap' },
-              { nm: 'MCP Server', ty: 'Claude Desktop', sub: 'compute_match_score + tools' } ] },
-            { lbl: 'Tier 9 · Data & Identity', color: 'data', flow: 'RLS-scoped', arrows: '▲ ▼', boxes: [
+              { nm: 'Anthropic Claude', ty: 'default', sub: 'opus-5 · sonnet-5 · haiku-4.5' },
+              { nm: 'OpenAI', ty: 'gpt-4o · 4.1' },
+              { nm: 'Google Gemini', ty: '2.0 flash · 1.5 pro' },
+              { nm: 'Perplexity', ty: 'sonar · search-grounded' } ] },
+            { lbl: 'Tier 8 · Backend Services', color: 'app', flow: 'edge functions on Deno', boxes: [
+              { nm: 'trial', ty: 'the Engine Room', sub: 'origin allowlist + daily cap on the shared key' },
+              { nm: 'recruiter', ty: 'firm-gated', sub: 'service role, never the browser' },
+              { nm: 'feedback · triage · assist', ty: 'screenshot → drafted reply' },
+              { nm: 'engine-event / engine-stats', ty: 'lifetime counters' },
+              { nm: 'Stripe · PayPal · grant-pro', ty: 'checkout + webhooks' },
+              { nm: 'FastAPI', ty: 'local dev only', sub: 'Claude Code OAuth' } ] },
+            { lbl: 'Tier 9 · Data & Identity', color: 'data', flow: 'RLS-scoped, 16 migrations', arrows: '▲ ▼', boxes: [
               { nm: 'Supabase Postgres', ty: 'auth + db', sub: 'row-level security' },
               { nm: 'user_secrets', ty: 'zero-knowledge', sub: 'ciphertext only · no recovery' },
-              { nm: 'analyses · interviews', ty: 'cross-device sync' },
-              { nm: 'engine_totals', ty: 'lifetime counters' },
-              { nm: 'agent_runs', ty: 'audit log' } ] }
+              { nm: 'analyses · interviews · resumes', ty: 'cross-device sync' },
+              { nm: 'cover_letters · home_court', ty: 'per-analysis artifacts' },
+              { nm: 'discoverable_profiles', ty: 'candidate-owned', sub: 'sourcing_requests write-gated' },
+              { nm: 'engine_totals', ty: 'monotonic counters', sub: 'allowlisted metrics only' } ] }
           ],
           rail: {
-            lbl: 'Autonomous Agent Loops',
+            lbl: 'Cross-cutting · Agents & Tools',
             items: [
-              { nm: 'Orchestrator', ty: 'daily · CEO loop' },
               { nm: 'Onboarding / Activation', ty: 'live · day 1/3/7' },
-              { nm: 'Feedback Triage', ty: 'screenshot → drafted reply' },
-              { nm: 'Billing / Dunning', ty: 'planned' } ],
+              { nm: 'Feedback Triage', ty: 'AI drafts, owner approves' },
+              { nm: 'MCP Server', ty: '7 tools for Claude Desktop', sub: 'compute_match_score, fetch_job_posting…' },
+              { nm: 'Pay It Forward', ty: '#AIforGood', sub: 'landed a job → fund the next person' } ],
             span: 'every run audited via agent_runs'
           },
-          note: 'A <b>React + Vite</b> SPA on <b>Cloudflare Pages</b> that opens on <b>Choose Your Journey</b>, a persona router sending candidates into the analysis and interview tracks and recruiters into their own workspace. The <b>interview loop</b> is the spine: cue cards, a live spoken mock against a three-person panel, a Special Delivery prep dossier, then a rolodex that keeps every transcript. Every model call fans through a client-side <b>Model Router</b> picking one of three paths: local <b>FastAPI</b> (Claude Code OAuth), a <b>direct browser</b> call on the user&rsquo;s own key (Anthropic, OpenAI, Gemini or Perplexity), or the shared <b>Engine Room</b> on a <b>Supabase Edge Function</b> behind an origin allowlist and an enforced daily cap. <b>Supabase Postgres</b> with row-level security holds accounts and cross-device history, and API keys are stored <b>zero-knowledge</b> (ciphertext only, encrypted in the browser). An <b>MCP server</b> exposes the real-math scoring tools to Claude Desktop, and scheduled <b>agent loops</b> run lifecycle ops, all audited through <code>agent_runs</code>. Every candidate tool is free, funded pay-it-forward.'
+          note: 'A <b>React + Vite</b> SPA on <b>Cloudflare Pages</b> that opens on <b>Choose Your Journey</b>, a persona router sending candidates into the analysis and interview tracks and recruiters into their own workspace. The <b>Interview Loop</b> is now a life cycle rather than a menu: <b>01 Before</b> (cue cards, Hot Seat, Prep Package, Live Interview Mode), <b>02 During</b> (<b>Home Court</b>, the sidekick you screen-share, derived entirely from this analysis), and <b>03 After</b> (thank-you letters, and a Rolodex that keeps every transcript). Every model call fans through a client-side <b>Model Router</b> picking one of three paths: local <b>FastAPI</b> for dev, a <b>direct browser</b> call on the user&rsquo;s own key (Claude, GPT, Gemini or Perplexity), or the shared <b>Engine Room</b> on a Supabase Edge Function guarded by an origin allowlist and an enforced daily cap. Thirteen <b>edge functions</b> carry the rest: firm-gated recruiter access, feedback triage, billing, and the monotonic counters behind the Engine Room. <b>Postgres</b> holds it all behind row-level security across sixteen migrations, with API keys stored <b>zero-knowledge</b> (ciphertext only) and <b>discoverable sourcing</b> built on a two-sided consent spine, where a firm sees only a blind card until the candidate chooses to share. An <b>MCP server</b> exposes seven tools to Claude Desktop. Every candidate tool is free, funded pay-it-forward.'
         }
       },
+
       'nba-fan-engagement': {
         title: 'Fan Engagement',
         tag: 'Cloud & AI · Sports · 2026',
