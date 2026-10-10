@@ -189,7 +189,7 @@
     }
     @media(max-width:700px){
       .hero-inner {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
         text-align: center;
       }
       .hero-photo-col { order: -1; display: flex; justify-content: center; }
@@ -263,7 +263,12 @@
     /* Below this the left column is narrower than the row, so let it wrap
        rather than push the chips out of the column. */
     @media(max-width:960px){ .cert-row { flex-wrap: wrap; } }
-    @media(max-width:700px){ .cert-row { justify-content: center; } }
+    @media(max-width:700px){
+      /* Six chips, one line: the name is what breaks, never the MBA chip. */
+      #hero { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .cert-row { justify-content: center; flex-wrap: nowrap; gap: .3rem; }
+      .cert-row .cert-tag { font-size: .6rem; letter-spacing: .06em; padding: .3rem .55rem; white-space: nowrap; }
+    }
     .cert-tag {
       font-family: 'DM Mono', monospace;
       font-size: .68rem; letter-spacing: .1em;
@@ -421,7 +426,7 @@
     .hero-intro p:last-child { margin-bottom: 0; }
     @media(max-width:700px){
       .hero-photo-col { width: 100%; max-width: 340px; }
-      .hero-intro { text-align: left; }
+      .hero-intro { text-align: center; }
     }
 
     /* Roomy displays — a large external monitor. There is vertical slack to
@@ -1946,6 +1951,63 @@
       .cta-float-label .t { max-width: 130px; }
       .cta-float:hover .cta-float-label .t.alt { max-width: 220px; white-space: normal; }
     }
+
+    /* ─── PHONE CHAPTERS ─────────────────────────────────
+       On a phone the page ran ~28 screens. Past the hero, each section
+       folds to its label + title + one line, so the stack reads as a
+       table of contents; tapping one opens it and folds the rest. JS adds
+       .m-fold to <html> under 700px, so no-JS and desktop see the full page. */
+    .fold-teaser, .fold-chev, .fold-end, .m-hub { display: none; }
+    @media (max-width: 700px) {
+      .m-fold .m-hub {
+        display: block; background: var(--navy);
+        padding: 1.6rem 16px 1.3rem; text-align: center;
+        border-top: 1px solid rgba(200,169,110,.14);
+      }
+      .m-hub-k {
+        font-family: 'DM Mono', monospace; font-size: .62rem;
+        letter-spacing: .22em; text-transform: uppercase; color: var(--accent);
+      }
+      .m-hub-t { margin-top: .35rem; font-size: .82rem; color: rgba(250,248,243,.55); }
+
+      .m-fold section.foldable .section-inner { position: relative; }
+      .m-fold section.foldable.open .section-inner:first-child { padding-top: 3.2rem; }
+      .m-fold section.foldable.open .section-inner { padding-bottom: 2.4rem; }
+      .m-fold section.foldable:not(.open) > :not(.section-inner),
+      .m-fold section.foldable:not(.open) .section-inner > :not(.chapter-label):not(.section-title):not(.fold-teaser):not(.fold-chev) {
+        display: none !important;
+      }
+      .m-fold section.foldable:not(.open) .section-inner {
+        padding: 1.25rem 3.6rem 1.3rem 16px; cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .m-fold section.foldable:not(.open) { border-top: 1px solid rgba(128,128,128,.16); }
+      .m-fold section.foldable:not(.open) .reveal { opacity: 1; transform: none; }
+      .m-fold section.foldable:not(.open) .chapter-label { margin-bottom: .3rem; font-size: .6rem; }
+      .m-fold section.foldable:not(.open) .section-title { font-size: 1.75rem; }
+      .m-fold section.foldable .section-title { cursor: pointer; }
+      .m-fold section.foldable:not(.open) .fold-teaser {
+        display: block; margin-top: .3rem;
+        font-size: .82rem; line-height: 1.45; color: var(--muted);
+      }
+      .m-fold section.foldable.is-dark .fold-teaser { color: rgba(250,248,243,.55); }
+      .m-fold section.foldable .fold-chev {
+        display: flex; align-items: center; justify-content: center;
+        position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+        width: 34px; height: 34px; border-radius: 50%;
+        border: 1px solid rgba(200,169,110,.45); color: var(--accent);
+        transition: transform .3s var(--ease);
+      }
+      .m-fold section.foldable.open .fold-chev { top: 3rem; transform: rotate(180deg); }
+      .fold-chev svg { width: 14px; height: 14px; }
+      .m-fold section.foldable.open .fold-end {
+        display: flex; align-items: center; justify-content: center; gap: .45rem;
+        margin: 0 auto; padding: 0 16px 2.6rem; background: none; border: 0;
+        font-family: 'DM Mono', monospace; font-size: .64rem; letter-spacing: .16em;
+        text-transform: uppercase; color: var(--accent); cursor: pointer;
+      }
+      .fold-end svg { width: 12px; height: 12px; transform: rotate(180deg); }
+    }
   </style>
 </head>
 <body>
@@ -1989,7 +2051,7 @@
           <span class="cert-tag">CMMI</span>
           <span class="cert-tag">MBA</span>
         </div>
-        <p class="hero-subtitle">Cloud &amp; Agentic AI · CapTech · ex-Microsoft · Fortune 500</p>
+        <p class="hero-subtitle">Cloud &amp; Agentic AI · CapTech · ex&#8209;Microsoft · Fortune 500</p>
         <a class="hero-live" href="https://github.com/fefoabreu?tab=repositories&amp;sort=updated" target="_blank" rel="noopener" hidden>
           <span class="live-dot"></span><span class="live-text"></span>
         </a>
@@ -2060,6 +2122,11 @@
   </section>
 
   <!-- CAPTECH -->
+  <div class="m-hub" aria-hidden="true">
+    <div class="m-hub-k">The chapters</div>
+    <div class="m-hub-t">Tap one to open it.</div>
+  </div>
+
   <section id="captech">
     <div class="section-inner">
       <p class="chapter-label reveal">CapTech</p>
@@ -3904,6 +3971,114 @@
       picker.querySelectorAll('.resume-opt').forEach(a => a.addEventListener('click', () => setOpen(false)));
       document.addEventListener('click', e => { if (!picker.contains(e.target)) setOpen(false); });
       document.addEventListener('keydown', e => { if (e.key === 'Escape') setOpen(false); });
+    })();
+
+    // ─── PHONE CHAPTERS ─────────────────────────────────
+    // Under 700px every section past the hero folds to a one-line card;
+    // opening one folds the others so the page never runs long again.
+    (function phoneChapters(){
+      const mq = window.matchMedia('(max-width: 700px)');
+      const teasers = {
+        'captech':     'Now · Sr. TPM, Applied AI, and the summer of #AIforGood',
+        'microsoft':   '2016 to 2026 · Principal Tech PM, Cloud &amp; AI',
+        'story':       '2010 to 2016 · A practice built from zero',
+        'The-Studio':  'Live platforms, each torn down to its architecture',
+        'applied-ai':  'The patterns behind every build, as one map',
+        'toolkit':     'Practices, platforms and certifications',
+        'voices':      'Testimonials from the people I delivered with',
+        'beyond':      'Brazil, Canada, Richmond, and the life around the work'
+      };
+      const secs = Object.keys(teasers).map(id => document.getElementById(id)).filter(Boolean);
+      const navH = () => (document.getElementById('main-nav') || {}).offsetHeight || 56;
+      const chev = '<span class="fold-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>';
+
+      const isDark = el => {
+        const m = getComputedStyle(el).backgroundColor.match(/\d+(\.\d+)?/g);
+        if (!m || (m[3] !== undefined && +m[3] === 0)) return false;
+        return (0.299 * m[0] + 0.587 * m[1] + 0.114 * m[2]) < 128;
+      };
+
+      secs.forEach(sec => {
+        const inner = sec.querySelector('.section-inner');
+        const title = inner && inner.querySelector('.section-title');
+        if (!title) return;
+        sec.classList.add('foldable');
+        if (isDark(sec)) sec.classList.add('is-dark');
+        title.insertAdjacentHTML('afterend', '<p class="fold-teaser">' + teasers[sec.id] + '</p>');
+        inner.insertAdjacentHTML('beforeend', chev);
+        // Long chapters (Voices runs ~5,000px) end with a way back to the list.
+        sec.insertAdjacentHTML('beforeend', '<button type="button" class="fold-end">' + chev.replace('fold-chev', 'fold-end-i') + 'Fold this chapter</button>');
+        sec.querySelector('.fold-end').addEventListener('click', () => close(sec));
+        inner.addEventListener('click', e => {
+          if (!mq.matches) return;
+          if (!sec.classList.contains('open')) { open(sec); return; }
+          if (e.target.closest('.section-title, .chapter-label, .fold-chev')) close(sec);
+        });
+      });
+
+      function setAria() {
+        secs.forEach(sec => {
+          const t = sec.querySelector('.section-title');
+          if (!t) return;
+          if (mq.matches) {
+            t.setAttribute('role', 'button'); t.tabIndex = 0;
+            t.setAttribute('aria-expanded', sec.classList.contains('open') ? 'true' : 'false');
+          } else {
+            t.removeAttribute('role'); t.removeAttribute('tabindex'); t.removeAttribute('aria-expanded');
+          }
+        });
+      }
+      function goTo(el, smooth) {
+        const y = el.getBoundingClientRect().top + window.scrollY - navH();
+        window.scrollTo({ top: Math.max(0, y), behavior: smooth ? 'smooth' : 'auto' });
+      }
+      function open(sec, target) {
+        secs.forEach(s => { if (s !== sec) s.classList.remove('open'); });
+        sec.classList.add('open');
+        setAria();
+        // Fold-above shifts the page synchronously, so measure after it.
+        goTo(target || sec, true);
+      }
+      function close(sec) {
+        sec.classList.remove('open');
+        setAria();
+        goTo(sec, false);
+      }
+
+      // Any in-page link (nav, "The Studio, further down") opens its chapter.
+      document.addEventListener('click', e => {
+        if (!mq.matches) return;
+        const a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        const target = document.getElementById(a.getAttribute('href').slice(1));
+        const sec = target && target.closest('section.foldable');
+        if (!sec) return;
+        e.preventDefault();
+        open(sec, target === sec ? null : target);
+      }, true);
+
+      document.addEventListener('keydown', e => {
+        if (!mq.matches || (e.key !== 'Enter' && e.key !== ' ')) return;
+        const t = e.target.closest('section.foldable .section-title');
+        if (!t) return;
+        e.preventDefault();
+        const sec = t.closest('section');
+        sec.classList.contains('open') ? close(sec) : open(sec);
+      });
+
+      function sync() {
+        document.documentElement.classList.toggle('m-fold', mq.matches);
+        setAria();
+      }
+      mq.addEventListener ? mq.addEventListener('change', sync) : mq.addListener(sync);
+      sync();
+
+      // Deep link (fefoabreu.me/#voices) lands on that chapter, open.
+      if (mq.matches && location.hash.length > 1) {
+        const target = document.getElementById(location.hash.slice(1));
+        const sec = target && target.closest('section.foldable');
+        if (sec) { sec.classList.add('open'); setAria(); requestAnimationFrame(() => goTo(target, false)); }
+      }
     })();
   </script>
 </body>
